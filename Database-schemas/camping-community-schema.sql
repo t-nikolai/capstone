@@ -60,10 +60,4 @@ create table reservation (
         references camper(camper_id)
 );
 
-
-
-
-
-
-
 -- data
