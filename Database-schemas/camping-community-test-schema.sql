@@ -60,10 +60,30 @@ create table reservation (
         references camper(camper_id)
 );
 
-
-
-
-
-
-
 -- data
+insert into campground(campground_name, campground_address, campground_city, campground_state, campground_zip,
+	campground_phone, campground_email, campground_capacity, standard_rate, weekend_rate)
+values("Test CG Name 1", "CG Street 1", "CG City 1", "S1", 11111, "(111)111-1111", 
+	"cgemail1@cgemail1.com", 11, 10.00, 11.00);
+    
+insert into campsite(site_name, campground_id)
+	values
+    ("Site 1", 1),
+    ("Site 2", 1),
+    ("Site 3", 1),
+    ("Site 4", 1),
+    ("Site 5", 1),
+    ("Site 6", 1),
+    ("Site 7", 1),
+    ("Site 8", 1),
+    ("Site 9", 1),
+    ("Site 10", 1),
+    ("Site 11", 1);
+    
+insert into camper(first_name, last_name, camping_method, camper_phone, camper_email, camper_address, camper_city, camper_state, camper_zip)
+	values
+    ("C First Name 1", "C Last Name 1", "C Method 1", "(111)111-1111", "cemail1@cemail1.com", "C Street 1", "C City 1", "S1", 11111);
+    
+insert into reservation(start_date, end_date, site_id, camper_id)
+	values
+    ("1111-11-11", "1111-11-12", 1, 1);
