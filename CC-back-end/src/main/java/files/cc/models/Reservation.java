@@ -4,44 +4,44 @@ import java.sql.Date;
 import java.util.Objects;
 
 public class Reservation {
-    private int reservation_id;
-    private Date start_date;
-    private Date end_date;
+    private int reservationId;
+    private Date startDate;
+    private Date endDate;
     private Campsite site;
     private Camper camper;
 
     public Reservation() { }
 
     public Reservation(int reservation_id, Date start_date, Date end_date, Campsite site, Camper camper) {
-        this.reservation_id = reservation_id;
-        this.start_date = start_date;
-        this.end_date = end_date;
+        this.reservationId = reservation_id;
+        this.startDate = start_date;
+        this.endDate = end_date;
         this.site = site;
         this.camper = camper;
     }
 
-    public int getReservation_id() {
-        return reservation_id;
+    public int getReservationId() {
+        return reservationId;
     }
 
-    public void setReservation_id(int reservation_id) {
-        this.reservation_id = reservation_id;
+    public void setReservationId(int reservationId) {
+        this.reservationId = reservationId;
     }
 
-    public Date getStart_date() {
-        return start_date;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setStart_date(Date start_date) {
-        this.start_date = start_date;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public Date getEnd_date() {
-        return end_date;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setEnd_date(Date end_date) {
-        this.end_date = end_date;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     public Campsite getSite() {
@@ -65,12 +65,12 @@ public class Reservation {
         if (this == o) return true;
         if (!(o instanceof Reservation)) return false;
         Reservation that = (Reservation) o;
-        return getReservation_id() == that.getReservation_id() && getStart_date().equals(that.getStart_date())
-                && getEnd_date().equals(that.getEnd_date()) && getSite().equals(that.getSite()) && getCamper().equals(that.getCamper());
+        return getReservationId() == that.getReservationId() && getStartDate().equals(that.getStartDate())
+                && getEndDate().equals(that.getEndDate()) && getSite().equals(that.getSite()) && getCamper().equals(that.getCamper());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getReservation_id(), getStart_date(), getEnd_date(), getSite(), getCamper());
+        return Objects.hash(getReservationId(), getStartDate(), getEndDate(), getSite(), getCamper());
     }
 }

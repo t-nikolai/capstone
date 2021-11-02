@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class Campground {
 
-    private int campground_id;
+    private int campgroundId;
     private String name;
 
     private String address;
@@ -18,15 +18,15 @@ public class Campground {
 
     private int capacity;
 
-    private BigDecimal standard_rate;
-    private BigDecimal weekend_rate;
+    private BigDecimal standardRate;
+    private BigDecimal weekendRate;
 
     public Campground() {}
 
     public Campground(int campground_id, String campground_name, String campground_address, String campground_city,
                       String campground_state, int campground_zip, String campground_phone, String campground_email,
                       int campground_capacity, BigDecimal standard_rate, BigDecimal weekend_rate) {
-        this.campground_id = campground_id;
+        this.campgroundId = campground_id;
         this.name = campground_name;
         this.address = campground_address;
         this.city = campground_city;
@@ -35,16 +35,16 @@ public class Campground {
         this.phone = campground_phone;
         this.email = campground_email;
         this.capacity = campground_capacity;
-        this.standard_rate = standard_rate;
-        this.weekend_rate = weekend_rate;
+        this.standardRate = standard_rate;
+        this.weekendRate = weekend_rate;
     }
 
-    public int getCampground_id() {
-        return campground_id;
+    public int getCampgroundId() {
+        return campgroundId;
     }
 
-    public void setCampground_id(int campground_id) {
-        this.campground_id = campground_id;
+    public void setCampgroundId(int campgroundId) {
+        this.campgroundId = campgroundId;
     }
 
     public String getName() {
@@ -111,20 +111,20 @@ public class Campground {
         this.capacity = campground_capacity;
     }
 
-    public BigDecimal getStandard_rate() {
-        return standard_rate;
+    public BigDecimal getStandardRate() {
+        return standardRate;
     }
 
-    public void setStandard_rate(BigDecimal standard_rate) {
-        this.standard_rate = standard_rate;
+    public void setStandardRate(BigDecimal standardRate) {
+        this.standardRate = standardRate;
     }
 
-    public BigDecimal getWeekend_rate() {
-        return weekend_rate;
+    public BigDecimal getWeekendRate() {
+        return weekendRate;
     }
 
-    public void setWeekend_rate(BigDecimal weekend_rate) {
-        this.weekend_rate = weekend_rate;
+    public void setWeekendRate(BigDecimal weekendRate) {
+        this.weekendRate = weekendRate;
     }
 
     @Override
@@ -132,17 +132,17 @@ public class Campground {
         if (this == o) return true;
         if (!(o instanceof Campground)) return false;
         Campground that = (Campground) o;
-        return getCampground_id() == that.getCampground_id() && getZip() == that.getZip() &&
+        return getCampgroundId() == that.getCampgroundId() && getZip() == that.getZip() &&
                 getCapacity() == that.getCapacity() && getName().equals(that.getName())
                 && getAddress().equals(that.getAddress()) && getCity().equals(that.getCity())
                 && getState().equals(that.getState()) && getPhone().equals(that.getPhone())
-                && getEmail().equals(that.getEmail()) && getStandard_rate().equals(that.getStandard_rate())
-                && getWeekend_rate().equals(that.getWeekend_rate());
+                && getEmail().equals(that.getEmail()) && getStandardRate().equals(that.getStandardRate())
+                && getWeekendRate().equals(that.getWeekendRate());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getCampground_id(), getName(), getAddress(), getCity(), getState(),
-                getZip(), getPhone(), getEmail(), getCapacity(), getStandard_rate(), getWeekend_rate());
+        return Objects.hash(getCampgroundId(), getName(), getAddress(), getCity(), getState(),
+                getZip(), getPhone(), getEmail(), getCapacity(), getStandardRate(), getWeekendRate());
     }
 }
