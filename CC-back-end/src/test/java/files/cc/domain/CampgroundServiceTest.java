@@ -143,20 +143,26 @@ class CampgroundServiceTest {
         campground.setStandardRate(BigDecimal.valueOf(-5.00));
         result = service.add(campground);
         assertEquals(ResultType.INVALID, result.getType());
+    }
 
-        // weekendR validation (under 0)
+    @Test
+    void shouldNotAddIfWeekendRateIsInvalid() {
+        Campground campground = makeCampground();
+        Result<Campground> result;
+
         campground.setWeekendRate(BigDecimal.valueOf(-5.00));
         result = service.add(campground);
         assertEquals(ResultType.INVALID, result.getType());
+    }
 
-        campground.setWeekendRate(new BigDecimal(30.00));
+    @Test
+    void shouldNotAddIfCampgroundIdIsInvalid() {
+        Campground campground = makeCampground();
+        Result<Campground> result;
 
-        // campgroundId validation (not 0)
         campground.setCampgroundId(1);
         result = service.add(campground);
         assertEquals(ResultType.INVALID, result.getType());
-
-        campground.setCampgroundId(0);
     }
 
     @Test
@@ -170,18 +176,21 @@ class CampgroundServiceTest {
     }
 
     @Test
-    void shouldNotUpdateIfInvalid() {
+    void shouldNotUpdateIfNull() {
         Campground emptyCampground = new Campground();
-        Campground campground = makeCampground();
-
         Result<Campground> result;
 
-        // when all fields are null
         result = service.update(null);
         assertEquals(ResultType.INVALID, result.getType());
 
         result = service.update(emptyCampground);
         assertEquals(ResultType.INVALID, result.getType());
+    }
+
+    @Test
+    void shouldNotUpdateIfNameIsInvalid() {
+        Campground campground = makeCampground();
+        Result<Campground>
 
         // name validation (null)
         campground.setName(null);
