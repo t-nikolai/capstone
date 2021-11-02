@@ -19,17 +19,29 @@ public class CamperJdbcTemplateRepository implements CamperRepository {
     public CamperJdbcTemplateRepository(JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbcTemplate;}
 
     @Override
+<<<<<<< HEAD
     public List<Camper> findAll() {
         final String sql = "select camper_id, first_name, last_name, camping_method, phone, email, " +
             "address, city, state, zip " +
+=======
+    public List<Camper> findAll() {     // ADMIN Privileges
+        final String sql = "select camper_id, first_name, last_name, camping_method, camper_phone, camper_email, " +
+            "camper_address, camper_city, camper_state, camper_zip " +
+>>>>>>> 98c37b47df56814d33ee66f3db6e30ae6c10b5dc
             "from camper limit 1000; ";
         return jdbcTemplate.query(sql, new CamperMapper());
     }
 
     @Override
+<<<<<<< HEAD
     public Camper findById(int camper_id){
         final String sql = "select camper_id, first_name, last_name, method, phone, " +
                 "email, address, city, state, zip " +
+=======
+    public Camper findById(int camper_id){      // ADMIN Privileges
+        final String sql = "select camper_id, first_name, last_name, camping_method, camper_phone, " +
+                "camper_email, camper_address, camper_city, camper_state, camper_zip " +
+>>>>>>> 98c37b47df56814d33ee66f3db6e30ae6c10b5dc
                 "from camper " +
                 "where camper_id = ? ;";
         Camper camper = jdbcTemplate.query(sql, new CamperMapper(), camper_id).stream()
@@ -45,7 +57,7 @@ public class CamperJdbcTemplateRepository implements CamperRepository {
 
     @Override
     @Transactional
-    public Camper add(Camper camper){
+    public Camper add(Camper camper){       // USER Privileges
         final String sql = "insert into camper (first_name, last_name, camping_method, " +
                 "camper_phone, camper_email, camper_address, camper_city, camper_state, camper_zip) " +
                 "values(?,?,?,?,?,?,?,?,?); ";
@@ -74,7 +86,7 @@ public class CamperJdbcTemplateRepository implements CamperRepository {
     }
 
     @Override
-    public boolean update(Camper camper){
+    public boolean update(Camper camper){       // USER Privileges
             final String sql = "update camper set "
                     + "first_name = ?, "
                     + "last_name = ?, "
