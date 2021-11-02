@@ -5,7 +5,6 @@ import files.cc.models.Campground;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import static java.lang.String.valueOf;
@@ -23,10 +22,27 @@ public class CampgroundService {
         return repository.findAll();
     }
 
-    // todo: find by prefix/id or something referencing findAll in repo
+    // todo: find by prefix or something referencing findAll in repo
+
+    public Campground findById(int campgroundId){
+        return repository.findById(campgroundId);
+    }
 
     public Result<Campground> add(Campground campground) throws DataAccessException{
         Result<Campground> result = addValidate(campground);
+
+        if (!result.isSuccess()){
+            return result;
+        }
+        campground = repository.add(campground);
+
+        if (campground == null){
+            result.addMessage("campground could not be added", ResultType.FAIL);
+            return result;
+        }
+
+        result.setPayload(campground);
+        return result;
     }
 
     public Result<Campground> update(Campground campground) {
@@ -35,30 +51,71 @@ public class CampgroundService {
             return result;
         }
 
-        if (campground.getCampgroundId() <= 0) {
-            result.addMessage("campgroundId must be set for `update` operation", ResultType.INVALID);
+        if (!repository.update(campground)) {
+            String msg = String.format("campgroundId: %s, not found or could not be updated", campground.getCampgroundId());
+            result.addMessage(msg, ResultType.NOT_FOUND);
             return result;
         }
 
-        if (!repository.update(campground)) {
-            String msg = String.format("campgroundId: %s, not found", campground.getCampgroundId());
-            result.addMessage(msg, ResultType.NOT_FOUND);
-        }
-
+        result.setPayload(campground);
         return result;
     }
 
-    public boolean delete(Campground campground) {
-        Result<Campground> result = deleteValidate(campground);
-        return repository.deleteById(campground.getCampgroundId());
+    public boolean deleteById(int campgroundId) {
+        Result<Campground> result = deleteValidate(campgroundId);
+        return repository.deleteById(campgroundId);
     }
 
     //validation
-    //  findBySomething: ?
+    //  TODO: findById/State/etc Validation?
     //  add: id == zero, name required, address/city/state/zip required, phone/email required, capacity & rates required
     //  update: id > 0, name required, address/city/state/zip required, phone/email required, capacity & rates required
     //  delete: id >0
-    private Result<Campground> validateReqdInfo(Campground campground){
+
+    private Result<Campground> addValidate(Campground campground){
+        Result<Campground> result = new Result<>();
+
+        if (campground == null) {
+            result.addMessage("campground cannot be null", ResultType.INVALID);
+            return result;
+        }
+
+        if (campground.getCampgroundId() != 0){
+            result.addMessage("campground id should be 0 before being added to the DB", ResultType.INVALID);
+            return result;
+        }
+
+        result = validateRequiredInfo(campground);
+        return result;
+    }
+
+    private Result<Campground> updateValidate(Campground campground){
+        Result<Campground> result = new Result<>();
+
+        if (campground == null) {
+            result.addMessage("campground cannot be null", ResultType.INVALID);
+            return result;
+        }
+
+        if (!validatePosNumber(campground.getCampgroundId())){
+            result.addMessage("campground ID should be a positive number", ResultType.INVALID);
+            return result;
+        }
+
+        result = validateRequiredInfo(campground);
+        return result;
+    }
+
+    private Result<Campground> deleteValidate(int campgroundId){
+        Result<Campground> result = new Result<>();
+
+        if (!validatePosNumber(campgroundId)){
+            result.addMessage("campground ID should be a positive number", ResultType.INVALID);
+        }
+        return result;
+    }
+
+    private Result<Campground> validateRequiredInfo(Campground campground){
         Result<Campground> result = new Result<>();
 
         if (campground == null) {
@@ -77,7 +134,7 @@ public class CampgroundService {
             return result;
         }
 
-        if (isNullOrBlank(campground.getPhone()) || !campground.getPhone().matches("[0-9]")){
+        if (isNullOrBlank(campground.getPhone()) /*|| !campground.getPhone().matches("[0-9]")*/){
             result.addMessage("campground's phone number is required, w/ no non-numbers", ResultType.INVALID);
             return result;
         }

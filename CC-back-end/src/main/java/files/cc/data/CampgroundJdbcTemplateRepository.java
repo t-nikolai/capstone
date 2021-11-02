@@ -1,11 +1,14 @@
 package files.cc.data;
 
+import files.cc.data.mappers.CamperMapper;
 import files.cc.data.mappers.CampgroundMapper;
+import files.cc.models.Camper;
 import files.cc.models.Campground;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -19,6 +22,7 @@ public class CampgroundJdbcTemplateRepository implements CampgroundRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    @Override
     public List<Campground> findAll(){
         final String sql = "select campground_id, name, address, city, state, zip, phone, email, capacity, " +
                 "standard_rate, weekend_rate " +
@@ -26,13 +30,27 @@ public class CampgroundJdbcTemplateRepository implements CampgroundRepository {
         return jdbcTemplate.query(sql, new CampgroundMapper());
     }
 
+    @Override
+    @Transactional
+    public Campground findById(int campgroundId) {
+        final String sql = "select campground_id, name, address, city, state, zip, phone, email, capacity, " +
+                "standard_rate, weekend_rate " +
+                "from campground " +
+                "where campground_id = ? ; ";
+        Campground campground = jdbcTemplate.query(sql, new CampgroundMapper(), campgroundId).stream()
+                .findFirst().orElse(null);
+
+        return campground;
+    }
+
+
     // TODO: find by prefix (state, city, name, etc.)  using lambdas/anon functions
 
     @Override
     public Campground add(Campground campground) {
-        final String sql = "insert into campground (campground_id, name, address, city, state, zip,\n" +
+        final String sql = "insert into campground (name, address, city, state, zip,\n" +
                 "phone, email, capacity, standard_rate, weekend_rate) values "
-                + "(?,?,?,?,?,?,?,?,?,?,?);";
+                + "(?,?,?,?,?,?,?,?,?,?);";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
@@ -87,6 +105,7 @@ public class CampgroundJdbcTemplateRepository implements CampgroundRepository {
     }
 
     @Override
+    @Transactional
     public boolean deleteById (int campgroundId) {
         jdbcTemplate.update("delete from campground where campground_id = ?;", campgroundId);
         return jdbcTemplate.update("delete from campground where campground_id = ?;", campgroundId) > 0;
