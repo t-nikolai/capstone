@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 
 public class CamperMapper implements RowMapper<Camper> {
-    //@Override
+    @Override
     public Camper mapRow(ResultSet resultSet, int i) throws SQLException {
         Camper camper = new Camper();
         camper.setCamper_id(resultSet.getInt("camper_id"));

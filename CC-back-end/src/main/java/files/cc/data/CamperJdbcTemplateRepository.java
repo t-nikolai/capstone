@@ -20,16 +20,16 @@ public class CamperJdbcTemplateRepository implements CamperRepository {
 
     @Override
     public List<Camper> findAll() {
-        final String sql = "select camper_id, first_name, last_name, camping_method, camper_phone, camper_email, " +
-            "camper_address, camper_city, camper_state, camper_zip " +
+        final String sql = "select camper_id, first_name, last_name, camping_method, phone, email, " +
+            "address, city, state, zip " +
             "from camper limit 1000; ";
         return jdbcTemplate.query(sql, new CamperMapper());
     }
 
     @Override
     public Camper findById(int camper_id){
-        final String sql = "select camper_id, first_name, last_name, camping_method, camper_phone, " +
-                "camper_email, camper_address, camper_city, camper_state, camper_zip " +
+        final String sql = "select camper_id, first_name, last_name, method, phone, " +
+                "email, address, city, state, zip " +
                 "from camper " +
                 "where camper_id = ? ;";
         Camper camper = jdbcTemplate.query(sql, new CamperMapper(), camper_id).stream()
@@ -79,12 +79,12 @@ public class CamperJdbcTemplateRepository implements CamperRepository {
                     + "first_name = ?, "
                     + "last_name = ?, "
                     + "camping_method = ?, "
-                    + "camper_phone = ?, "
-                    + "camper_email = ?, "
-                    + "camper_address = ?, "
-                    + "camper_city = ?, "
-                    + "camper_state = ?, "
-                    + "camper_zip = ? ;";
+                    + "phone = ?, "
+                    + "email = ?, "
+                    + "address = ?, "
+                    + "city = ?, "
+                    + "state = ?, "
+                    + "zip = ? ;";
 
             return jdbcTemplate.update(sql,
                     camper.getFirst_name(),
