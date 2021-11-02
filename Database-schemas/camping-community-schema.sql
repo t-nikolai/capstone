@@ -5,24 +5,24 @@ use camping_community;
 -- create tables and relationships
 create table campground (
     campground_id int not null primary key auto_increment,
-    campground_name varchar(70) not null,
+    name varchar(70) not null,
     --
-    campground_address varchar(50) not null,
-    campground_city varchar(50) not null,
-    campground_state varchar(2) not null,
-    campground_zip int(5) not null,
+    address varchar(50) not null,
+    city varchar(50) not null,
+    state varchar(2) not null,
+    zip int(5) not null,
     --
-    campground_phone varchar(20) not null,
-    campground_email varchar(50) not null,
-    campground_capacity int not null,
+    phone varchar(20) not null,
+    email varchar(50) not null,
+    capacity int not null,
     --
     standard_rate decimal(6,2) not null,
     weekend_rate decimal(6,2) not null
 );
 
 create table campsite (
-	site_id int not null primary key auto_increment,
-    site_name varchar(10) not null,
+    site_id int not null primary key auto_increment,
+    name varchar(10) not null,
     
     campground_id int not null,
     constraint fk_campsite_campground_id
@@ -31,17 +31,17 @@ create table campsite (
 );
 
 create table camper (
-	camper_id int not null primary key auto_increment,
+    camper_id int not null primary key auto_increment,
     first_name varchar(40) not null,
     last_name varchar(40) not null,
     camping_method varchar(30) not null, -- enum ?
-    camper_phone varchar(20) null,
-    camper_email varchar(50) not null,
+    phone varchar(20) null,
+    email varchar(50) not null,
     -- 
-    camper_address varchar(50) not null,
-    camper_city varchar(50) not null,
-    camper_state varchar(2) not null,
-    camper_zip int(5) not null
+    address varchar(50) not null,
+    city varchar(50) not null,
+    state varchar(2) not null,
+    zip int(5) not null
 );
 
 create table reservation (
