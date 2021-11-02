@@ -61,32 +61,6 @@ create table reservation (
 );
 
 -- data
-insert into campground(`name`, address, city, state, zip,
-	phone, email, capacity, standard_rate, weekend_rate)
-values("Test CG Name 1", "CG Street 1", "CG City 1", "S1", 11111, "(111)111-1111", 
-	"cgemail1@cgemail1.com", 11, 10.00, 11.00);
-    
-insert into campsite(site_name, campground_id)
-	values
-    ("Site 1", 1),
-    ("Site 2", 1),
-    ("Site 3", 1),
-    ("Site 4", 1),
-    ("Site 5", 1),
-    ("Site 6", 1),
-    ("Site 7", 1),
-    ("Site 8", 1),
-    ("Site 9", 1),
-    ("Site 10", 1),
-    ("Site 11", 1);
-    
-insert into camper(first_name, last_name, camping_method, phone, email, address, city, state, zip)
-	values
-    ("C First Name 1", "C Last Name 1", "C Method 1", "(111)111-1111", "cemail1@cemail1.com", "C Street 1", "C City 1", "S1", 11111);
-    
-insert into reservation(start_date, end_date, site_id, camper_id)
-	values
-    ("1111-11-11", "1111-11-12", 1, 1);
     
 delimiter //
 create procedure set_known_good_state()
@@ -165,11 +139,17 @@ insert into campsite(site_name, campground_id)
     
 insert into camper(first_name, last_name, camping_method, phone, email, address, city, state, zip)
 	values
-    ("C First Name 1", "C Last Name 1", "C Method 1", "(111)111-1111", "cemail1@cemail1.com", "C Street 1", "C City 1", "S1", 11111);
+    ("C First Name 1", "C Last Name 1", "C Method 1", "(111)111-1111", "cemail1@cemail1.com", "C Street 1", "C City 1", "S1", 11111),
+    ("C First Name 2", "C Last Name 2", "C Method 2", "(222)222-2222", "cemail2@cemail2.com", "C Street 2", "C City 2", "S2", 22222),
+    ("C First Name 3", "C Last Name 3", "C Method 3", "(333)333-3333", "cemail3@cemail3.com", "C Street 3", "C City 3", "S3", 33333),
+    ("C First Name 4", "C Last Name 4", "C Method 4", "(444)444-4444", "cemail4@cemail4.com", "C Street 4", "C City 4", "S4", 44444);
     
 insert into reservation(start_date, end_date, site_id, camper_id)
 	values
-    ("1111-11-11", "1111-11-12", 1, 1);
+    ("2021-01-01", "2021-01-02", 1, 1),
+    ("2022-02-02", "2022-02-03", 2, 2),
+    ("2023-03-03", "2023-03-04", 3, 3),
+    ("2024-04-04", "2024-04-05", 4, 4);
 
 end //
 -- 4. Change the statement terminator back to the original.
