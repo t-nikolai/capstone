@@ -10,15 +10,15 @@ public class CamperMapper implements RowMapper<Camper> {
     @Override
     public Camper mapRow(ResultSet resultSet, int i) throws SQLException {
         Camper camper = new Camper();
-        camper.setCamper_id(resultSet.getInt("camper_id"));
-        camper.setFirst_name(resultSet.getString("first_name"));
-        camper.setLast_name(resultSet.getString("last_name"));
-        camper.setCamper_address(resultSet.getString("address"));
-        camper.setCamper_city(resultSet.getString("city"));
-        camper.setCamper_state(resultSet.getString("state"));
-        camper.setCamper_zip(resultSet.getInt("zip_code"));
-        camper.setCamper_email(resultSet.getString("email"));
-        camper.setCamper_phone(resultSet.getString("phone"));
+        camper.setCamperId(resultSet.getInt("camper_id"));
+        camper.setFirstName(resultSet.getString("first_name"));
+        camper.setLastName(resultSet.getString("last_name"));
+        camper.setAddress(resultSet.getString("address"));
+        camper.setCity(resultSet.getString("city"));
+        camper.setState(resultSet.getString("state"));
+        camper.setZip(resultSet.getInt("zip_code"));
+        camper.setEmail(resultSet.getString("email"));
+        camper.setPhone(resultSet.getString("phone"));
 
         return camper;
     }
