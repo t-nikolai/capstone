@@ -190,100 +190,126 @@ class CampgroundServiceTest {
     @Test
     void shouldNotUpdateIfNameIsInvalid() {
         Campground campground = makeCampground();
-        Result<Campground>
+        Result<Campground> result;
 
-        // name validation (null)
         campground.setName(null);
         result = service.update(campground);
         assertEquals(ResultType.INVALID, result.getType());
+    }
 
-        campground.setName("Tent Place");
+    @Test
+    void shouldNotUpdateIfAddressIsInvalid() {
+        Campground campground = makeCampground();
+        Result<Campground> result;
 
-        // address validation (null)
         campground.setAddress(null);
-        service.update(campground);
+        result = service.update(campground);
         assertEquals(ResultType.INVALID, result.getType());
+    }
 
-        campground.setAddress("1231 Forest Hills Dr.");
+    @Test
+    void shouldNotUpdateIfCityIsInvalid() {
+        Campground campground = makeCampground();
+        Result<Campground> result;
 
-        // city validation (null)
         campground.setCity(null);
-        service.update(campground);
+        result = service.update(campground);
         assertEquals(ResultType.INVALID, result.getType());
+    }
 
-        campground.setCity("Woodland");
+    @Test
+    void shouldNotUpdateIfStateIsInvalid() {
+        Campground campground = makeCampground();
+        Result<Campground> result;
 
-        // state validation (null)
         campground.setState(null);
-        service.update(campground);
+        result = service.update(campground);
         assertEquals(ResultType.INVALID, result.getType());
+    }
 
-        campground.setState("WI");
+    @Test
+    void shouldNotUpdateIfZipIsInvalid() {
+        Campground campground = makeCampground();
+        Result<Campground> result;
 
-        // zip validation (under 6 numbers, over 6 numbers, not all numbers)
         campground.setZip(0);
-        service.update(campground);
+        result = service.update(campground);
         assertEquals(ResultType.INVALID, result.getType());
-        campground.setZip(0);
 
         campground.setZip(666666);
-        service.update(campground);
+        result = service.update(campground);
         assertEquals(ResultType.INVALID, result.getType());
 
         campground.setZip(-4 / 6 * 4);
-        service.update(campground);
+        result = service.update(campground);
         assertEquals(ResultType.INVALID, result.getType());
+    }
 
-        campground.setZip(43414);
+    @Test
+    void shouldNotUpdateIfPhoneIsInvalid() {
+        Campground campground = makeCampground();
+        Result<Campground> result;
 
-        // phone validation (null, doesn't just contain numbers)
         campground.setPhone(null);
-        service.update(campground);
+        result = service.update(campground);
         assertEquals(ResultType.INVALID, result.getType());
 
         campground.setPhone("abcde"); // TODO : check it!
-        service.update(campground);
+        result = service.update(campground);
         assertEquals(ResultType.INVALID, result.getType());
+    }
 
-        campground.setPhone("4142229999");
+    @Test
+    void shouldNotUpdateIfEmailIsInvalid() {
+        Campground campground = makeCampground();
+        Result<Campground> result;
 
-        // email validation (null, doesn't contain '@')
         campground.setEmail(null);
-        service.update(campground);
+        result = service.update(campground);
         assertEquals(ResultType.INVALID, result.getType());
 
         campground.setEmail("hereIsAnEmailAddress.com");
-        service.update(campground);
+        result = service.update(campground);
         assertEquals(ResultType.INVALID, result.getType());
+    }
 
-        campground.setEmail("tentplace120@npus.net");
+    @Test
+    void shouldNotUpdateIfCapacityIsInvalid() {
+        Campground campground = makeCampground();
+        Result<Campground> result;
 
-        // capacity validation (under 0)
         campground.setCapacity(-7);
-        service.update(campground);
+        result = service.update(campground);
         assertEquals(ResultType.INVALID, result.getType());
+    }
 
-        campground.setCapacity(12);
+    @Test
+    void shouldNotUpdateIfStandardRateIsInvalid() {
+        Campground campground = makeCampground();
+        Result<Campground> result;
 
-        // standardR validation (under 0)
         campground.setStandardRate(BigDecimal.valueOf(-5.00));
-        service.update(campground);
+        result = service.update(campground);
         assertEquals(ResultType.INVALID, result.getType());
+    }
 
-        campground.setStandardRate(new BigDecimal(25.00));
+    @Test
+    void shouldNotUpdateIfWeekendRateIsInvalid() {
+        Campground campground = makeCampground();
+        Result<Campground> result;
 
-        // weekendR validation (under 0)
         campground.setWeekendRate(BigDecimal.valueOf(-5.00));
-        service.update(campground);
+        result = service.update(campground);
         assertEquals(ResultType.INVALID, result.getType());
+    }
 
-        campground.setWeekendRate(new BigDecimal(30.00));
+    @Test
+    void shouldNotUpdateIfCampgroundIdIsInvalid() {
+        Campground campground = makeCampground();
+        Result<Campground> result;
 
-        // campgroundId validation (not 0)
-        service.update(campground);
+        result = service.update(campground);
         assertEquals(ResultType.INVALID, result.getType());
-
-        campground.setCampgroundId(1);
     }
 
     @Test
@@ -296,6 +322,18 @@ class CampgroundServiceTest {
 
         result = service.update(campground);
         assertEquals(ResultType.SUCCESS, result.getType());
+    }
+
+    @Test
+    void shouldNotDeleteWhenInvalid() {
+        assertFalse(service.deleteById(-2));
+    }
+
+    @Test
+    void shouldDeleteWhenValid() {
+        when(service.deleteById(1)).thenReturn(true);
+        assertTrue(service.deleteById(1));
+        assertFalse(service.deleteById(2)); //as if campground 2 doesn't exist
     }
 
     Campground makeCampground(){
