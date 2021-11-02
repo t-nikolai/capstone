@@ -64,8 +64,8 @@ class CampgroundServiceTest {
         service.add(campground);
         assertEquals(ResultType.INVALID, result.getType());  campground.setZip(0);
 
-
-        service.666666dd(campground);
+        campground.setZip(666666);
+        service.add(campground);
         assertEquals(ResultType.INVALID, result.getType());
 
         campground.setZip(43414);
