@@ -12,4 +12,6 @@ public class CampgroundJdbcTemplateRepository {
     public CampgroundJdbcTemplateRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
+
+
 }

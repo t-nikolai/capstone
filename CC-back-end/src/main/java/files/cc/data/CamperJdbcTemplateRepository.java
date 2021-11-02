@@ -19,7 +19,7 @@ public class CamperJdbcTemplateRepository implements CamperRepository {
     public CamperJdbcTemplateRepository(JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbcTemplate;}
 
     @Override
-    public List<Camper> findAll() {
+    public List<Camper> findAll() {     // ADMIN Privileges
         final String sql = "select camper_id, first_name, last_name, camping_method, camper_phone, camper_email, " +
             "camper_address, camper_city, camper_state, camper_zip " +
             "from camper limit 1000; ";
@@ -27,7 +27,7 @@ public class CamperJdbcTemplateRepository implements CamperRepository {
     }
 
     @Override
-    public Camper findById(int camper_id){
+    public Camper findById(int camper_id){      // ADMIN Privileges
         final String sql = "select camper_id, first_name, last_name, camping_method, camper_phone, " +
                 "camper_email, camper_address, camper_city, camper_state, camper_zip " +
                 "from camper " +
@@ -45,7 +45,7 @@ public class CamperJdbcTemplateRepository implements CamperRepository {
 
     @Override
     @Transactional
-    public Camper add(Camper camper){
+    public Camper add(Camper camper){       // USER Privileges
         final String sql = "insert into camper (first_name, last_name, camping_method, " +
                 "camper_phone, camper_email, camper_address, camper_city, camper_state, camper_zip) " +
                 "values(?,?,?,?,?,?,?,?,?); ";
@@ -74,7 +74,7 @@ public class CamperJdbcTemplateRepository implements CamperRepository {
     }
 
     @Override
-    public boolean update(Camper camper){
+    public boolean update(Camper camper){       // USER Privileges
             final String sql = "update camper set "
                     + "first_name = ?, "
                     + "last_name = ?, "
