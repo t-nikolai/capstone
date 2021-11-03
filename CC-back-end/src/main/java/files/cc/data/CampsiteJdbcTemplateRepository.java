@@ -2,6 +2,7 @@ package files.cc.data;
 
 import files.cc.data.mappers.CampsiteMapper;
 import files.cc.models.Campsite;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -17,7 +18,7 @@ public class CampsiteJdbcTemplateRepository implements CampsiteRepository {
     }
 
     @Override
-    public List<Campsite> findAll(){
+    public List<Campsite> findAll() throws DataAccessException {
         final String sql = "select site_id, cs.`name` as cs_name, cs.campground_id as cs_cg_id, " +
                 "cg.campground_id as campground_id, cg.`name` as `name`, address, city, `state`, zip, phone, email, capacity, standard_rate, weekend_rate " +
                 "from campsite cs " +
@@ -26,7 +27,7 @@ public class CampsiteJdbcTemplateRepository implements CampsiteRepository {
     }
 
     @Override
-    public Campsite findById(int id){
+    public Campsite findById(int id) throws DataAccessException{
         final String sql = "select site_id, cs.`name` as cs_name, cs.campground_id as cs_cg_id, " +
                 "cg.campground_id as campground_id, cg.`name` as `name`, address, city, `state`, zip, phone, email, capacity, standard_rate, weekend_rate " +
                 "from campsite cs " +
