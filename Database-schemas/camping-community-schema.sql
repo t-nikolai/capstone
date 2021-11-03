@@ -61,7 +61,7 @@ create table reservation (
 );
 
 -- data
-insert into campground(campground_name, campground_address, campground_city, campground_state, campground_zip,
-	campground_phone, campground_email, campground_capacity, standard_rate, weekend_rate)
+insert into campground(`name`, address, city, state, zip,
+	phone, email, capacity, standard_rate, weekend_rate)
 values("Afton Campground", "6959 Peller Ave S", "Hastings", "MN", 55033, "(651)201-6780", 
 	"afton.statepark@state.mn.us", 31, 30.00, 35.00);
