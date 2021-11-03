@@ -58,7 +58,7 @@ public class Camper {
         return campingMethod;
     }
 
-    public void setCamping_method(String camping_method) {
+    public void setCampingMethod(String camping_method) {
         this.campingMethod = camping_method;
     }
 
