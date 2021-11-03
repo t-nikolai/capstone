@@ -37,10 +37,9 @@ public class CampgroundJdbcTemplateRepository implements CampgroundRepository {
                 "standard_rate, weekend_rate " +
                 "from campground " +
                 "where campground_id = ? ; ";
-        Campground campground = jdbcTemplate.query(sql, new CampgroundMapper(), campgroundId).stream()
-                .findFirst().orElse(null);
 
-        return campground;
+        return jdbcTemplate.query(sql, new CampgroundMapper(), campgroundId).stream()
+                .findFirst().orElse(null);
     }
 
 

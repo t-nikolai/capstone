@@ -66,14 +66,14 @@ delimiter //
 create procedure set_known_good_state()
 begin
 
-delete from campground;
-alter table alias auto_increment = 1;
+delete from reservation;
+alter table reservation auto_increment = 1;
 delete from campsite;
 alter table campsite auto_increment = 1;
 delete from camper;
 alter table camper auto_increment = 1;
-delete from reservation;
-alter table reservation auto_increment = 1;
+delete from campground;
+alter table campground auto_increment = 1;
 
 insert into campground(`name`, address, city, state, zip,
 	phone, email, capacity, standard_rate, weekend_rate)
