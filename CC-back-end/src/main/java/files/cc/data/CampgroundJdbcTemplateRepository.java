@@ -37,10 +37,9 @@ public class CampgroundJdbcTemplateRepository implements CampgroundRepository {
                 "standard_rate, weekend_rate " +
                 "from campground " +
                 "where campground_id = ? ; ";
-        Campground campground = jdbcTemplate.query(sql, new CampgroundMapper(), campgroundId).stream()
-                .findFirst().orElse(null);
 
-        return campground;
+        return jdbcTemplate.query(sql, new CampgroundMapper(), campgroundId).stream()
+                .findFirst().orElse(null);
     }
 
 
@@ -87,7 +86,7 @@ public class CampgroundJdbcTemplateRepository implements CampgroundRepository {
                 + "zip = ?, "
                 + "phone = ?, "
                 + "email = ?, "
-                + "standard_rate = ? "
+                + "standard_rate = ?, "
                 + "weekend_rate = ? "
                 + "where campground_id = ?;";
 
@@ -107,6 +106,7 @@ public class CampgroundJdbcTemplateRepository implements CampgroundRepository {
     @Override
     @Transactional
     public boolean deleteById (int campgroundId) {
+        //TODO: need to account for campsites that rely on the campground being deleted somewhere (here? the service? ask instructors & team)
         jdbcTemplate.update("delete from campground where campground_id = ?;", campgroundId);
         return jdbcTemplate.update("delete from campground where campground_id = ?;", campgroundId) > 0;
     }
