@@ -2,6 +2,7 @@ package files.cc.data;
 
 import files.cc.data.mappers.CamperMapper;
 import files.cc.models.Camper;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -19,7 +20,7 @@ public class CamperJdbcTemplateRepository implements CamperRepository {
     public CamperJdbcTemplateRepository(JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbcTemplate;}
 
     @Override
-    public List<Camper> findAll() {     // ADMIN Privileges
+    public List<Camper> findAll() throws DataAccessException {     // ADMIN Privileges
         final String sql = "select camper_id, first_name, last_name, camping_method, phone, email, " +
             "address, city, state, zip " +
             "from camper limit 1000; ";
@@ -27,7 +28,7 @@ public class CamperJdbcTemplateRepository implements CamperRepository {
     }
 
     @Override
-    public Camper findById(int camper_id){      // ADMIN Privileges
+    public Camper findById(int camper_id) throws DataAccessException{      // ADMIN Privileges
         final String sql = "select camper_id, first_name, last_name, camping_method, phone, " +
                 "email, address, city, state, zip " +
                 "from camper " +
@@ -45,7 +46,7 @@ public class CamperJdbcTemplateRepository implements CamperRepository {
 
     @Override
     @Transactional
-    public Camper add(Camper camper){       // USER Privileges
+    public Camper add(Camper camper) throws DataAccessException{       // USER Privileges
         final String sql = "insert into camper (first_name, last_name, camping_method, " +
                 "phone, email, address, city, state, zip) " +
                 "values(?,?,?,?,?,?,?,?,?); ";
@@ -74,7 +75,7 @@ public class CamperJdbcTemplateRepository implements CamperRepository {
     }
 
     @Override
-    public boolean update(Camper camper){       // USER Privileges
+    public boolean update(Camper camper) throws DataAccessException{       // USER Privileges
             final String sql = "update camper set "
                     + "first_name = ?, "
                     + "last_name = ?, "
@@ -101,7 +102,7 @@ public class CamperJdbcTemplateRepository implements CamperRepository {
     }
 
     @Override
-    public boolean deleteById(int camper_id){
+    public boolean deleteById(int camper_id) throws DataAccessException{
         jdbcTemplate.update("delete from camper where camper_id = ?", camper_id);
         return jdbcTemplate.update("delete from camper where camper_id = ?", camper_id) > 0;
     }
