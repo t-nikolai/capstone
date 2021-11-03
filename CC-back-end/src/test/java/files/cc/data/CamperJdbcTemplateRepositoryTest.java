@@ -97,5 +97,5 @@ class CamperJdbcTemplateRepositoryTest {
     void shouldNotDelete(){
         assertFalse(repository.deleteById(99));
     }
-    
+
 }
