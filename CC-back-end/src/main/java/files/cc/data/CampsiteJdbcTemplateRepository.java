@@ -18,7 +18,8 @@ public class CampsiteJdbcTemplateRepository implements CampsiteRepository {
 
     @Override
     public List<Campsite> findAll(){
-        final String sql = "select site_id, cs.`name` as cs_name, cs.campground_id, " +
+        final String sql = "select site_id, cs.`name` as cs_name, cs.campground_id as cs_cg_id, " +
+                "cg.campground_id as campground_id, cg.`name` as `name`, address, city, `state`, zip, phone, email, capacity, standard_rate, weekend_rate " +
                 "from campsite cs " +
                 "inner join campground cg on cs.campground_id = cg.campground_id;";
         return jdbcTemplate.query(sql, new CampsiteMapper());
@@ -26,9 +27,10 @@ public class CampsiteJdbcTemplateRepository implements CampsiteRepository {
 
     @Override
     public Campsite findById(int id){
-        final String sql = "select site_id, `name`, campground_id" +
+        final String sql = "select site_id, cs.`name` as cs_name, cs.campground_id as cs_cg_id, " +
+                "cg.campground_id as campground_id, cg.`name` as `name`, address, city, `state`, zip, phone, email, capacity, standard_rate, weekend_rate " +
                 "from campsite cs " +
-                "" +
+                "inner join campground cg on cs.campground_id = cg.campground_id " +
                 "where site_id = ?;";
         return jdbcTemplate.query(sql, new CampsiteMapper(), id).stream().findFirst().orElse(null);
     }
