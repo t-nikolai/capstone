@@ -13,12 +13,12 @@ public class CamperMapper implements RowMapper<Camper> {
         camper.setCamperId(resultSet.getInt("camper_id"));
         camper.setFirstName(resultSet.getString("first_name"));
         camper.setLastName(resultSet.getString("last_name"));
+        camper.setPhone(resultSet.getString("phone"));
+        camper.setEmail(resultSet.getString("email"));
         camper.setAddress(resultSet.getString("address"));
         camper.setCity(resultSet.getString("city"));
         camper.setState(resultSet.getString("state"));
-        camper.setZip(resultSet.getInt("zip_code"));
-        camper.setEmail(resultSet.getString("email"));
-        camper.setPhone(resultSet.getString("phone"));
+        camper.setZip(resultSet.getInt("zip"));
 
         return camper;
     }
