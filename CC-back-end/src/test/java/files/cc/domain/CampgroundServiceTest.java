@@ -324,17 +324,17 @@ class CampgroundServiceTest {
         assertEquals(ResultType.SUCCESS, result.getType());
     }
 
-    @Test
-    void shouldNotDeleteWhenInvalid() {
-        assertFalse(service.deleteById(-2));
-    }
-
-    @Test
-    void shouldDeleteWhenValid() {
-        when(service.deleteById(1)).thenReturn(true);
-        assertTrue(service.deleteById(1));
-        assertFalse(service.deleteById(2)); //as if campground 2 doesn't exist
-    }
+//    @Test
+//    void shouldNotDeleteWhenInvalid() {
+//        assertFalse(service.deleteById(-2));
+//    }
+//
+//    @Test
+//    void shouldDeleteWhenValid() {
+//        when(service.deleteById(1)).thenReturn(true);
+//        assertTrue(service.deleteById(1));
+//        assertFalse(service.deleteById(2)); //as if campground 2 doesn't exist
+//    }
 
     Campground makeCampground(){
         Campground campground = new Campground();

@@ -103,11 +103,11 @@ public class CampgroundJdbcTemplateRepository implements CampgroundRepository {
                 campground.getCampgroundId()) > 0;
     }
 
-    @Override
-    @Transactional
-    public boolean deleteById (int campgroundId) {
-        //TODO: need to account for campsites that rely on the campground being deleted somewhere (here? the service? ask instructors & team)
-        jdbcTemplate.update("delete from campground where campground_id = ?;", campgroundId);
-        return jdbcTemplate.update("delete from campground where campground_id = ?;", campgroundId) > 0;
-    }
+//    @Override
+//    @Transactional
+//    public boolean deleteById (int campgroundId) {
+//        //TODO: need to account for campsites that rely on the campground being deleted somewhere (here? the service? ask instructors & team)
+//        jdbcTemplate.update("delete from campground where campground_id = ?;", campgroundId);
+//        return jdbcTemplate.update("delete from campground where campground_id = ?;", campgroundId) > 0;
+//    }
 }

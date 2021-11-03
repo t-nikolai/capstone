@@ -82,17 +82,6 @@ class CampgroundRepositoryTest {
         assertFalse(repository.update(campground));
     }
 
-    // TODO: need to fix deleteById in repo before writing tests
-    @Test
-    void shouldDelete(){
-        assertTrue(repository.deleteById(4));
-    }
-
-    @Test
-    void shouldNotDelete(){
-
-    }
-
     private Campground makeCampground(){
         Campground campground = new Campground();
         campground.setCampgroundId(0);
