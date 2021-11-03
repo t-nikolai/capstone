@@ -34,7 +34,7 @@ create table camper (
 	camper_id int not null primary key auto_increment,
     first_name varchar(40) not null,
     last_name varchar(40) not null,
-    camping_method varchar(30) not null, -- enum ?
+    camping_method varchar(30) not null, 
     phone varchar(20) null,
     email varchar(50) not null,
     -- 

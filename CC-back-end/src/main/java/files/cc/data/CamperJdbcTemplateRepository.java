@@ -84,7 +84,8 @@ public class CamperJdbcTemplateRepository implements CamperRepository {
                     + "address = ?, "
                     + "city = ?, "
                     + "state = ?, "
-                    + "zip = ? ;";
+                    + "zip = ? "
+                    + "where camper_id = ?; ";
 
             return jdbcTemplate.update(sql,
                     camper.getFirstName(),

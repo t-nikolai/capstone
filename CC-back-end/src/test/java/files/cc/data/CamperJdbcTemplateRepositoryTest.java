@@ -1,12 +1,12 @@
 package files.cc.data;
 
 import files.cc.models.Camper;
-import files.cc.models.Campground;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -48,14 +48,54 @@ class CamperJdbcTemplateRepositoryTest {
     }
 
     @Test
-    void shouldUpdate(){
-        Camper camper
+    void shouldAdd(){
+        Camper camper = new Camper();
+        camper.setFirstName("Doug");
+        camper.setLastName("Dimmadome");
+        camper.setPhone("(777)222-9101");
+        camper.setEmail("jj@fishersunited.com");
+        camper.setCampingMethod("Tent");
+        camper.setAddress("123 Western Heights");
+        camper.setCity("Portland");
+        camper.setState("IL");
+        camper.setZip(60053);
+
+        repository.add(camper);
+        assertNotNull(repository.findById(5));
+
     }
 
+    @Test
+    void shouldUpdate(){
+        Camper camper = repository.findById(2);
+//        System.out.println(camper.getFirstName() + "\n" + camper.getLastName() + "\n" +
+//                camper.getCampingMethod() + "\n" + camper.getFirstName() + "\n" + camper.getFirstName() + "\n" +
+//                camper.getFirstName() + "\n" + camper.getFirstName() + "\n" +);
+        camper.setFirstName("Thomas");
+        camper.setState("AK");
+        camper.setZip(99991);
+        //camper.setCampingMethod("#1");
+        System.out.println(camper.getFirstName() + "\n" + camper.getState() + "\n" + camper.getCampingMethod());
+        assertTrue(repository.update(camper));
 
+    }
 
-    Camper makeCamper(){
-        
+    @Test
+    void shouldNotUpdate(){
+        Camper camper = repository.findById(1);
+        camper.setCamperId(88);
+
+        assertFalse(repository.update(camper));
+    }
+
+    @Test // TODO: make sure this test works (can't delete parent row, so can't delete camper currently)
+    void shouldDelete(){
+        assertTrue(repository.deleteById(1));
+    }
+
+    @Test
+    void shouldNotDelete(){
+        assertFalse(repository.deleteById(99));
     }
 
 }

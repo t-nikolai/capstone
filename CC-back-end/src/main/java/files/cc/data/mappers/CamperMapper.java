@@ -13,6 +13,7 @@ public class CamperMapper implements RowMapper<Camper> {
         camper.setCamperId(resultSet.getInt("camper_id"));
         camper.setFirstName(resultSet.getString("first_name"));
         camper.setLastName(resultSet.getString("last_name"));
+        camper.setCampingMethod(resultSet.getString("camping_method"));
         camper.setPhone(resultSet.getString("phone"));
         camper.setEmail(resultSet.getString("email"));
         camper.setAddress(resultSet.getString("address"));
