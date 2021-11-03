@@ -5,7 +5,7 @@ use camping_community;
 -- create tables and relationships
 create table campground (
     campground_id int not null primary key auto_increment,
-    name varchar(70) not null,
+    `name` varchar(70) not null,
     --
     address varchar(50) not null,
     city varchar(50) not null,
@@ -22,7 +22,7 @@ create table campground (
 
 create table campsite (
     site_id int not null primary key auto_increment,
-    name varchar(10) not null,
+    `name` varchar(10) not null,
     
     campground_id int not null,
     constraint fk_campsite_campground_id

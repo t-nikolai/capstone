@@ -5,7 +5,7 @@ use camping_community_test;
 -- create tables and relationships
 create table campground (
     campground_id int not null primary key auto_increment,
-    name varchar(70) not null,
+    `name` varchar(70) not null,
     --
     address varchar(50) not null,
     city varchar(50) not null,
@@ -22,7 +22,7 @@ create table campground (
 
 create table campsite (
 	site_id int not null primary key auto_increment,
-    site_name varchar(10) not null,
+    `name` varchar(10) not null,
     
     campground_id int not null,
     constraint fk_campsite_campground_id
@@ -87,7 +87,7 @@ values("Test CG Name 1", "CG Street 1", "CG City 1", "S1", 11111, "(111)111-1111
 	"cgemail4@cgemail4.com", 44, 14.00, 44.00);
 	
     
-insert into campsite(site_name, campground_id)
+insert into campsite(`name`, campground_id)
 	values
     ("Site 1", 1),
     ("Site 2", 1),
