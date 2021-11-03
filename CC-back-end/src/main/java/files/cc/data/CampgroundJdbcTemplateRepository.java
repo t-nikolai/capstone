@@ -24,7 +24,7 @@ public class CampgroundJdbcTemplateRepository implements CampgroundRepository {
 
     @Override
     public List<Campground> findAll(){
-        final String sql = "select campground_id, name, address, city, state, zip, phone, email, capacity, " +
+        final String sql = "select campground_id, `name`, address, city, state, zip, phone, email, capacity, " +
                 "standard_rate, weekend_rate " +
                 "from campground limit 1000; ";
         return jdbcTemplate.query(sql, new CampgroundMapper());
@@ -33,7 +33,7 @@ public class CampgroundJdbcTemplateRepository implements CampgroundRepository {
     @Override
     @Transactional
     public Campground findById(int campgroundId) {
-        final String sql = "select campground_id, name, address, city, state, zip, phone, email, capacity, " +
+        final String sql = "select campground_id, `name`, address, city, state, zip, phone, email, capacity, " +
                 "standard_rate, weekend_rate " +
                 "from campground " +
                 "where campground_id = ? ; ";
@@ -47,7 +47,7 @@ public class CampgroundJdbcTemplateRepository implements CampgroundRepository {
 
     @Override
     public Campground add(Campground campground) {
-        final String sql = "insert into campground (name, address, city, state, zip,\n" +
+        final String sql = "insert into campground (`name`, address, city, state, zip,\n" +
                 "phone, email, capacity, standard_rate, weekend_rate) values "
                 + "(?,?,?,?,?,?,?,?,?,?);";
 
