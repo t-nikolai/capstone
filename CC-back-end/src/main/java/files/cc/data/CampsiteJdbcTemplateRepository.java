@@ -18,15 +18,17 @@ public class CampsiteJdbcTemplateRepository implements CampsiteRepository {
 
     @Override
     public List<Campsite> findAll(){
-        final String sql = "select site_id, `name`, campground_id " +
-                "from campsite limit 1000";
+        final String sql = "select site_id, cs.`name` as cs_name, cs.campground_id, " +
+                "from campsite cs " +
+                "inner join campground cg on cs.campground_id = cg.campground_id;";
         return jdbcTemplate.query(sql, new CampsiteMapper());
     }
 
     @Override
     public Campsite findById(int id){
         final String sql = "select site_id, `name`, campground_id" +
-                "from campsite" +
+                "from campsite cs " +
+                "" +
                 "where site_id = ?;";
         return jdbcTemplate.query(sql, new CampsiteMapper(), id).stream().findFirst().orElse(null);
     }

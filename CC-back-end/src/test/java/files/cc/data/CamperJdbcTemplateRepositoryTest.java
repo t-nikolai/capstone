@@ -49,13 +49,5 @@ class CamperJdbcTemplateRepositoryTest {
 
     @Test
     void shouldUpdate(){
-        Camper camper
     }
-
-
-
-    Camper makeCamper(){
-        
-    }
-
 }

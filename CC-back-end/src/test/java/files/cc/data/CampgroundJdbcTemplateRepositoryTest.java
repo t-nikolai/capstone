@@ -12,7 +12,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
-class CampgroundRepositoryTest {
+class CampgroundJdbcTemplateRepositoryTest {
 
     final static int NEXT_ID = 5;
 

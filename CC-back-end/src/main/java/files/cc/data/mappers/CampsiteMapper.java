@@ -12,7 +12,7 @@ public class CampsiteMapper implements RowMapper<Campsite> {
     public Campsite mapRow(ResultSet resultSet, int i) throws SQLException {
         Campsite campsite = new Campsite();
         campsite.setSiteId(resultSet.getInt("site_id"));
-        campsite.setName(resultSet.getString("name"));
+        campsite.setName(resultSet.getString("cs_name"));
 
         CampgroundMapper campgroundMapper = new CampgroundMapper();
         campsite.setCampground(campgroundMapper.mapRow(resultSet, i));
