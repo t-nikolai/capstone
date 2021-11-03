@@ -56,13 +56,13 @@ public class CampgroundController {
         return ErrorResponse.build(result);
     }
 
-    @DeleteMapping("/{campgroundId}")
-    public ResponseEntity<Void> deleteById(@PathVariable int campgroundId) {
-        if (service.deleteById(campgroundId)) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
+//    @DeleteMapping("/{campgroundId}")
+//    public ResponseEntity<Void> deleteById(@PathVariable int campgroundId) {
+//        if (service.deleteById(campgroundId)) {
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        }
+//        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//    }
 
 
 }

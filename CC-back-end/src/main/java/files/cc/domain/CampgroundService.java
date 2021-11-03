@@ -61,10 +61,10 @@ public class CampgroundService {
         return result;
     }
 
-    public boolean deleteById(int campgroundId) {
-        Result<Campground> result = deleteValidate(campgroundId);
-        return repository.deleteById(campgroundId);
-    }
+//    public boolean deleteById(int campgroundId) {
+//        Result<Campground> result = deleteValidate(campgroundId);
+//        return repository.deleteById(campgroundId);
+//    }
 
     //validation
     //  TODO: findById/State/etc Validation?

@@ -11,5 +11,5 @@ public interface CampgroundRepository {
     //todo: add in findByPrefix/Id - something
     Campground add(Campground campground) throws DataAccessException;
     boolean update(Campground campground) throws DataAccessException;
-    boolean deleteById(int campgroundId) throws DataAccessException;
+//    boolean deleteById(int campgroundId) throws DataAccessException;
 }
