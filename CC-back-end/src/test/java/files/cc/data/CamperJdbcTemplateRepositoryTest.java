@@ -67,9 +67,6 @@ class CamperJdbcTemplateRepositoryTest {
 
     @Test
     void shouldUpdate(){
-<<<<<<< HEAD
-    }
-=======
         Camper camper = repository.findById(2);
 //        System.out.println(camper.getFirstName() + "\n" + camper.getLastName() + "\n" +
 //                camper.getCampingMethod() + "\n" + camper.getFirstName() + "\n" + camper.getFirstName() + "\n" +
@@ -100,6 +97,5 @@ class CamperJdbcTemplateRepositoryTest {
     void shouldNotDelete(){
         assertFalse(repository.deleteById(99));
     }
-
->>>>>>> 68ca58e82595726bc73add417879c649f033e29b
+    
 }
