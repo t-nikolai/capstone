@@ -27,12 +27,18 @@ class CampgroundRepositoryTest {
         knownGoodState.set();
     }
 
+    //---------testing rules: -----------
+    //  leave first campground entry (id of 1) alone
+    //  when add the id will be 5
+    //  update id of 3 only
+    //  delete id of 4 only
+
     @Test
     void shouldFindAll(){
         List<Campground> campgrounds = repository.findAll();
 
         assertNotNull(campgrounds);
-        assertEquals(4, campgrounds.size());
+        assertTrue(campgrounds.size() >= 3 && campgrounds.size() <= 5);
     }
 
     @Test
@@ -45,6 +51,45 @@ class CampgroundRepositoryTest {
 
     @Test
     void shouldNotFindByWrongId(){
+        Campground campground = repository.findById(999);
+
+        assertNull(campground);
+    }
+
+    @Test
+    void shouldAdd(){
+        Campground campground = makeCampground();
+
+        campground = repository.add(campground);
+
+        assertNotNull(campground);
+        assertEquals(NEXT_ID, campground.getCampgroundId());
+    }
+
+    @Test
+    void shouldUpdate(){
+        Campground campground = makeCampground();
+        campground.setCampgroundId(3);
+
+        assertTrue(repository.update(campground));
+    }
+
+    @Test
+    void shouldNotUpdate(){
+        Campground campground = makeCampground();
+        campground.setCampgroundId(999);
+
+        assertFalse(repository.update(campground));
+    }
+
+    // TODO: need to fix deleteById in repo before writing tests
+    @Test
+    void shouldDelete(){
+        assertTrue(repository.deleteById(4));
+    }
+
+    @Test
+    void shouldNotDelete(){
 
     }
 
