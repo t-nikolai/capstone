@@ -20,6 +20,11 @@ class CamperServiceTest {
     @MockBean
     CamperRepository repository;
 
+    //TODO: review tests
+    //   - specifically:
+    //      - Address testing below
+    //      - Delete testing (once implemented)
+
 //  FIND TESTS
     @Test
     void shouldFindAllCampers(){
