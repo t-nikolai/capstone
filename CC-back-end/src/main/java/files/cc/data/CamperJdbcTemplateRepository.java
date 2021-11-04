@@ -25,16 +25,16 @@ public class CamperJdbcTemplateRepository implements CamperRepository {
 
     @Override
     public List<Camper> findAll() throws DataAccessException {     // ADMIN Privileges
-        final String sql = "select camper_id, first_name, last_name, camping_method, phone, email, " +
-            "address, city, state, zip " +
+        final String sql = "select camper_id, first_name, last_name, camping_method, phone as cr_phone, email as cr_email, " +
+            "address as cr_address, city as cr_city, state as cr_state, zip as cr_zip " +
             "from camper limit 1000; ";
         return jdbcTemplate.query(sql, new CamperMapper());
     }
 
     @Override
     public Camper findById(int camper_id) throws DataAccessException{      // ADMIN Privileges
-        final String sql = "select camper_id, first_name, last_name, camping_method, phone, " +
-                "email, address, city, state, zip " +
+        final String sql = "select camper_id, first_name, last_name, camping_method, phone as cr_phone, " +
+                "email as cr_email, address as cr_address, city as cr_city, state as cr_state, zip as cr_zip " +
                 "from camper " +
                 "where camper_id = ? ;";
         Camper camper = jdbcTemplate.query(sql, new CamperMapper(), camper_id).stream()

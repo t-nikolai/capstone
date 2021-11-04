@@ -39,7 +39,7 @@ class CampsiteServiceTest {
 
     @Test
     void shouldFindById(){
-        when(repository.findById(1)).thenReturn(new Campsite(1, "campsite 1", new Campground()));
+        when(repository.findById(1)).thenReturn(new Campsite(1, "campsite 1", 1));
 
         Campsite campsite = service.findById(1);
 

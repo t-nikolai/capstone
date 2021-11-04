@@ -13,9 +13,10 @@ public class CampsiteMapper implements RowMapper<Campsite> {
         Campsite campsite = new Campsite();
         campsite.setSiteId(resultSet.getInt("site_id"));
         campsite.setName(resultSet.getString("cs_name"));
+        campsite.setCampgroundId(resultSet.getInt("cs_cg_id"));
 
-        CampgroundMapper campgroundMapper = new CampgroundMapper();
-        campsite.setCampground(campgroundMapper.mapRow(resultSet, i));
+//        CampgroundMapper campgroundMapper = new CampgroundMapper();
+//        campsite.setCampground(campgroundMapper.mapRow(resultSet, i));
 
         return campsite;
     }

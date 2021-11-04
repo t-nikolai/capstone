@@ -25,15 +25,23 @@ public class ReservationJdbcTemplateRepository implements ReservationRepository 
 
     @Override
     public List<Reservation> findAll() throws DataAccessException {
-        final String sql = "select reservation_id, start_date, end_date, site_id, camper_id " +
-                "from reservation limit 1000;";
+        final String sql = "select r.reservation_id as reservation_id, r.start_date as start_date, r.end_date as end_date, " +
+                "cs.site_id as site_id, cs.`name` as cs_name, cs.campground_id as campground_id, " +
+                "cr.camper_id as camper_id, cr.first_name as first_name, cr.last_name as last_name, cr.camping_method as camping_method, cr.phone as cr_phone, cr.email as cr_email, cr.address as cr_address, cr.city as cr_city, cr.`state` as cr_state, cr.zip as cr_zip " +
+                "from reservation r " +
+                "inner join campsite cs on r.site_id = cs.site_id " +
+                "inner join camper cr on r.camper_id = cr.camper_id;";
         return jdbcTemplate.query(sql, new ReservationMapper());
     }
 
     @Override
     public Reservation findById(int reservationId) throws DataAccessException{
-        final String sql = "select reservation_id, start_date, end_date, site_id, camper_id " +
-                "from reservation " +
+        final String sql = "select r.reservation_id as reservation_id, r.start_date as start_date, r.end_date as end_date, " +
+                "cs.site_id as site_id, cs.`name` as cs_name, cs.campground_id as campground_id, " +
+                "cr.camper_id as camper_id, cr.first_name as first_name, cr.last_name as last_name, cr.camping_method as camping_method, cr.phone as cr_phone, cr.email as cr_email, cr.address as cr_address, cr.city as cr_city, cr.`state` as cr_state, cr.zip as cr_zip " +
+                "from reservation r " +
+                "inner join campsite cs on r.site_id = cs.site_id " +
+                "inner join camper cr on r.camper_id = cr.camper_id " +
                 "where reservation_id = ?;";
         return jdbcTemplate.query(sql, new ReservationMapper(), reservationId).stream().findFirst().orElse(null);
     }
@@ -45,7 +53,7 @@ public class ReservationJdbcTemplateRepository implements ReservationRepository 
 
     @Override
     public List<Reservation> findByCampgroundId(int campgroundId){
-        return findAll().stream().filter(i -> i.getSite().getCampground().getCampgroundId() == campgroundId).collect(Collectors.toList());
+        return findAll().stream().filter(i -> i.getSite().getCampgroundId() == campgroundId).collect(Collectors.toList());
     }
 
     @Override

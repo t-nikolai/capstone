@@ -6,14 +6,16 @@ public class Campsite {
 
     private int siteId;
     private String name;
-    private Campground campground;
+    //private Campground campground;
+    private int campgroundId;
 
     public Campsite() {}
 
-    public Campsite(int site_id, String site_name, Campground campground) {
+    public Campsite(int site_id, String site_name, int campgroundId) {
         this.siteId = site_id;
         this.name = site_name;
-        this.campground = campground;
+        //this.campground = campground;
+        this.campgroundId = campgroundId;
     }
 
     public int getSiteId() {
@@ -32,12 +34,12 @@ public class Campsite {
         this.name = name;
     }
 
-    public Campground getCampground() {
-        return campground;
+    public int getCampgroundId() {
+        return campgroundId;
     }
 
-    public void setCampground(Campground campground) {
-        this.campground = campground;
+    public void setCampgroundId(int campground) {
+        this.campgroundId = campground;
     }
 
     @Override
@@ -46,11 +48,11 @@ public class Campsite {
         if (!(o instanceof Campsite)) return false;
         Campsite campsite = (Campsite) o;
         return getSiteId() == campsite.getSiteId() && getName().equals(campsite.getName())
-                && getCampground().equals(campsite.getCampground());
+                && getCampgroundId() == campsite.getCampgroundId();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getSiteId(), getName(), getCampground());
+        return Objects.hash(getSiteId(), getName(), getCampgroundId());
     }
 }

@@ -60,9 +60,9 @@ class CamperJdbcTemplateRepositoryTest {
         camper.setState("IL");
         camper.setZip(60053);
 
-        repository.add(camper);
-        assertNotNull(repository.findById(5));
-
+        camper = repository.add(camper);
+        assertNotNull(camper);
+        assertEquals(5, camper.getCamperId());
     }
 
     @Test
