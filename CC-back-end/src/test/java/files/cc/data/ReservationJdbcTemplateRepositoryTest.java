@@ -31,7 +31,7 @@ class ReservationJdbcTemplateRepositoryTest {
 
     @Test
     void shouldFindAll(){
-        
+
     }
 
 }
