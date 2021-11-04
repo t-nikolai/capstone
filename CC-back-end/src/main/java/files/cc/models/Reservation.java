@@ -1,18 +1,19 @@
 package files.cc.models;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Reservation {
     private int reservationId;
-    private Date startDate;
-    private Date endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private Campsite site;
     private Camper camper;
 
     public Reservation() { }
 
-    public Reservation(int reservation_id, Date start_date, Date end_date, Campsite site, Camper camper) {
+    public Reservation(int reservation_id, LocalDate start_date, LocalDate end_date, Campsite site, Camper camper) {
         this.reservationId = reservation_id;
         this.startDate = start_date;
         this.endDate = end_date;
@@ -28,19 +29,19 @@ public class Reservation {
         this.reservationId = reservationId;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 

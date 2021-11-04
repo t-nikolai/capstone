@@ -90,7 +90,7 @@ class CamperJdbcTemplateRepositoryTest {
 
     @Test // TODO: make sure this test works (can't delete parent row, so can't delete camper currently)
     void shouldDelete(){
-        assertTrue(repository.deleteById(1));
+        assertTrue(repository.deleteById(4));
     }
 
     @Test

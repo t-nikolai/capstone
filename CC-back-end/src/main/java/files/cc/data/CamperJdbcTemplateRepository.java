@@ -16,8 +16,12 @@ import java.util.List;
 @Repository
 public class CamperJdbcTemplateRepository implements CamperRepository {
     private final JdbcTemplate jdbcTemplate;
+    private final ReservationJdbcTemplateRepository reservationRepo;
 
-    public CamperJdbcTemplateRepository(JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbcTemplate;}
+    public CamperJdbcTemplateRepository(JdbcTemplate jdbcTemplate, ReservationJdbcTemplateRepository reservationRepo) {
+        this.jdbcTemplate = jdbcTemplate;
+        this.reservationRepo = reservationRepo;
+    }
 
     @Override
     public List<Camper> findAll() throws DataAccessException {     // ADMIN Privileges
@@ -35,11 +39,6 @@ public class CamperJdbcTemplateRepository implements CamperRepository {
                 "where camper_id = ? ;";
         Camper camper = jdbcTemplate.query(sql, new CamperMapper(), camper_id).stream()
                 .findFirst().orElse(null);
-
-//        if (camper != null) {
-//            addAgencies(agent);
-//            addAliases(agent);
-//        }
 
         return camper;
     }
@@ -103,7 +102,7 @@ public class CamperJdbcTemplateRepository implements CamperRepository {
 
     @Override
     public boolean deleteById(int camper_id) throws DataAccessException{
-        jdbcTemplate.update("delete from camper where camper_id = ?", camper_id);
+        reservationRepo.deleteByCamperId(camper_id);
         return jdbcTemplate.update("delete from camper where camper_id = ?", camper_id) > 0;
     }
 }
