@@ -21,10 +21,6 @@ class CampgroundServiceTest {
     @MockBean
     CampgroundRepository repository;
 
-
-    //TODO: go over all the tests - mockito requirements, nothing going through to repo functions, all positive and negaitve cases,
-    // correct (valid/invalid) inputs, etc.
-
     @Test
     void shouldNotAddIfNull() {
         Campground emptyCampground = new Campground();

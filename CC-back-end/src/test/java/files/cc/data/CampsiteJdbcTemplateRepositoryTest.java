@@ -37,6 +37,21 @@ class CampsiteJdbcTemplateRepositoryTest {
         List<Campsite> campsites = repository.findAll();
 
         assertNotNull(campsites);
-        //assertTrue()
+        assertTrue(campsites.size() >= 43 && campsites.size() <= 45);       // just plain == 44 right now
+    }
+
+    @Test
+    void shouldFindById(){
+        Campsite campsite = repository.findById(1);
+
+        assertNotNull(campsite);
+        assertEquals(1, campsite.getSiteId());
+    }
+
+    @Test
+    void shouldNotFindByBadId(){
+        Campsite campsite = repository.findById(999);
+
+        assertNull(campsite);
     }
 }

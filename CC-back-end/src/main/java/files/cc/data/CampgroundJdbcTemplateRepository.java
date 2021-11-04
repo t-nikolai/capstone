@@ -4,6 +4,7 @@ import files.cc.data.mappers.CamperMapper;
 import files.cc.data.mappers.CampgroundMapper;
 import files.cc.models.Camper;
 import files.cc.models.Campground;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -23,7 +24,7 @@ public class CampgroundJdbcTemplateRepository implements CampgroundRepository {
     }
 
     @Override
-    public List<Campground> findAll(){
+    public List<Campground> findAll() throws DataAccessException {
         final String sql = "select campground_id, `name`, address, city, state, zip, phone, email, capacity, " +
                 "standard_rate, weekend_rate " +
                 "from campground limit 1000; ";
@@ -32,7 +33,7 @@ public class CampgroundJdbcTemplateRepository implements CampgroundRepository {
 
     @Override
     @Transactional
-    public Campground findById(int campgroundId) {
+    public Campground findById(int campgroundId) throws DataAccessException{
         final String sql = "select campground_id, `name`, address, city, state, zip, phone, email, capacity, " +
                 "standard_rate, weekend_rate " +
                 "from campground " +
@@ -46,7 +47,7 @@ public class CampgroundJdbcTemplateRepository implements CampgroundRepository {
     // TODO: find by prefix (state, city, name, etc.)  using lambdas/anon functions
 
     @Override
-    public Campground add(Campground campground) {
+    public Campground add(Campground campground) throws DataAccessException{
         final String sql = "insert into campground (`name`, address, city, state, zip,\n" +
                 "phone, email, capacity, standard_rate, weekend_rate) values "
                 + "(?,?,?,?,?,?,?,?,?,?);";
@@ -77,7 +78,7 @@ public class CampgroundJdbcTemplateRepository implements CampgroundRepository {
     }
 
     @Override
-    public boolean update (Campground campground){
+    public boolean update (Campground campground) throws DataAccessException{
         final String sql = "update campground set "
                 + "`name` = ?, "
                 + "address = ?, "
