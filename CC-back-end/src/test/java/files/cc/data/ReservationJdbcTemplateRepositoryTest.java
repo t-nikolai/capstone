@@ -77,7 +77,33 @@ class ReservationJdbcTemplateRepositoryTest {
         assertNotNull(repository.findById(5));
     }
 
+    @Test
+    void shouldUpdate(){
+        Reservation reservation = repository.findById(3);
+        reservation.setCamper(camperRepository.findById(2));
 
+        assertTrue(repository.update(reservation));
+    }
+
+    @Test
+    void shouldNotUpdate(){
+        Reservation reservation = new Reservation();
+        Campsite cs1 = campsiteRepository.findById(1);
+        Camper cr1 = camperRepository.findById(2);
+
+        reservation.setSite(cs1);
+        reservation.setCamper(cr1);
+        reservation.setStartDate(LocalDate.of(2022,01,01));
+        reservation.setEndDate(LocalDate.of(2022,02,01));
+
+        reservation.setReservationId(222);
+        assertFalse(repository.update(reservation));
+    }
+
+    @Test
+    void shouldDeleteById(){
+        assertTrue(repository.deleteById(4));
+    }
 
 
 

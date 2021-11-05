@@ -26,7 +26,7 @@ public class ReservationJdbcTemplateRepository implements ReservationRepository 
     @Override
     public List<Reservation> findAll() throws DataAccessException {
         final String sql = "select r.reservation_id as reservation_id, r.start_date as start_date, r.end_date as end_date, " +
-                "cs.site_id as site_id, cs.`name` as cs_name, cs.campground_id as campground_id, " +
+                "cs.site_id as site_id, cs.`name` as cs_name, cs.campground_id as cs_cg_id, " +
                 "cr.camper_id as camper_id, cr.first_name as first_name, cr.last_name as last_name, cr.camping_method as camping_method, cr.phone as cr_phone, cr.email as cr_email, cr.address as cr_address, cr.city as cr_city, cr.`state` as cr_state, cr.zip as cr_zip " +
                 "from reservation r " +
                 "inner join campsite cs on r.site_id = cs.site_id " +
@@ -37,7 +37,7 @@ public class ReservationJdbcTemplateRepository implements ReservationRepository 
     @Override
     public Reservation findById(int reservationId) throws DataAccessException{
         final String sql = "select r.reservation_id as reservation_id, r.start_date as start_date, r.end_date as end_date, " +
-                "cs.site_id as site_id, cs.`name` as cs_name, cs.campground_id as campground_id, " +
+                "cs.site_id as site_id, cs.`name` as cs_name, cs.campground_id as cs_cg_id, " +
                 "cr.camper_id as camper_id, cr.first_name as first_name, cr.last_name as last_name, cr.camping_method as camping_method, cr.phone as cr_phone, cr.email as cr_email, cr.address as cr_address, cr.city as cr_city, cr.`state` as cr_state, cr.zip as cr_zip " +
                 "from reservation r " +
                 "inner join campsite cs on r.site_id = cs.site_id " +
