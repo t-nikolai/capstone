@@ -32,6 +32,10 @@ create table campsite (
 
 create table camper (
 	camper_id int not null primary key auto_increment,
+    username varchar(30) not null,
+    `password` varchar(50) not null,
+    `role` varchar(12) not null,
+    
     first_name varchar(40) not null,
     last_name varchar(40) not null,
     camping_method varchar(30) not null, 
@@ -139,10 +143,10 @@ insert into campsite(`name`, campground_id)
     
 insert into camper(first_name, last_name, camping_method, phone, email, address, city, state, zip)
 	values
-    ("C First Name 1", "C Last Name 1", "C Method 1", "(111)111-1111", "cemail1@cemail1.com", "C Street 1", "C City 1", "S1", 11111),
-    ("C First Name 2", "C Last Name 2", "C Method 2", "(222)222-2222", "cemail2@cemail2.com", "C Street 2", "C City 2", "S2", 22222),
-    ("C First Name 3", "C Last Name 3", "C Method 3", "(333)333-3333", "cemail3@cemail3.com", "C Street 3", "C City 3", "S3", 33333),
-    ("C First Name 4", "C Last Name 4", "C Method 4", "(444)444-4444", "cemail4@cemail4.com", "C Street 4", "C City 4", "S4", 44444);
+    ("user1", "password", "USER", "C First Name 1", "C Last Name 1", "C Method 1", "(111)111-1111", "cemail1@cemail1.com", "C Street 1", "C City 1", "S1", 11111),
+    ("user2", "password", "USER", "C First Name 2", "C Last Name 2", "C Method 2", "(222)222-2222", "cemail2@cemail2.com", "C Street 2", "C City 2", "S2", 22222),
+    ("user3", "password", "USER", "C First Name 3", "C Last Name 3", "C Method 3", "(333)333-3333", "cemail3@cemail3.com", "C Street 3", "C City 3", "S3", 33333),
+    ("admin", "secretpassword", "ADMIN", "C First Name 4", "C Last Name 4", "C Method 4", "(444)444-4444", "cemail4@cemail4.com", "C Street 4", "C City 4", "S4", 44444);
     
 insert into reservation(start_date, end_date, site_id, camper_id)
 	values
