@@ -1,4 +1,5 @@
 import './Home';
+import { BrowserRouter as Router, Switch, useHistory, Link } from 'react-router-dom';
 
 function Signup() {
     return <div>
@@ -14,7 +15,7 @@ function Signup() {
 
                 <div>
                     <button className="bg-green-600 hover:bg-green-900 text-white font-bold p-2 rounded w-30 mr-3" id="login" type="submit"><span>Sign up</span></button>
-                    <a href='./Home' className="bg-gray-600 hover:bg-gray-900 text-white font-bold p-2 rounded w-30" id="login" type="submit"><span>Cancel</span></a>
+                    <Link to="/" className="bg-gray-600 hover:bg-gray-900 text-white font-bold p-2 rounded w-30" id="login" type="submit"><span>Cancel</span></Link>
                 </div>
 
             </form>
