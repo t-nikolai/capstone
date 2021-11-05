@@ -4,6 +4,7 @@ import files.cc.models.Campsite;
 import files.cc.models.Reservation;
 import org.springframework.jdbc.core.RowMapper;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -15,6 +16,7 @@ public class ReservationMapper implements RowMapper<Reservation> {
         reservation.setReservationId(resultSet.getInt("reservation_id"));
         reservation.setStartDate(resultSet.getDate("start_date").toLocalDate());
         reservation.setEndDate(resultSet.getDate("end_date").toLocalDate());
+        reservation.setTotal(BigDecimal.valueOf(resultSet.getDouble("total")));
 
         CampsiteMapper campsiteMapper = new CampsiteMapper();
         reservation.setSite(campsiteMapper.mapRow(resultSet, i));

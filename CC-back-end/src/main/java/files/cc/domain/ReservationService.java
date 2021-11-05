@@ -96,6 +96,8 @@ public class ReservationService {
 
         reservation.setTotal(generateTotalForStay(reservation));
 
+        //if (reservation.getTotal())
+
         boolean isUpdated = repository.update(reservation);
 
         if (!isUpdated){

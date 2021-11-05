@@ -51,6 +51,7 @@ class ReservationJdbcTemplateRepositoryTest {
     void shouldFindById(){
         Reservation reservation = repository.findById(2);
         assertNotNull(reservation);
+        assertEquals(2, reservation.getReservationId());
     }
 
     @Test
