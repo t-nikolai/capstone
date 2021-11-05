@@ -4,6 +4,9 @@ import java.util.Objects;
 
 public class Camper {
     private int camperId;
+    private String username;
+    private String password;
+    private Role role;
     private String firstName;
     private String lastName;
     private String campingMethod;      //TODO: ENUM??? -> 'public enum campingMethod { TENT, CAMPER, CABIN }'
@@ -16,9 +19,12 @@ public class Camper {
 
     public Camper() { }
 
-    public Camper(int camper_id, String first_name, String last_name, String camping_method, String camper_phone,
+    public Camper(int camper_id, String username, String password, Role role, String first_name, String last_name, String camping_method, String camper_phone,
                   String camper_email, String camper_address, String camper_city, String camper_state, int camper_zip) {
         this.camperId = camper_id;
+        this.username = username;
+        this.password = password;
+        this.role = role;
         this.firstName = first_name;
         this.lastName = last_name;
         this.campingMethod = camping_method;
@@ -36,6 +42,30 @@ public class Camper {
 
     public void setCamperId(int camper_id) {
         this.camperId = camper_id;
+    }
+
+    public String getUsername(){
+        return username;
+    }
+
+    public void setUsername(String username){
+        this.username = username;
+    }
+
+    public String getPassword(){
+        return password;
+    }
+
+    public void setPassword(String password){
+        this.password = password;
+    }
+
+    public Role getRole(){
+        return role;
+    }
+
+    public void setRole(Role role){
+        this.role = role;
     }
 
     public String getFirstName() {
