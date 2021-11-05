@@ -52,6 +52,7 @@ create table reservation (
 	reservation_id int not null primary key auto_increment,
     start_date date not null,
     end_date date not null,
+    total decimal(6,2) not null,
     
     site_id int not null,
     constraint fk_reservation_site_id
@@ -148,16 +149,13 @@ insert into camper(first_name, last_name, camping_method, phone, email, address,
     ("user3", "password", "USER", "C First Name 3", "C Last Name 3", "C Method 3", "(333)333-3333", "cemail3@cemail3.com", "C Street 3", "C City 3", "S3", 33333),
     ("admin", "secretpassword", "ADMIN", "C First Name 4", "C Last Name 4", "C Method 4", "(444)444-4444", "cemail4@cemail4.com", "C Street 4", "C City 4", "S4", 44444);
     
-insert into reservation(start_date, end_date, site_id, camper_id)
+insert into reservation(start_date, end_date, total, site_id, camper_id)
 	values
-    ("2021-01-01", "2021-01-02", 1, 1),
-    ("2022-02-02", "2022-02-03", 2, 2),
-    ("2023-03-03", "2023-03-04", 3, 3),
-    ("2024-04-04", "2024-04-05", 4, 4);
+    ("2021-01-01", "2021-01-02", 11.00, 1, 1),
+    ("2022-02-02", "2022-02-03", 20.00, 2, 2),
+    ("2023-03-03", "2023-03-04", 33.00, 3, 3),
+    ("2024-04-04", "2024-04-05", 14.00, 4, 4);
 
 end //
 -- 4. Change the statement terminator back to the original.
 delimiter ;
-
-use camping_community_test;
-select r.reservation_id as reservation_id, r.start_date as start_date, r.end_date as end_date, cs.site_id as site_id, cs.`name` as cs_name, cs.campground_id as campground_id, cr.camper_id as camper_id, cr.first_name as first_name, cr.last_name as last_name, cr.camping_method as camping_method, cr.phone as phone, cr.email as email, cr.address as address, cr.city as city, cr.`state` as state, cr.zip as zip from reservation r inner join campsite cs on r.site_id = cs.site_id inner join camper cr on r.camper_id = cr.camper_id;
