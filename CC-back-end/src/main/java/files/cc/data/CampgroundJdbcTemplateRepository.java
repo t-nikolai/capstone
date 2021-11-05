@@ -1,8 +1,6 @@
 package files.cc.data;
 
-import files.cc.data.mappers.CamperMapper;
 import files.cc.data.mappers.CampgroundMapper;
-import files.cc.models.Camper;
 import files.cc.models.Campground;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
