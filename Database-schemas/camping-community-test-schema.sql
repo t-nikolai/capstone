@@ -154,3 +154,6 @@ insert into reservation(start_date, end_date, site_id, camper_id)
 end //
 -- 4. Change the statement terminator back to the original.
 delimiter ;
+
+use camping_community_test;
+select r.reservation_id as reservation_id, r.start_date as start_date, r.end_date as end_date, cs.site_id as site_id, cs.`name` as cs_name, cs.campground_id as campground_id, cr.camper_id as camper_id, cr.first_name as first_name, cr.last_name as last_name, cr.camping_method as camping_method, cr.phone as phone, cr.email as email, cr.address as address, cr.city as city, cr.`state` as state, cr.zip as zip from reservation r inner join campsite cs on r.site_id = cs.site_id inner join camper cr on r.camper_id = cr.camper_id;
