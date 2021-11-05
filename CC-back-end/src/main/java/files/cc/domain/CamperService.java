@@ -58,9 +58,14 @@ public class CamperService {
         return result;
     }
 
-    public boolean deleteById(int camperId) throws DataAccessException{
+    public Result<Camper> deleteById(int camperId) throws DataAccessException{
         Result<Camper> result = deleteValidate(camperId);
-        return repository.deleteById(camperId);
+        boolean isDeleted = repository.deleteById(camperId);
+
+        if (!isDeleted){
+            result.addMessage("This camper could not be deleted.", ResultType.FAIL);
+        }
+        return result;
     }
 
 
