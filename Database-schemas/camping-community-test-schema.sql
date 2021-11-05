@@ -142,7 +142,7 @@ insert into campsite(`name`, campground_id)
     ("Site 10", 4),
     ("Site 11", 4);
     
-insert into camper(first_name, last_name, camping_method, phone, email, address, city, state, zip)
+insert into camper(username, `password`, `role`, first_name, last_name, camping_method, phone, email, address, city, state, zip)
 	values
     ("user1", "password", "USER", "C First Name 1", "C Last Name 1", "C Method 1", "(111)111-1111", "cemail1@cemail1.com", "C Street 1", "C City 1", "S1", 11111),
     ("user2", "password", "USER", "C First Name 2", "C Last Name 2", "C Method 2", "(222)222-2222", "cemail2@cemail2.com", "C Street 2", "C City 2", "S2", 22222),
@@ -159,3 +159,7 @@ insert into reservation(start_date, end_date, total, site_id, camper_id)
 end //
 -- 4. Change the statement terminator back to the original.
 delimiter ;
+
+set sql_safe_updates = 0;
+call set_known_good_state();
+set sql_safe_updates = 1;
