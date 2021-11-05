@@ -1,3 +1,5 @@
+import { BrowserRouter as Router, Switch, useHistory, Link } from 'react-router-dom';
+
 function UserNavBar() {
     return (
         <div>
@@ -8,13 +10,13 @@ function UserNavBar() {
                 </div>
                 <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
                     <div class="text-sm lg:flex-grow visibility:hidden lg:visable">
-                        <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-green-300 hover:text-white mr-4 "> home </a>
-                        <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-green-300 hover:text-white mr-4 "> view campgrounds </a>
-                        <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-green-300 hover:text-white mr-4 "> view campsites </a>
+                        <Link to='/' class="block mt-4 lg:inline-block lg:mt-0 text-green-300 hover:text-white mr-4 "> home </Link>
+                        <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-green-300 hover:text-white mr-4 "> view locations </a>
+                        <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-green-300 hover:text-white mr-4 "> make a reservation </a>
                     </div>
                     <div>
-                        <a href="#" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-green-300 hover:border-transparent hover:text-white hover:bg-green-300 mt-4 mr-4 lg:mt-0">Log out</a>
-                        <a href="#" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-green-300 hover:border-transparent hover:text-white hover:bg-green-300 mt-4 lg:mt-0">Sign in</a>
+                        <a href="#" class="inline-block text-sm px-4 py-2 leading-none border rounded text-black border-green-300 bg-gray-400 hover:border-transparent hover:text-white hover:bg-green-300 mt-4 mr-4 lg:mt-0">Log out</a>
+                        <Link to='/SignUp' class="inline-block text-sm px-4 py-2 leading-none border rounded text-black border-green-300 bg-gray-400 hover:border-transparent hover:text-white hover:bg-green-300 mt-4 lg:mt-0">Sign up</Link>
                     </div>
                 </div>
             </nav>
