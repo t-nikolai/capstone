@@ -59,7 +59,8 @@ public class CamperController {
 
     @DeleteMapping("/{camperId}")
     public ResponseEntity<Void> deleteById(@PathVariable int camperId) {
-        if (service.deleteById(camperId)) {
+        Result<Camper> result = service.deleteById(camperId);
+        if (result.isSuccess()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
@@ -28,17 +30,36 @@ class CamperServiceTest {
 //  FIND TESTS
     @Test
     void shouldFindAllCampers(){
+        List<Camper> mockCampers = List.of(new Camper(), new Camper(), new Camper(), new Camper());
 
+        when(repository.findAll()).thenReturn(mockCampers);
+
+        List<Camper> campers = service.findAll();
+
+        assertNotNull(campers);
+        assertEquals(4, campers.size());
     }
 
     @Test
     void shouldNotFindNonexistentCamper(){
+        when(repository.findById(1)).thenReturn(new Camper());
 
+        Camper camper = service.findById(2);
+
+        assertNull(camper);
     }
 
     @Test
-    void shouldFindCamperId3(){
+    void shouldFindCamperId1(){
+        Camper camper = makeCamper();
+        camper.setCamperId(1);
+        Camper mockCamper = camper;
 
+        when(repository.findById(1)).thenReturn(camper);
+
+        Camper result = service.findById(1);
+
+        assertEquals(1, result.getCamperId());
     }
 
 //  ADD TESTS
