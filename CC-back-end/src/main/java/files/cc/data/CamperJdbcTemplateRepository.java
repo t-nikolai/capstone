@@ -56,7 +56,7 @@ public class CamperJdbcTemplateRepository implements CamperRepository {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, camper.getUsername());
             ps.setString(2, camper.getPassword());
-            ps.setString(3, camper.getRole().toString());
+            ps.setString(3, String.valueOf(camper.getRole()));
             ps.setString(4, camper.getFirstName());
             ps.setString(5, camper.getLastName());
             ps.setString(6, camper.getCampingMethod());
@@ -80,9 +80,9 @@ public class CamperJdbcTemplateRepository implements CamperRepository {
     @Override
     public boolean update(Camper camper) throws DataAccessException{       // USER Privileges
             final String sql = "update camper set "
-                    + "username, "
-                    + "`password`, "
-                    + "`role`, "
+                    + "username = ?, "
+                    + "`password` = ?, "
+                    + "`role` = ?, "
                     + "first_name = ?, "
                     + "last_name = ?, "
                     + "camping_method = ?, "
@@ -97,7 +97,7 @@ public class CamperJdbcTemplateRepository implements CamperRepository {
             return jdbcTemplate.update(sql,
                     camper.getUsername(),
                     camper.getPassword(),
-                    camper.getRole(),
+                    String.valueOf(camper.getRole()),
                     camper.getFirstName(),
                     camper.getLastName(),
                     camper.getCampingMethod(),

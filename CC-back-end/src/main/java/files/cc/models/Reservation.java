@@ -15,13 +15,13 @@ public class Reservation {
 
     public Reservation() { }
 
-    public Reservation(int reservation_id, LocalDate start_date, LocalDate end_date, Campsite site, Camper camper) {
+    public Reservation(int reservation_id, LocalDate start_date, LocalDate end_date, BigDecimal total, Campsite site, Camper camper) {
         this.reservationId = reservation_id;
         this.startDate = start_date;
         this.endDate = end_date;
+        this.total = total;
         this.site = site;
         this.camper = camper;
-        this.total = new BigDecimal(0);
     }
 
     public int getReservationId() {

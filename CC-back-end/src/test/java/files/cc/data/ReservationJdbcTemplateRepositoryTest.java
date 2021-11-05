@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -66,6 +67,7 @@ class ReservationJdbcTemplateRepositoryTest {
         Reservation reservation = new Reservation();
         Campsite cs1 = campsiteRepository.findById(1);
         Camper cr1 = camperRepository.findById(2);
+        reservation.setTotal(new BigDecimal(10));
 
         assertNull(repository.findById(5));
 
@@ -91,6 +93,7 @@ class ReservationJdbcTemplateRepositoryTest {
         Reservation reservation = new Reservation();
         Campsite cs1 = campsiteRepository.findById(1);
         Camper cr1 = camperRepository.findById(2);
+        reservation.setTotal(new BigDecimal(10));
 
         reservation.setSite(cs1);
         reservation.setCamper(cr1);

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -42,7 +43,7 @@ class ReservationServiceTest {
     @Test
     void shouldFindById(){
         Reservation mockReservation = new Reservation(1, LocalDate.of(1999,9,9),
-                LocalDate.of(1999,9,19), new Campsite(), new Camper());
+                LocalDate.of(1999,9,19), new BigDecimal(10), new Campsite(), new Camper());
         when(repository.findById(1)).thenReturn(mockReservation);
 
         Reservation reservation = service.findById(1);
@@ -249,8 +250,8 @@ class ReservationServiceTest {
         return new Campsite(1, "name", 1);
     }
 
-    private Reservation makeReservation(){
+    private Reservation makeReservation() {
         return new Reservation(0, LocalDate.of(2022,9,9),
-                LocalDate.of(2022,9,19), makeCampsite(), makeCamper());
+                LocalDate.of(2022,9,19), new BigDecimal(10), makeCampsite(), makeCamper());
     }
 }

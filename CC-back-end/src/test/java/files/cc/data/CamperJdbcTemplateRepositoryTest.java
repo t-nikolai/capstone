@@ -1,6 +1,7 @@
 package files.cc.data;
 
 import files.cc.models.Camper;
+import files.cc.models.Role;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ class CamperJdbcTemplateRepositoryTest {
     @Test
     void shouldFindAll(){
         List<Camper> campers =repository.findAll();
-        assertTrue(campers.size() >= 4);
+        assertTrue(campers.size() >= 3 && campers.size()<=5);
     }
 
     @Test
@@ -49,6 +50,9 @@ class CamperJdbcTemplateRepositoryTest {
     @Test
     void shouldAdd(){
         Camper camper = new Camper();
+        camper.setUsername("user1");
+        camper.setPassword("pw1");
+        camper.setRole(Role.USER);
         camper.setFirstName("Doug");
         camper.setLastName("Dimmadome");
         camper.setPhone("(777)222-9101");
