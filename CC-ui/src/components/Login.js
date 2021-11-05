@@ -1,21 +1,48 @@
 import './Home';
-import { BrowserRouter as Router, Switch, useHistory, Link } from 'react-router-dom';
+import { useState, useContext, useEffect } from "react";
+import { Link, useHistory} from "react-router-dom";
+import UserContext from "./UserContext";
 
 function Login() {
+
+    const [canidate, setCanidiate] = useState({
+        username : "",
+        password : ""
+    });
+    const onChange = (evt) => {
+        const clone = {...canidate};
+        clone[evt.target.name] = evt.target.value;
+        setCanidiate(clone);
+        console.log(canidate);
+    }
+    const auth = useContext(UserContext);
+    const history = useHistory();
+  
+  useEffect (() => {
+      document.body.className = "Login";
+  }, [])
+  
+    const onSubmit = (evt) => {
+      evt.preventDefault();
+      auth.login(canidate);
+      history.push("/")
+    }
+
+    
     return <div>
         <div className="w-screen h-screen flex justify-center items-center container">
-            <form className="p-10 bg-green-100 bg-opacity-50 rounded flex justify-center items-center flex-col shadow-md z-10">
+            <form className="p-10 bg-green-100 bg-opacity-50 rounded flex justify-center items-center flex-col shadow-md z-10" onSubmit={onSubmit}>
 
                 <svg xmlns="http://www.w3.org/2000/svg" className=" w-20 h-20 text-gray-600 mb-2" viewbox="20 20 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd" />
                 </svg>
 
                 <p className="mb-5 text-3xl uppercase font-bold text-green-900">Login</p>
-                <input type="text" name="username" className="mb-5 p-3 w-80 focus:border-green-700 rounded border-2 outline-none" autocomplete="off" placeholder="Username" required />
-                <input type="password" name="password" className="mb-5 p-3 w-80 focus:border-green-700 rounded border-2 outline-none" autocomplete="off" placeholder="Password" required />
+                <input type="text" name="username" className="mb-5 p-3 w-80 focus:border-green-700 rounded border-2 outline-none" autocomplete="off" placeholder="Username" value={canidate.username} onChange={onChange} required />
+                <input type="password" name="password" className="mb-5 p-3 w-80 focus:border-green-700 rounded border-2 outline-none" autocomplete="off" placeholder="Password" value={canidate.password} onChange={onChange} required />
 
                 <div>
-                    <button className="bg-green-600 hover:bg-green-900 text-white font-bold p-2 rounded w-30 mr-3" id="login" type="submit"><span>Login</span></button>
+                    <button className="bg-green-600 hover:bg-green-900 text-white font-bold p-2 rounded w-30 mr-3" id="login" type="submit" onClick = {onSubmit}><span>Login</span></button>
                     <Link to='/' className="bg-gray-600 hover:bg-gray-900 text-white font-bold p-2 rounded w-30" id="login" type="submit"><span>Cancel</span></Link>
                 </div>
 
