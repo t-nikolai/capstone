@@ -1,3 +1,5 @@
+import { Link, useHistory} from "react-router-dom";
+
 function AdminNavBar() {
     return (
         <div>
@@ -8,7 +10,7 @@ function AdminNavBar() {
                 </div>
                 <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
                     <div class="text-sm lg:flex-grow visibility:hidden lg:visable">
-                        <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-green-300 hover:text-white mr-4 "> home </a>
+                        <Link to='/' class="block mt-4 lg:inline-block lg:mt-0 text-green-300 hover:text-white mr-4 "> home </Link>
                         <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-green-300 hover:text-white mr-4 "> review locations </a>
                         <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-green-300 hover:text-white mr-4 "> review reservations </a>
                     </div>

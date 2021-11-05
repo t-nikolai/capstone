@@ -10,8 +10,8 @@ function BasicNavBar() {
             <div class="w-full block flex-grow lg:flex items-center lg:w-auto">
             <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
                     <div class="text-sm lg:flex-grow visibility:hidden lg:visable">
-                        <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-green-300 hover:text-white mr-4 "> home </a>
-                        <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-green-300 hover:text-white mr-4 "> view locations </a>
+                        <Link to='/' class="block mt-4 lg:inline-block lg:mt-0 text-green-300 hover:text-white mr-4 "> home </Link>
+                        <Link to='/Campgrounds' class="block mt-4 lg:inline-block lg:mt-0 text-green-300 hover:text-white mr-4 "> view locations </Link>
                     </div>
                     </div>
                 <div>

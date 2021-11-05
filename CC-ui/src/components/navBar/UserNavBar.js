@@ -1,6 +1,27 @@
-import { BrowserRouter as Router, Switch, useHistory, Link } from 'react-router-dom';
+import { useState, useContext, useEffect } from "react";
+import { Link, useHistory} from "react-router-dom";
+import UserContext from "../UserContext";
 
 function UserNavBar() {
+
+    const [canidate, setCanidiate] = useState({
+        username : "",
+        password : ""
+    });
+
+    const auth = useContext(UserContext);
+    const history = useHistory();
+  
+  useEffect (() => {
+      document.body.className = "Login";
+  }, [])
+  
+    const onSubmit = (evt) => {
+      evt.preventDefault();
+      auth.login(canidate);
+      history.push("/");
+    }
+
     return (
         <div>
             <nav class="flex items-center justify-between flex-wrap bg-green-700 px-4 pt-3">
@@ -11,11 +32,11 @@ function UserNavBar() {
                 <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
                     <div class="text-sm lg:flex-grow visibility:hidden lg:visable">
                         <Link to='/' class="block mt-4 lg:inline-block lg:mt-0 text-green-300 hover:text-white mr-4 "> home </Link>
-                        <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-green-300 hover:text-white mr-4 "> view locations </a>
+                        <Link to='/Campgrounds' class="block mt-4 lg:inline-block lg:mt-0 text-green-300 hover:text-white mr-4 "> view locations </Link>
                         <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-green-300 hover:text-white mr-4 "> make a reservation </a>
                     </div>
                     <div>
-                        <a href="#" class="inline-block text-sm px-4 py-2 leading-none border rounded text-black border-green-300 bg-gray-400 hover:border-transparent hover:text-white hover:bg-green-300 mt-4 mr-4 lg:mt-0">Log out</a>
+                        <button type="submit" class="inline-block text-sm px-4 py-2 leading-none border rounded text-black border-green-300 bg-gray-400 hover:border-transparent hover:text-white hover:bg-green-300 mt-4 mr-4 lg:mt-0" onClick={onSubmit}>Log out</button>
                         <Link to='/SignUp' class="inline-block text-sm px-4 py-2 leading-none border rounded text-black border-green-300 bg-gray-400 hover:border-transparent hover:text-white hover:bg-green-300 mt-4 lg:mt-0">Sign up</Link>
                     </div>
                 </div>

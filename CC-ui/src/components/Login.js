@@ -25,7 +25,7 @@ function Login() {
     const onSubmit = (evt) => {
       evt.preventDefault();
       auth.login(canidate);
-      history.push("/")
+      history.push("/");
     }
 
     

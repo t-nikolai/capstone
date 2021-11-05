@@ -37,21 +37,23 @@ function App() {
     }
   }
 
-  const logout = () => setCredentials();
+  const logout = () => {
+    setCredentials();
+  }
 
   const auth = {
     credentials,
     login: login
   }
 
-  function setAPIState(method, a) {
+  function setAPIState(method, c) {
     return {
       method: method,
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json"
       },
-      body: JSON.stringify(a)
+      body: JSON.stringify(c)
     }
   }
 
@@ -62,9 +64,9 @@ function App() {
           <Route path="/" exact>
             {/* home page links with required credentials */}
             {/* need to add credentials for the navigation bar */}
-            { credentials ? 
-            ( credentials.role === 'ADMIN' ? <AdminNavBar /> : <UserNavBar /> )
-                            : <BasicNavBar /> } 
+            {credentials ?
+              (credentials.role === 'ADMIN' ? <AdminNavBar /> : <UserNavBar />)
+              : <BasicNavBar />}
             <Home />
           </Route>
           <Route path="/login">
@@ -74,6 +76,14 @@ function App() {
           <Route path="/signup">
             {/* sign up page with required credentials */}
             <Signup />
+          </Route>
+          <Route path="/campgrounds">
+            {/* Campgrounds page with required credentials */}
+            {credentials ?
+              (credentials.role === 'ADMIN' ? <AdminNavBar /> : <UserNavBar />)
+              : <BasicNavBar />}
+            {credentials && credentials.role === 'ADMIN' ?
+              <Home /> : <Campgrounds />}
           </Route>
         </Switch>
       </Router>
