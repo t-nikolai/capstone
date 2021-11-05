@@ -58,13 +58,15 @@ public class CamperService {
         return result;
     }
 
-//    public boolean deleteById(int camperId) throws DataAccessException{
-//        Result<Camper> result = deleteValidate(camperId);
-//        return repository.deleteById(camperId);
-//    }
+    public boolean deleteById(int camperId) throws DataAccessException{
+        Result<Camper> result = deleteValidate(camperId);
+        return repository.deleteById(camperId);
+    }
 
 
-    
+
+
+
 //////////////////////////////////////////////////
     private Result<Camper> addValidate(Camper camper){
         Result<Camper> result = new Result<>();
@@ -111,10 +113,6 @@ public class CamperService {
         }
         return result;
     }
-
-
-
-
 
     private Result<Camper> validateRequiredInfo(Camper camper){
         Result<Camper> result = new Result<>();
