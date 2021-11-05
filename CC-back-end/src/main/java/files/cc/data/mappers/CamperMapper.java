@@ -4,6 +4,8 @@ import files.cc.models.Camper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import files.cc.models.Role;
 import org.springframework.jdbc.core.RowMapper;
 
 public class CamperMapper implements RowMapper<Camper> {
@@ -11,6 +13,9 @@ public class CamperMapper implements RowMapper<Camper> {
     public Camper mapRow(ResultSet resultSet, int i) throws SQLException {
         Camper camper = new Camper();
         camper.setCamperId(resultSet.getInt("camper_id"));
+        camper.setUsername(resultSet.getString("username"));
+        camper.setPassword(resultSet.getString("password"));
+        camper.setRole(Role.valueOf(resultSet.getString("role")));
         camper.setFirstName(resultSet.getString("first_name"));
         camper.setLastName(resultSet.getString("last_name"));
         camper.setCampingMethod(resultSet.getString("camping_method"));

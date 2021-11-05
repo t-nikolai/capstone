@@ -6,6 +6,7 @@ import files.cc.data.ReservationRepository;
 import files.cc.models.Camper;
 import files.cc.models.Campsite;
 import files.cc.models.Reservation;
+import files.cc.models.Role;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -240,7 +241,7 @@ class ReservationServiceTest {
     }
 
     private Camper makeCamper(){
-        return new Camper(1, "first", "last", "rv", "1111111111",
+        return new Camper(1, "user", "pw", Role.USER, "first", "last", "rv", "1111111111",
                 "email@email.com", "address", "city", "ST", 11111);
     }
 

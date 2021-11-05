@@ -25,7 +25,7 @@ public class ReservationJdbcTemplateRepository implements ReservationRepository 
 
     @Override
     public List<Reservation> findAll() throws DataAccessException {
-        final String sql = "select r.reservation_id as reservation_id, r.start_date as start_date, r.end_date as end_date, " +
+        final String sql = "select r.reservation_id as reservation_id, r.start_date as start_date, r.end_date as end_date, r.total as total " +
                 "cs.site_id as site_id, cs.`name` as cs_name, cs.campground_id as cs_cg_id, " +
                 "cr.camper_id as camper_id, cr.first_name as first_name, cr.last_name as last_name, cr.camping_method as camping_method, cr.phone as cr_phone, cr.email as cr_email, cr.address as cr_address, cr.city as cr_city, cr.`state` as cr_state, cr.zip as cr_zip " +
                 "from reservation r " +
@@ -36,7 +36,7 @@ public class ReservationJdbcTemplateRepository implements ReservationRepository 
 
     @Override
     public Reservation findById(int reservationId) throws DataAccessException{
-        final String sql = "select r.reservation_id as reservation_id, r.start_date as start_date, r.end_date as end_date, " +
+        final String sql = "select r.reservation_id as reservation_id, r.start_date as start_date, r.end_date as end_date, r.total as total " +
                 "cs.site_id as site_id, cs.`name` as cs_name, cs.campground_id as cs_cg_id, " +
                 "cr.camper_id as camper_id, cr.first_name as first_name, cr.last_name as last_name, cr.camping_method as camping_method, cr.phone as cr_phone, cr.email as cr_email, cr.address as cr_address, cr.city as cr_city, cr.`state` as cr_state, cr.zip as cr_zip " +
                 "from reservation r " +
@@ -58,15 +58,16 @@ public class ReservationJdbcTemplateRepository implements ReservationRepository 
 
     @Override
     public Reservation add(Reservation reservation) throws DataAccessException{
-        final String sql = "insert into reservation (start_date, end_date, site_id, camper_id) " +
-                "values(?,?,?,?);";
+        final String sql = "insert into reservation (start_date, end_date, total, site_id, camper_id) " +
+                "values(?,?,?,?,?);";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setDate(1, Date.valueOf(reservation.getStartDate()));
             ps.setDate(2, Date.valueOf(reservation.getEndDate()));
-            ps.setInt(3, reservation.getSite().getSiteId());
-            ps.setInt(4, reservation.getCamper().getCamperId());
+            ps.setDouble(3, reservation.getTotal().doubleValue());
+            ps.setInt(4, reservation.getSite().getSiteId());
+            ps.setInt(5, reservation.getCamper().getCamperId());
             return ps;
         }, keyHolder);
 
@@ -83,12 +84,14 @@ public class ReservationJdbcTemplateRepository implements ReservationRepository 
         final String sql = "update reservation set " +
                 "start_date = ?, " +
                 "end_date = ?, " +
+                "total = ?, " +
                 "site_id = ?, " +
                 "camper_id = ? " +
                 "where reservation_id = ?; ";
         return jdbcTemplate.update(sql,
                 reservation.getStartDate(),
                 reservation.getEndDate(),
+                reservation.getTotal().doubleValue(),
                 reservation.getSite().getSiteId(),
                 reservation.getCamper().getCamperId(),
                 reservation.getReservationId()) > 0;
