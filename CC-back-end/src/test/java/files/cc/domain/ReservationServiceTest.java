@@ -27,6 +27,9 @@ class ReservationServiceTest {
 
         when(repository.findAll()).thenReturn(mockReservations);
 
-        
+        List<Reservation> reservations = service.findAll();
+
+        assertNotNull(reservations);
+        assertEquals(4, reservations.size());
     }
 }

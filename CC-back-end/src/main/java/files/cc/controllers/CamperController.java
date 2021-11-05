@@ -3,12 +3,14 @@ package files.cc.controllers;
 import files.cc.domain.CamperService;
 import files.cc.domain.Result;
 import files.cc.models.Camper;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@ConditionalOnWebApplication
 @RestController
 @CrossOrigin(origins = {"http://localhost:3000"})
 @RequestMapping("/api/camper")

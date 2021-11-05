@@ -16,9 +16,9 @@ import java.util.List;
 @Repository
 public class CamperJdbcTemplateRepository implements CamperRepository {
     private final JdbcTemplate jdbcTemplate;
-    private final ReservationJdbcTemplateRepository reservationRepo;
+    private final ReservationRepository reservationRepo;
 
-    public CamperJdbcTemplateRepository(JdbcTemplate jdbcTemplate, ReservationJdbcTemplateRepository reservationRepo) {
+    public CamperJdbcTemplateRepository(JdbcTemplate jdbcTemplate, ReservationRepository reservationRepo) {
         this.jdbcTemplate = jdbcTemplate;
         this.reservationRepo = reservationRepo;
     }
