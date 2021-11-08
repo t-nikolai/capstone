@@ -87,6 +87,15 @@ public class CamperService {
             return result;
         }
 
+        List<Camper> camperList = repository.findAll();
+        for(Camper c: camperList){
+            if (camper.getUsername().toLowerCase().equals(c.getUsername().toLowerCase())){
+                result.addMessage("username should be unique; the selected username has already been used", ResultType.INVALID);
+                return result;
+            }
+        }
+
+
         if (isNullOrBlank(camper.getRole().toString())){
             camper.setRole(Role.USER);
         }
