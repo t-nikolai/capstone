@@ -3,6 +3,7 @@ package files.cc.domain;
 import files.cc.data.CamperRepository;
 import files.cc.models.Camper;
 
+import files.cc.models.Role;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -205,6 +206,9 @@ class CamperServiceTest {
 
     private Camper makeCamper(){
         Camper camper = new Camper();
+        camper.setUsername("user1");
+        camper.setPassword("pw1");
+        camper.setRole(Role.USER);
         camper.setFirstName("Doug");
         camper.setLastName("Dimmadome");
         camper.setPhone("(777)222-9101");
