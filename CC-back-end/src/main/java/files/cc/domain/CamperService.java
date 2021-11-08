@@ -2,6 +2,7 @@ package files.cc.domain;
 
 import files.cc.data.CamperRepository;
 import files.cc.models.Camper;
+import files.cc.models.Role;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -84,6 +85,19 @@ public class CamperService {
         if (camper.getCamperId() != 0){
             result.addMessage("camper id should be 0 before being added to the DB", ResultType.INVALID);
             return result;
+        }
+
+        List<Camper> camperList = repository.findAll();
+        for(Camper c: camperList){
+            if (camper.getUsername().toLowerCase().equals(c.getUsername().toLowerCase())){
+                result.addMessage("username should be unique; the selected username has already been used", ResultType.INVALID);
+                return result;
+            }
+        }
+
+
+        if (isNullOrBlank(camper.getRole().toString())){
+            camper.setRole(Role.USER);
         }
 
         result = validateRequiredInfo(camper);
