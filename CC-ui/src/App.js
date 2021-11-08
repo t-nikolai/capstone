@@ -11,6 +11,7 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Campgrounds from './components/Campgrounds';
+import Reservation from './components/Reservation.js';
 
 function App() {
 
@@ -38,12 +39,14 @@ function App() {
   }
 
   const logout = () => {
+    console.log("logout was called");
     setCredentials();
   }
 
   const auth = {
     credentials,
-    login: login
+    login: login,
+    logout: logout
   }
 
   function setAPIState(method, c) {
@@ -83,7 +86,16 @@ function App() {
               (credentials.role === 'ADMIN' ? <AdminNavBar /> : <UserNavBar />)
               : <BasicNavBar />}
             {credentials && credentials.role === 'ADMIN' ?
-              <Home /> : <Campgrounds />}
+              <Home /> : <Campgrounds credentials={credentials}/>}
+          </Route>
+          <Route path="/reservation">
+            {/* Campgrounds page with required credentials */}
+            {credentials && credentials?
+              (credentials.role === 'ADMIN' ? <AdminNavBar /> : <UserNavBar />)
+              : <BasicNavBar />}
+            {credentials ?
+              (credentials.role === 'ADMIN' ? <Home /> : <Reservation />)
+              : <Home />}
           </Route>
         </Switch>
       </Router>

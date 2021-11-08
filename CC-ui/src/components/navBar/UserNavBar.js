@@ -8,9 +8,8 @@ function UserNavBar() {
         username : "",
         password : ""
     });
-
+    
     const auth = useContext(UserContext);
-    const history = useHistory();
   
   useEffect (() => {
       document.body.className = "Login";
@@ -18,8 +17,8 @@ function UserNavBar() {
   
     const onSubmit = (evt) => {
       evt.preventDefault();
-      auth.login(canidate);
-      history.push("/");
+      auth.logout();
+
     }
 
     return (
@@ -44,7 +43,7 @@ function UserNavBar() {
 
             <div class="flex items-center flex-wrap text-green-100 bg-green-700 p-1">
                 <img class="fill-current mr-2 w-8 h-8 p-1" src="images/loginIcon.png" alt="loginO=Icon" />
-                <span class="font-semibold text-xl tracking-tight">User username</span>
+                <span class="font-semibold text-xl tracking-tight">{auth.credentials.username}</span>
             </div>
         </div>
     );
