@@ -75,6 +75,7 @@ class ReservationServiceTest {
 
         assertTrue(result.isSuccess());
         assertEquals(5, result.getPayload().getReservationId());
+        assertEquals(new BigDecimal("104.00"), reservation.getTotal());
     }
 
     @Test
@@ -137,12 +138,13 @@ class ReservationServiceTest {
     void shouldUpdate(){
         Reservation reservation = makeReservation();
         reservation.setReservationId(3);
-
+        reservation.setEndDate(LocalDate.of(2022, 9, 14));
         when(repository.update(reservation)).thenReturn(true);
 
         Result<Reservation> result = service.update(reservation);
 
         assertTrue(result.isSuccess());
+        assertEquals(new BigDecimal("52.00"), result.getPayload().getTotal());
     }
 
     @Test
@@ -248,10 +250,10 @@ class ReservationServiceTest {
 
     private Campsite makeCampsite(){
         return new Campsite(1, "name", 1);
-    }
+    }  // Campground StdRate: 10, WkdRate: 11
 
     private Reservation makeReservation() {
         return new Reservation(0, LocalDate.of(2022,9,9),
-                LocalDate.of(2022,9,19), new BigDecimal(10), makeCampsite(), makeCamper());
+                LocalDate.of(2022,9,19), new BigDecimal(0), makeCampsite(), makeCamper());
     }
 }
