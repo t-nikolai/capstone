@@ -4,15 +4,15 @@ import Calendar from 'react-calendar';
 function MakeCalender() {
   const [value, onChange] = useState(new Date());
 
-  /*return (
+  return (
     <div>
       <Calendar
         onChange={onChange}
         value={value}
       />
     </div>
-  );*/
-  return <div />
+  );
+
 }
 
 export default MakeCalender;

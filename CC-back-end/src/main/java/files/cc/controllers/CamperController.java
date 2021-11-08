@@ -23,6 +23,15 @@ public class CamperController {
     @GetMapping
     public List<Camper> findAll() { return service.findAll(); }
 
+    @GetMapping("/login/{username}")
+    public ResponseEntity<Camper> findByUsername(@PathVariable String username){
+        Camper camper = service.findAll().stream().filter(i -> i.getUsername().equals(username)).findFirst().orElse(null);
+        if (camper == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok(camper);
+    }
+
     @GetMapping("/{camperId}")
     public ResponseEntity<Camper> findById(@PathVariable int camperId){
         Camper camper = service.findById(camperId);

@@ -20,6 +20,16 @@ export async function findById(camperId) {
     return Promise.reject("Camper's findById response is NOT 200 OK");
 }
 
+export async function findByUsername(username) {
+    const response = await fetch(`${baseUrl}/login/${username}`);       // post request for user and pass 
+    if(response.status === 200){
+        console.log("Camper's findByUsername response is 200 OK");
+        return response.json();
+    }
+    console.log("Camper's findByUsername response is NOT 200 OK");
+    return Promise.reject("Camper's findByUsername response is NOT 200 OK");
+}
+
 function makeFetchInit(method, camper) {
     return {
         method: method,

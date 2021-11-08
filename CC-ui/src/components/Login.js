@@ -5,15 +5,15 @@ import UserContext from "./UserContext";
 
 function Login() {
 
-    const [canidate, setCanidiate] = useState({
+    const [candidate, setCanidiate] = useState({
         username : "",
         password : ""
     });
     const onChange = (evt) => {
-        const clone = {...canidate};
+        const clone = {...candidate};
         clone[evt.target.name] = evt.target.value;
         setCanidiate(clone);
-        console.log(canidate);
+        console.log(candidate);
     }
     const auth = useContext(UserContext);
     const history = useHistory();
@@ -23,9 +23,11 @@ function Login() {
   }, [])
   
     const onSubmit = (evt) => {
-      evt.preventDefault();
-      auth.login(canidate);
-      history.push("/");
+      evt.preventDefault();     
+      // call backend api for user and pass 
+      // on fail - bad credentials message/alert
+      // on success - take camper & call auth.login - setting credentials in App
+      history.push("/");        // on success only
     }
 
     
@@ -38,8 +40,8 @@ function Login() {
                 </svg>
 
                 <p className="mb-5 text-3xl uppercase font-bold text-green-900">Login</p>
-                <input type="text" name="username" className="mb-5 p-3 w-80 focus:border-green-700 rounded border-2 outline-none" autocomplete="off" placeholder="Username" value={canidate.username} onChange={onChange} required />
-                <input type="password" name="password" className="mb-5 p-3 w-80 focus:border-green-700 rounded border-2 outline-none" autocomplete="off" placeholder="Password" value={canidate.password} onChange={onChange} required />
+                <input type="text" id= "username" name="username" className="mb-5 p-3 w-80 focus:border-green-700 rounded border-2 outline-none" autocomplete="off" placeholder="Username" value={candidate.username} onChange={onChange} required />
+                <input type="password" id="password" name="password" className="mb-5 p-3 w-80 focus:border-green-700 rounded border-2 outline-none" autocomplete="off" placeholder="Password" value={candidate.password} onChange={onChange} required />
 
                 <div>
                     <button className="bg-green-600 hover:bg-green-900 text-white font-bold p-2 rounded w-30 mr-3" id="login" type="submit" onClick = {onSubmit}><span>Login</span></button>

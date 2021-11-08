@@ -11,7 +11,8 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Campgrounds from './components/Campgrounds';
-import Reservation from './components/Reservation.js';
+import Reservation from './components/ReservationForm.js';
+import UserContext from './components/UserContext';
 
 function App() {
 
@@ -20,22 +21,28 @@ function App() {
   const history = useHistory();
 
   //hard coding credentials
-  const login = (canidate) => {
+  const login = (candidate) => {
+    
+    // const camper = findByUsername(candidate.username);
+    // if (candidate.password === camper.password){     
+        
+    // }
+
     //user login
-    if (canidate.username === "user" && canidate.password === "user") {
-      setCredentials({
-        username: canidate.username,
-        role: "USER"
-      });
-      //admin login
-    } else if (canidate.username === "admin" && canidate.password === "admin") {
-      setCredentials({
-        username: canidate.username,
-        role: "ADMIN"
-      });
+    // if (candidate.username === "user" && candidate.password === "user") {
+    //   setCredentials({
+    //     username: candidate.username,
+    //     role: "USER"
+    //   });
+    //   //admin login
+    // } else if (candidate.username === "admin" && candidate.password === "admin") {
+    //   setCredentials({
+    //     username: candidate.username,
+    //     role: "ADMIN"
+    //   });
       //empty login
-    } else {
-    }
+    // } else {
+    // }
   }
 
   const logout = () => {
@@ -45,7 +52,7 @@ function App() {
 
   const auth = {
     credentials,
-    login: login,
+    login: setCredentials,
     logout: logout
   }
 
@@ -64,22 +71,16 @@ function App() {
     <UserContext.Provider value={auth}>
       <Router>
         <Switch>
-          <Route path="/" exact>
-            {/* home page links with required credentials */}
-            {/* need to add credentials for the navigation bar */}
-            {credentials ?
-              (credentials.role === 'ADMIN' ? <AdminNavBar /> : <UserNavBar />)
-              : <BasicNavBar />}
-            <Home />
-          </Route>
           <Route path="/login">
             {/* login in page with required credentials */}
             <Login />
           </Route>
+
           <Route path="/signup">
             {/* sign up page with required credentials */}
             <Signup />
           </Route>
+          
           <Route path="/campgrounds">
             {/* Campgrounds page with required credentials */}
             {credentials ?
@@ -88,6 +89,7 @@ function App() {
             {credentials && credentials.role === 'ADMIN' ?
               <Home /> : <Campgrounds credentials={credentials}/>}
           </Route>
+
           <Route path="/reservation">
             {/* Campgrounds page with required credentials */}
             {credentials && credentials?
@@ -96,6 +98,15 @@ function App() {
             {credentials ?
               (credentials.role === 'ADMIN' ? <Home /> : <Reservation />)
               : <Home />}
+          </Route>
+
+          <Route path="/" exact>
+            {/* home page links with required credentials */}
+            {/* need to add credentials for the navigation bar */}
+            {credentials ?
+              (credentials.role === 'ADMIN' ? <AdminNavBar /> : <UserNavBar />)
+              : <BasicNavBar />}
+            <Home />
           </Route>
         </Switch>
       </Router>
