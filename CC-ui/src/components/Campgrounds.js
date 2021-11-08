@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Map from "./testingComponents/MapTestingComponent";
 
 function Campgrounds(credentials) {
 
@@ -47,8 +48,7 @@ return <div>
         </section>
         <div className="col-span-2">
             <h2 className="text-center text-3xl"> Name of campground will appear here when clicked </h2>
-            <p className="p-10">map will go here................................................................
-            ...........................................................................................(testing to see if col span worked)</p>
+            <Map />
         </div>
     </div>
 </div>

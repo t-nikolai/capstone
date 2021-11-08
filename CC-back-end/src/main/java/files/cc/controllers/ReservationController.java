@@ -23,6 +23,15 @@ public class ReservationController {
     @GetMapping
     public List<Reservation> findAll() { return service.findAll(); }
 
+    @GetMapping("/reservations-by-campsite/{campsiteId}")
+    public ResponseEntity<List<Reservation>> findByCampsiteId(@PathVariable int campsiteId){
+        List<Reservation> reservations = service.findByCampsiteId(campsiteId);
+        if (reservations == null || reservations.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok(reservations);
+    }
+
     @GetMapping("/{reservationId}")
     public ResponseEntity<Reservation> findById(@PathVariable int reservationId){
         Reservation reservation = service.findById(reservationId);
