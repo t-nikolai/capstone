@@ -26,7 +26,7 @@ public class CamperService {
         return repository.findById(camperId);
     }
     
-    public Result<Camper> add(Camper camper) /*throws DataAccessException*/ {
+    public Result<Camper> add(Camper camper) throws DataAccessException{
         Result<Camper> result = addValidate(camper);
 
         if (!result.isSuccess()){

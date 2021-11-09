@@ -6,9 +6,9 @@ function Campgrounds(credentials) {
     const credential = {...credentials}
     const classDiv = setClassName(credential.role);
     
-return <div>
-    <div className="grid grid-cols-3 gap-2">
-        <section className="container px-6 py-4 mx-auto bg-red-900">
+return <div >
+    <div className="grid grid-cols-3 gap-2 ">
+        <div className="container px-6 py-4 mx-auto h-auto bg-yellow-900" >
             <div className="grid gap-6 grid-cols-1">
 
                 <div className="flex items-right p-4 bg-white border-2 border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 grid-col-2">
@@ -45,8 +45,8 @@ return <div>
                 </div>
 
             </div>
-        </section>
-        <div className="col-span-2">
+        </div>
+        <div className="col-span-2 bg-gradient-to-r from-yelow-900 to-white">
             <h2 className="text-center text-3xl"> Name of campground will appear here when clicked </h2>
             <Map />
         </div>
