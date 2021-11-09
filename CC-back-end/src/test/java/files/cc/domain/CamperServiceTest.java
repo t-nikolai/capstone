@@ -56,7 +56,7 @@ class CamperServiceTest {
         camper.setCamperId(1);
         Camper mockCamper = camper;
 
-        when(repository.findById(1)).thenReturn(camper);
+        when(repository.findById(1)).thenReturn(mockCamper);
 
         Camper result = service.findById(1);
 
@@ -116,12 +116,44 @@ class CamperServiceTest {
         camper =makeCamper();
         camper.setState("ABCD");
         result = service.add(camper);
-        assertEquals(ResultType.FAIL, result.getType()); // fails, not invalid
+        assertEquals(ResultType.INVALID, result.getType());
         
         camper = makeCamper();
-        camper.setZip(888888);
+        camper.setZip("888888");
         result = service.add(camper);
         assertEquals(ResultType.INVALID, result.getType());
+    }
+
+    @Test
+    void shouldNotAddInvalidZip(){
+        Camper camper = makeCamper();
+        Result<Camper> result = new Result<>();
+
+        camper.setZip("a7d92");
+        result = service.add(camper);
+        assertFalse(result.isSuccess());
+
+        camper.setZip("123456");
+        result = service.add(camper);
+        assertFalse(result.isSuccess());
+
+        camper.setZip("a7992");
+        result = service.add(camper);
+        assertFalse(result.isSuccess());
+    }
+
+    @Test
+    void shouldNotAddInvalidPhone(){
+        Camper camper = makeCamper();
+        Result<Camper> result = new Result<>();
+
+        camper.setPhone("4200271");
+        result = service.add(camper);
+        assertFalse(result.isSuccess());
+
+        camper.setPhone("641420jdbc");
+        result = service.add(camper);
+        assertFalse(result.isSuccess());
     }
 
     @Test
@@ -217,7 +249,7 @@ class CamperServiceTest {
         camper.setAddress("123 Western Heights");
         camper.setCity("Portland");
         camper.setState("IL");
-        camper.setZip(60053);
+        camper.setZip("60053");
 
         return camper;
     }

@@ -45,7 +45,7 @@ create table camper (
     address varchar(50) not null,
     city varchar(50) not null,
     state varchar(2) not null,
-    zip int(5) not null
+    zip varchar(5) not null
 );
 
 create table reservation (
@@ -68,8 +68,8 @@ create table reservation (
 -- data
 insert into camper(username, `password`, `role`,first_name, last_name, camping_method, phone, email, address, city, state, zip)
 	values
-    ("user","password", "USER", "Ms.", "Camper", "C Method 1", "(111)111-1111", "cemail1@cemail1.com", "C Street 1", "C City 1", "S1", 11111),
-    ("admin","secretpassword", "ADMIN", "Mr.", "Admin", "C Method 2", "(222)222-2222", "admin@campingcommunity.com", "C Street 2", "C City 2", "S2", 22222);
+    ("user","password", "USER", "Ms.", "Camper", "C Method 1", "(111)111-1111", "cemail1@cemail1.com", "C Street 1", "C City 1", "S1", "11111"),
+    ("admin","secretpassword", "ADMIN", "Mr.", "Admin", "C Method 2", "(222)222-2222", "admin@campingcommunity.com", "C Street 2", "C City 2", "S2", "22222");
 
 insert into campground(`name`, address, city, state, zip,
 	phone, email, capacity, standard_rate, weekend_rate)
@@ -125,3 +125,6 @@ values ("Afton A-1",1),
     ("LHRP 12",3),
     ("LHRP 13",3),
     ("LHRP 14",3);
+    
+use camping_community;
+select * from camper;

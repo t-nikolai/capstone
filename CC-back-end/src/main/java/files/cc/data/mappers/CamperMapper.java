@@ -24,7 +24,7 @@ public class CamperMapper implements RowMapper<Camper> {
         camper.setAddress(resultSet.getString("cr_address"));
         camper.setCity(resultSet.getString("cr_city"));
         camper.setState(resultSet.getString("cr_state"));
-        camper.setZip(resultSet.getInt("cr_zip"));
+        camper.setZip(resultSet.getString("cr_zip"));
 
         return camper;
     }

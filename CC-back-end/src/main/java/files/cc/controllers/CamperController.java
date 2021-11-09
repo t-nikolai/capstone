@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -33,10 +34,10 @@ public class CamperController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Object> verifyCredentials(@RequestBody Camper camper){
+    public ResponseEntity<Object> verifyCredentials(@RequestBody HashMap<String, String> credentials){
         Camper result = service.findAll().stream()
-                .filter(i -> (i.getUsername().equals(camper.getUsername())
-                        && i.getPassword().equals(camper.getPassword())))
+                .filter(i -> (i.getUsername().equals(credentials.get("username"))
+                        && i.getPassword().equals(credentials.get("password"))))
                 .findFirst().orElse(null);
         if (result == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

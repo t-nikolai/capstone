@@ -45,7 +45,7 @@ create table camper (
     address varchar(50) not null,
     city varchar(50) not null,
     state varchar(2) not null,
-    zip int(5) not null
+    zip varchar(5) not null
 );
 
 create table reservation (
@@ -145,13 +145,13 @@ insert into campsite(`name`, campground_id)
 insert into camper(username, `password`, `role`, first_name, last_name, camping_method, phone, email, address, city, state, zip)
 	values
     ("user1", "password", "USER", "C First Name 1", "C Last Name 1", 
-		"C Method 1", "(111)111-1111", "cemail1@cemail1.com", "C Street 1", "C City 1", "S1", 11111),
+		"C Method 1", "(111)111-1111", "cemail1@cemail1.com", "C Street 1", "C City 1", "S1", "11111"),
     ("user2", "password", "USER", "C First Name 2", "C Last Name 2", 
-		"C Method 2", "(222)222-2222", "cemail2@cemail2.com", "C Street 2", "C City 2", "S2", 22222),
+		"C Method 2", "(222)222-2222", "cemail2@cemail2.com", "C Street 2", "C City 2", "S2", "22222"),
     ("user3", "password", "USER", "C First Name 3", "C Last Name 3", 
-		"C Method 3", "(333)333-3333", "cemail3@cemail3.com", "C Street 3", "C City 3", "S3", 33333),
+		"C Method 3", "(333)333-3333", "cemail3@cemail3.com", "C Street 3", "C City 3", "S3", "33333"),
     ("admin", "secretpassword", "ADMIN", "C First Name 4", "C Last Name 4", 
-		"C Method 4", "(444)444-4444", "cemail4@cemail4.com", "C Street 4", "C City 4", "S4", 44444);
+		"C Method 4", "(444)444-4444", "cemail4@cemail4.com", "C Street 4", "C City 4", "S4", "44444");
     
 insert into reservation(start_date, end_date, total, site_id, camper_id)
 	values
@@ -163,7 +163,3 @@ insert into reservation(start_date, end_date, total, site_id, camper_id)
 end //
 -- 4. Change the statement terminator back to the original.
 delimiter ;
-
-set sql_safe_updates = 0;
-call set_known_good_state();
-set sql_safe_updates = 1;

@@ -26,7 +26,7 @@ public class CamperService {
         return repository.findById(camperId);
     }
     
-    public Result<Camper> add(Camper camper) throws DataAccessException {
+    public Result<Camper> add(Camper camper) /*throws DataAccessException*/ {
         Result<Camper> result = addValidate(camper);
 
         if (!result.isSuccess()){
@@ -89,14 +89,13 @@ public class CamperService {
 
         List<Camper> camperList = repository.findAll();
         for(Camper c: camperList){
-            if (camper.getUsername().toLowerCase().equals(c.getUsername().toLowerCase())){
+            if (camper.getUsername().equalsIgnoreCase(c.getUsername())){
                 result.addMessage("username should be unique; the selected username has already been used", ResultType.INVALID);
                 return result;
             }
         }
 
-
-        if (isNullOrBlank(camper.getRole().toString())){
+        if (camper.getRole() == null || camper.getRole().toString().isBlank() || camper.getRole().toString().isEmpty()){
             camper.setRole(Role.USER);
         }
 
@@ -146,17 +145,19 @@ public class CamperService {
             return result;
         }
 
-        if (camper.getPhone() == null){
-            camper.setPhone(" ");
+        camper.setPhone(camper.getPhone().replaceAll("[^0-9]", ""));     // replace anything that isn't a number 0-9 with ""
+
+        if (isNullOrBlank(camper.getPhone()) || !camper.getPhone().matches("[0-9]{10}")){       // make sure phone matches exactly 10 digits
+            result.addMessage("camper's phone number is required, with a valid phone number containing only 10 digits", ResultType.INVALID);
         }
 
         if (isNullOrBlank(camper.getEmail()) || !camper.getEmail().contains("@")){
-            result.addMessage("camper's email address is requried and must be valid", ResultType.INVALID);
+            result.addMessage("camper's email address is required and must be valid", ResultType.INVALID);
             return result;
         }
 
-        if (isNullOrBlank(camper.getAddress()) || isNullOrBlank(camper.getCity()) || isNullOrBlank(camper.getState())
-                || !valueOf(camper.getZip()).matches("[0-9]{5}") ){          // zip code validation - might be funky
+        if (isNullOrBlank(camper.getAddress()) || isNullOrBlank(camper.getCity()) || isNullOrBlank(camper.getState()) || camper.getState().length() != 2
+                || !camper.getZip().matches("^[0-9]{5}(?:-[0-9]{4})?$") ){
             result.addMessage("camper's full address is required, with a valid 5-digit zip code", ResultType.INVALID);
             return result;
         }

@@ -245,7 +245,7 @@ class ReservationServiceTest {
 
     private Camper makeCamper(){
         return new Camper(1, "user", "pw", Role.USER, "first", "last", "rv", "1111111111",
-                "email@email.com", "address", "city", "ST", 11111);
+                "email@email.com", "address", "city", "ST", "11111");
     }
 
     private Campsite makeCampsite(){

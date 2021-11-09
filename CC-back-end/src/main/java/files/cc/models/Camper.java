@@ -15,12 +15,12 @@ public class Camper {
     private String address;
     private String city;
     private String state;
-    private int zip;
+    private String zip;
 
     public Camper() { }
 
     public Camper(int camper_id, String username, String password, Role role, String first_name, String last_name, String camping_method, String camper_phone,
-                  String camper_email, String camper_address, String camper_city, String camper_state, int camper_zip) {
+                  String camper_email, String camper_address, String camper_city, String camper_state, String camper_zip) {
         this.camperId = camper_id;
         this.username = username;
         this.password = password;
@@ -132,11 +132,11 @@ public class Camper {
         this.state = camper_state;
     }
 
-    public int getZip() {
+    public String getZip() {
         return zip;
     }
 
-    public void setZip(int camper_zip) {
+    public void setZip(String camper_zip) {
         this.zip = camper_zip;
     }
 

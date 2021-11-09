@@ -6,30 +6,17 @@ import UserContext from "./UserContext";
 import { verifyCredentials } from "../api/camperApi";
 
 function Login() {
+    const [error, setError] = useState();
 
-    const [camper, setCamper] = useState({
-        username: "",
-        password: "",
-        role: "",
-        firstName: "",
-        lastName: "",
-        address: "",
-        city: "",
-        state: "",
-        zip: 0,
-        email: "",
-        phone: ""
-    });
     const [candidate, setCanidiate] = useState({
         username: "",
-        password: "",
-        role: ""
+        password: ""
     });
+    
     const onChange = (evt) => {
         const clone = { ...candidate };
         clone[evt.target.name] = evt.target.value;
         setCanidiate(clone);
-        console.log(candidate);
     }
     const auth = useContext(UserContext);
     const history = useHistory();
@@ -44,10 +31,11 @@ function Login() {
         // on fail - bad credentials message/alert
         // on success - take camper & call auth.login - setting credentials in App
         verifyCredentials(candidate)
-            .then(camper => setCamper(camper))
-            .then(auth.login(camper))
-            .then(history.push("/"))
-            .catch((err) => history.push(alert("Credentials are invalid")));
+            .then(camper => {
+                auth.login(camper);
+                history.push("/");
+            })
+            .catch((err) => setError(err));
     }
 
     return <div>
@@ -66,6 +54,12 @@ function Login() {
                     <button className="bg-green-600 hover:bg-green-900 text-white font-bold p-2 rounded w-30 mr-3" id="login" type="submit" onClick={onSubmit}><span>Login</span></button>
                     <Link to='/' className="bg-gray-600 hover:bg-gray-900 text-white font-bold p-2 rounded w-30" id="login" type="submit"><span>Cancel</span></Link>
                 </div>
+
+                {error && <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4" role="alert">
+                    <p class="font-bold">Error</p>
+                    <p>An error has occurred: </p>
+                    <p>{error}</p>
+                </div>  }
 
             </form>
             <img className="fixed object-cover w-full h-full y-0 x-0" src="https://coresites-cdn-adm.imgix.net/mpora_new/wp-content/uploads/2017/01/Cycle-Touring-Essentials-Touring-Bike-at-Camp.jpg?fit=crop"></img>

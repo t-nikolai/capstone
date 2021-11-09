@@ -46,7 +46,7 @@ public class CamperJdbcTemplateRepository implements CamperRepository {
 
     @Override
     @Transactional
-    public Camper add(Camper camper) throws DataAccessException{       // USER Privileges
+    public Camper add(Camper camper) /*throws DataAccessException*/{       // USER Privileges
         final String sql = "insert into camper (`username`, `password`, `role`, first_name, last_name, camping_method, " +
                 "phone, email, address, city, `state`, zip) " +
                 "values(?,?,?,?,?,?,?,?,?,?,?,?); ";
@@ -65,7 +65,7 @@ public class CamperJdbcTemplateRepository implements CamperRepository {
             ps.setString(9, camper.getAddress());
             ps.setString(10, camper.getCity());
             ps.setString(11, camper.getState());
-            ps.setInt(12, camper.getZip());
+            ps.setString(12, camper.getZip());
             return ps;
         }, keyHolder);
 

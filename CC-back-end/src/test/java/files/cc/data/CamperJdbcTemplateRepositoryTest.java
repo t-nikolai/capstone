@@ -61,7 +61,7 @@ class CamperJdbcTemplateRepositoryTest {
         camper.setAddress("123 Western Heights");
         camper.setCity("Portland");
         camper.setState("IL");
-        camper.setZip(60053);
+        camper.setZip("60053");
 
         camper = repository.add(camper);
         assertNotNull(camper);
@@ -76,7 +76,7 @@ class CamperJdbcTemplateRepositoryTest {
 //                camper.getFirstName() + "\n" + camper.getFirstName() + "\n" +);
         camper.setFirstName("Thomas");
         camper.setState("AK");
-        camper.setZip(99991);
+        camper.setZip("99991");
         //camper.setCampingMethod("#1");
         System.out.println(camper.getFirstName() + "\n" + camper.getState() + "\n" + camper.getCampingMethod());
         assertTrue(repository.update(camper));

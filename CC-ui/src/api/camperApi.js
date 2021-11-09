@@ -34,7 +34,7 @@ function makeFetchInit(method, camper) {
 export async function verifyCredentials(camper) {
     const init = makeFetchInit("POST", camper);
     const response = await fetch(`${baseUrl}/login`, init);
-    if(response.status === 201){
+    if(response.status === 200){
         console.log("camper's verification response is 200 OK");
         return response.json();
     }
@@ -43,8 +43,9 @@ export async function verifyCredentials(camper) {
 }
 
 export async function add(camper) {
+    console.log("add function was called!");
     const init = makeFetchInit("POST", camper);
-    const response = await fetch(baseUrl, init);
+    const response = await fetch(baseUrl, init);    // 400
     if (response.status === 201) {
         return response.json();
     }
@@ -62,6 +63,7 @@ export async function update(camper) {
 }
 
 export async function save(camper) {
+    console.log("save function called!");
     return camper.camperId > 0 ? update(camper) : add(camper);
 }
 

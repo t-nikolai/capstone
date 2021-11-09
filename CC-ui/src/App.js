@@ -25,7 +25,8 @@ function App() {
     setCredentials();
   }
 
-  const login = (...creds) => {
+  const login = (creds) => {
+    console.log("logged in", creds);
     setCredentials({
       username: creds.username,
       role: creds.role
