@@ -20,16 +20,6 @@ export async function findById(camperId) {
     return Promise.reject("Camper's findById response is NOT 200 OK");
 }
 
-export async function findByUsername(username) {
-    const response = await fetch(`${baseUrl}/login/${username}`);       // post request for user and pass 
-    if(response.status === 200){
-        console.log("Camper's findByUsername response is 200 OK");
-        return response.json();
-    }
-    console.log("Camper's findByUsername response is NOT 200 OK");
-    return Promise.reject("Camper's findByUsername response is NOT 200 OK");
-}
-
 function makeFetchInit(method, camper) {
     return {
         method: method,
@@ -41,7 +31,18 @@ function makeFetchInit(method, camper) {
     };
 }
 
-async function add(camper) {
+export async function verifyCredentials(camper) {
+    const init = makeFetchInit("POST", camper);
+    const response = await fetch(`${baseUrl}/login`, init);
+    if(response.status === 201){
+        console.log("camper's verification response is 200 OK");
+        return response.json();
+    }
+    console.log("camper's verification response is NOT 200 OK.");
+    return Promise.reject("camper's verification response is NOT 200 OK");
+}
+
+export async function add(camper) {
     const init = makeFetchInit("POST", camper);
     const response = await fetch(baseUrl, init);
     if (response.status === 201) {
@@ -51,7 +52,7 @@ async function add(camper) {
     return Promise.reject("Camper's add response is NOT 200 OK");
 }
 
-async function update(camper) {
+export async function update(camper) {
     const init = makeFetchInit("PUT", camper);
     const response = await fetch(`${baseUrl}/${camper.camperId}`, init);
     if (response.status !== 204) {

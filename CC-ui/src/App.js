@@ -12,59 +12,30 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import Campgrounds from './components/Campgrounds';
 import Reservation from './components/ReservationForm.js';
-import UserContext from './components/UserContext';
 
 function App() {
 
   //const values
   const [credentials, setCredentials] = useState();
+  // const[camper, setCamper] = useState();
   const history = useHistory();
-
-  //hard coding credentials
-  const login = (candidate) => {
-    
-    // const camper = findByUsername(candidate.username);
-    // if (candidate.password === camper.password){     
-        
-    // }
-
-    //user login
-    // if (candidate.username === "user" && candidate.password === "user") {
-    //   setCredentials({
-    //     username: candidate.username,
-    //     role: "USER"
-    //   });
-    //   //admin login
-    // } else if (candidate.username === "admin" && candidate.password === "admin") {
-    //   setCredentials({
-    //     username: candidate.username,
-    //     role: "ADMIN"
-    //   });
-      //empty login
-    // } else {
-    // }
-  }
 
   const logout = () => {
     console.log("logout was called");
     setCredentials();
   }
 
-  const auth = {
-    credentials,
-    login: setCredentials,
-    logout: logout
+  const login = (...creds) => {
+    setCredentials({
+      username: creds.username,
+      role: creds.role
+    });
   }
 
-  function setAPIState(method, c) {
-    return {
-      method: method,
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify(c)
-    }
+  const auth = {
+    credentials,
+    login: login,
+    logout: logout
   }
 
   return (

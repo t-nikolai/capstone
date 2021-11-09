@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import ReactMapGL from "react-map-gl";
+//import ReactMapGL from "react-map-gl";
 
 //temp address
 //look here for proper formatting... 'https://docs.mapbox.com/help/troubleshooting/address-geocoding-format-guide/'
 
 
 function Map() {
-
+/*
     const [address, setAddress] = useState({
         street: "6959 Peller Ave S",
         city: "Hastings",
@@ -56,7 +56,10 @@ function Map() {
             {...viewport}
             onViewportChange={nextViewport => setViewport(nextViewport)}
         />
-    );
+    );*/
+
+    return <div />
+    
 }
 
 export default Map;

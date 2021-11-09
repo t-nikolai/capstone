@@ -1,36 +1,55 @@
 import './Home';
+import App from '../App';
 import { useState, useContext, useEffect } from "react";
-import { Link, useHistory} from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import UserContext from "./UserContext";
+import { verifyCredentials } from "../api/camperApi";
 
 function Login() {
 
+    const [camper, setCamper] = useState({
+        username: "",
+        password: "",
+        role: "",
+        firstName: "",
+        lastName: "",
+        address: "",
+        city: "",
+        state: "",
+        zip: 0,
+        email: "",
+        phone: ""
+    });
     const [candidate, setCanidiate] = useState({
-        username : "",
-        password : ""
+        username: "",
+        password: "",
+        role: ""
     });
     const onChange = (evt) => {
-        const clone = {...candidate};
+        const clone = { ...candidate };
         clone[evt.target.name] = evt.target.value;
         setCanidiate(clone);
         console.log(candidate);
     }
     const auth = useContext(UserContext);
     const history = useHistory();
-  
-  useEffect (() => {
-      document.body.className = "Login";
-  }, [])
-  
+
+    useEffect(() => {
+        document.body.className = "Login";
+    }, [])
+
     const onSubmit = (evt) => {
-      evt.preventDefault();     
-      // call backend api for user and pass 
-      // on fail - bad credentials message/alert
-      // on success - take camper & call auth.login - setting credentials in App
-      history.push("/");        // on success only
+        evt.preventDefault();
+        // call backend api for user and pass 
+        // on fail - bad credentials message/alert
+        // on success - take camper & call auth.login - setting credentials in App
+        verifyCredentials(candidate)
+            .then(camper => setCamper(camper))
+            .then(auth.login(camper))
+            .then(history.push("/"))
+            .catch((err) => history.push(alert("Credentials are invalid")));
     }
 
-    
     return <div>
         <div className="w-screen h-screen flex justify-center items-center container">
             <form className="p-10 bg-green-100 bg-opacity-50 rounded flex justify-center items-center flex-col shadow-md z-10" onSubmit={onSubmit}>
@@ -40,11 +59,11 @@ function Login() {
                 </svg>
 
                 <p className="mb-5 text-3xl uppercase font-bold text-green-900">Login</p>
-                <input type="text" id= "username" name="username" className="mb-5 p-3 w-80 focus:border-green-700 rounded border-2 outline-none" autocomplete="off" placeholder="Username" value={candidate.username} onChange={onChange} required />
+                <input type="text" id="username" name="username" className="mb-5 p-3 w-80 focus:border-green-700 rounded border-2 outline-none" autocomplete="off" placeholder="Username" value={candidate.username} onChange={onChange} required />
                 <input type="password" id="password" name="password" className="mb-5 p-3 w-80 focus:border-green-700 rounded border-2 outline-none" autocomplete="off" placeholder="Password" value={candidate.password} onChange={onChange} required />
 
                 <div>
-                    <button className="bg-green-600 hover:bg-green-900 text-white font-bold p-2 rounded w-30 mr-3" id="login" type="submit" onClick = {onSubmit}><span>Login</span></button>
+                    <button className="bg-green-600 hover:bg-green-900 text-white font-bold p-2 rounded w-30 mr-3" id="login" type="submit" onClick={onSubmit}><span>Login</span></button>
                     <Link to='/' className="bg-gray-600 hover:bg-gray-900 text-white font-bold p-2 rounded w-30" id="login" type="submit"><span>Cancel</span></Link>
                 </div>
 

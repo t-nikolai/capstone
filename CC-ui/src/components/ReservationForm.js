@@ -54,8 +54,8 @@ function Reservation() {
             <form onSubmit={onSubmit} className="p-10 bg-green-100 bg-opacity-50 rounded flex justify-center items-center flex-col shadow-md z-10">
                 <p className="mb-5 text-3xl uppercase font-bold text-green-900 animate-pulse">Make a reservation</p>
                 <div className="grid-cols-2">
-                    <input type="text" name="campground" class="mb-5 p-3 w-80 focus:border-green-700 rounded border-2 outline-none mr-4" autocomplete="off" placeholder="campground (will autofill)" required />
-                    <input type="text" name="campSite" class="mb-5 p-3 w-80 focus:border-green-700 rounded border-2 outline-none" autocomplete="off" placeholder="Camp site (will autofill)" required />
+                    <input type="text" name="campground" className="mb-5 p-3 w-80 focus:border-green-700 rounded border-2 outline-none mr-4" autocomplete="off" placeholder="campground (will autofill)" required />
+                    <input type="text" name="campSite" className="mb-5 p-3 w-80 focus:border-green-700 rounded border-2 outline-none" autocomplete="off" placeholder="Camp site (will autofill)" required />
                 </div>
                 <div>
                     calender will go here? (note: change picture and layout to make more unique)
