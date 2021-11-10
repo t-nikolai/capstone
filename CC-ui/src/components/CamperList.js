@@ -1,12 +1,15 @@
 import Camper from "./CamperProfile";
 import { useState, useEffect } from 'react';
 import { useHistory } from "react-router";
+import { UserContext } from './UserContext';
 import { findAll } from "../api/camperApi";
 
 function CamperList() {
 
     const [campers, setCampers] = useState([]);
     const history = useHistory();
+
+    //const user = useContext(UserContext);
 
     useEffect(() => {
         findAll()

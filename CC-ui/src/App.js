@@ -75,6 +75,7 @@ function App() {
           </Route>
 
           <Route path="/campers">
+            {/* Campers list needs admin credential check (should only appear for admin logins) */}
             <CamperList />
           </Route>
 

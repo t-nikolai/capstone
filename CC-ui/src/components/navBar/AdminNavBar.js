@@ -34,6 +34,7 @@ function AdminNavBar(logout) {
                         <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 text-green-300 hover:text-white mr-4 "> review locations </a>
                         <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 text-green-300 hover:text-white mr-4 "> review reservations </a>
                         <Link to='/reservations-list' className="block mt-4 lg:inline-block lg:mt-0 text-green-300 hover:text-white mr-4 "> view all reservations </Link>
+                        <Link to='/campers' className="block mt-4 lg:inline-block lg:mt-0 text-green-300 hover:text-white mr-4 "> view all campers </Link>
                     </div>
                     <div>
                         <a href="#" className="inline-block text-sm px-4 py-2 leading-none border rounded text-text bg-gray-400 border-green-300 hover:border-transparent hover:text-white hover:bg-green-300 mt-4 mr-4 lg:mt-0" onClick={onSubmit}>Log out</a>
