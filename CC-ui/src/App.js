@@ -52,12 +52,10 @@ function App() {
       <Router>
         <Switch>
           <Route path="/login">
-            {/* login in page with required credentials */}
             <Login />
           </Route>
 
           <Route path="/signup">
-            {/* sign up page with required credentials */}
             <Signup />
           </Route>
           
@@ -76,7 +74,10 @@ function App() {
 
           <Route path="/campers">
             {/* Campers list needs admin credential check (should only appear for admin logins) */}
-            <CamperList />
+            {credentials ?
+              (credentials.role === 'ADMIN' ? <AdminNavBar /> : <UserNavBar />)
+              : <BasicNavBar />}
+            {credentials && credentials.role === 'ADMIN' ? <CamperList /> : <Home />}
           </Route>
 
           <Route path="/reservations-list">
