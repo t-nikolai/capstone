@@ -15,7 +15,7 @@ const emptyReservation = {
 
 function Reservation() {
 
-    const[error, setError] = useState();
+    const [error, setError] = useState();
 
     const [reservation, setReservation] = useState(emptyReservation);
     const { reservationId } = useParams();
@@ -23,20 +23,20 @@ function Reservation() {
 
     const user = useContext(UserContext);
 
-    useEffect( () => {
-        if(reservationId) {
+    useEffect(() => {
+        if (reservationId) {
             findById(reservationId)
                 .then(reservation => setReservation(reservation))
-                .catch( (err) => history.push("/error", err.toString() ));
+                .catch((err) => history.push("/error", err.toString()));
         }
     }, [reservationId, history]);
 
     const onChange = evt => {
         const next = { ...reservation };
         let value = evt.target.value;
-        if(evt.target.type === "number") {
+        if (evt.target.type === "number") {
             value = parseInt(value, 10);
-            if(isNaN(value)) {
+            if (isNaN(value)) {
                 value = evt.target.value;
             }
         }
@@ -55,8 +55,8 @@ function Reservation() {
 
 
 
-            .then( () => history.push("/")) // push to confirmation page instead of home page?
-            .catch( (err) => history.push("/error", err.toString() ));
+            .then(() => history.push("/")) // push to confirmation page instead of home page?
+            .catch((err) => history.push("/error", err.toString()));
     };
 
     return <div>
@@ -67,12 +67,25 @@ function Reservation() {
                     <input type="text" name="campground" className="mb-5 p-3 w-80 focus:border-green-700 rounded border-2 outline-none mr-4" autocomplete="off" placeholder="campground (will autofill)" required />
                     <input type="text" name="campSite" className="mb-5 p-3 w-80 focus:border-green-700 rounded border-2 outline-none" autocomplete="off" placeholder="Camp site (will autofill)" required />
                 </div>
-                <div>
-                    calender will go here? (note: change picture and layout to make more unique)
-                    <MakeCalender />
+                <div className="grid-cols-2">
+                    {/* need to find a way to put these divs side by side */}
+                    <div>
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="startDate">
+                            Start date
+                        </label>
+                        <input type="date" name="startDate" className="mb-5 p-3 w-80 focus:border-green-700 rounded border-2 outline-none mr-4" autocomplete="off" required
+                            value={emptyReservation.startDate} onChange={onChange} />
+                    </div>
+                    <div>
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="endDate">
+                            Start date
+                        </label>
+                        <input type="date" name="endDate" className="mb-5 p-3 w-80 focus:border-green-700 rounded border-2 outline-none" autocomplete="off" required
+                            value={emptyReservation.endDate} onChange={onChange} />
+                    </div>
                 </div>
                 <div>
-                    ()
+                    
                     <button className="bg-green-600 hover:bg-green-900 text-white font-bold p-2 rounded w-30 mr-3" id="login" type="submit"><span>Make Reservation</span></button>
                     <Link to="/Campgrounds" className="bg-gray-600 hover:bg-gray-900 text-white font-bold p-2 rounded w-30" id="login" type="submit"><span>Cancel</span></Link>
                 </div>

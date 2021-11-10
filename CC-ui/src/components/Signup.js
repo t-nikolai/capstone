@@ -60,14 +60,21 @@ function Signup() {
         <div className="w-screen h-screen flex justify-center items-center container">
             <form onSubmit={onSubmit} className="p-10 bg-green-100 bg-opacity-50 rounded flex justify-center items-center flex-col shadow-md z-10">
                 <p className="mb-5 text-3xl uppercase font-bold text-green-900 animate-pulse">Create an Account</p>
-                <div className="grid-cols-2">
-                    {/* username and password at top? */}
 
+                <div className="grid-cols-2">
+                    <input type="text" name="username" className="mb-5 p-3 w-80 focus:border-green-700 rounded border-2 outline-none mr-4" autocomplete="off" placeholder="Username" required
+                        value={camper.username} onChange={onChange} />
+                    <input type="password" name="password" id="password" className="mb-5 p-3 w-80 focus:border-green-700 rounded border-2 outline-none" autocomplete="off" placeholder="Password" required
+                        value={camper.password} onChange={onChange} />
+                </div>
+
+                <div className="grid-cols-2">
                     <input type="text" name="firstName" className="mb-5 p-3 w-80 focus:border-green-700 rounded border-2 outline-none mr-4" autocomplete="off" placeholder="First Name" required
                         value={camper.firstName} onChange={onChange} />
                     <input type="text" name="lastName" className="mb-5 p-3 w-80 focus:border-green-700 rounded border-2 outline-none" autocomplete="off" placeholder="Last Name" required
                         value={camper.lastName} onChange={onChange} />
                 </div>
+
                 <div className="grid-cols-4">
                     <input type="text" name="address" className="mb-5 p-3 w-70 focus:border-green-700 rounded border-2 outline-none mr-2" autocomplete="off" placeholder="Street Name" required
                         value={camper.address} onChange={onChange} />
@@ -129,18 +136,14 @@ function Signup() {
                     <input type="text" name="zip" className="mb-5 p-3 w-20 focus:border-green-700 rounded border-2 outline-none" autocomplete="off" placeholder="Zip" required
                         value={camper.zip} onChange={onChange} />
                 </div>
+
                 <div className="grid-cols-2">
                     <input type="email" name="email" className="mb-5 p-3 w-80 focus:border-green-700 rounded border-2 outline-none mr-4" autocomplete="off" placeholder="Email" required
                         value={camper.email} onChange={onChange} />
                     <input type="text" name="phone" className="mb-5 p-3 w-80 focus:border-green-700 rounded border-2 outline-none" autocomplete="off" placeholder="(xxx)xxx-xxxx" required
                         value={camper.phone} onChange={onChange} />
                 </div>
-                <div className="grid-cols-2">
-                    <input type="text" name="username" className="mb-5 p-3 w-80 focus:border-green-700 rounded border-2 outline-none mr-4" autocomplete="off" placeholder="Username" required
-                        value={camper.username} onChange={onChange} />
-                    <input type="password" name="password" id="password" className="mb-5 p-3 w-80 focus:border-green-700 rounded border-2 outline-none" autocomplete="off" placeholder="Password" required
-                        value={camper.password} onChange={onChange} />
-                </div>
+                
                 <div>
                     <button className="bg-green-600 hover:bg-green-900 text-white font-bold p-2 rounded w-30 mr-3" id="login" type="submit"><span>Sign up</span></button>
                     <Link to="/" className="bg-gray-600 hover:bg-gray-900 text-white font-bold p-2 rounded w-30" id="login" type="button"><span>Cancel</span></Link>
