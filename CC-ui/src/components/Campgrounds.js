@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Map from "./testingComponents/MapTestingComponent";
+import { useState } from 'react';
 
 function Campgrounds(credentials) {
 
@@ -17,7 +18,7 @@ return <div >
                         <h4 id="name" className="text-xl font-semibold mb-2">Campsite 1</h4>
                         <p id="job" className="text-gray-800 mt-2">Brief description of campsite</p>
                         <div className={classDiv} >
-                        <Link to='/reservation' className="bg-gray-600 hover:bg-gray-900 text-white font-bold p-1 px-2 mt-2 ml-52 rounded w-30" id="login" type="submit"><span>make reservation</span></Link>
+                        <Link to='/reservation' className="bg-gray-600 hover:bg-gray-900 text-white font-bold p-1 px-2 mt-2 ml-52 rounded w-30" id="login" type="button"><span>make reservation</span></Link>
                         </div>
                     </div>
                 </div>
@@ -48,7 +49,7 @@ return <div >
         </div>
         <div className="col-span-2 bg-gradient-to-r from-yelow-900 to-white">
             <h2 className="text-center text-3xl"> Name of campground will appear here when clicked </h2>
-            <Map />
+            {/* <Map /> */}
         </div>
     </div>
 </div>

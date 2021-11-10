@@ -12,6 +12,14 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import Campgrounds from './components/Campgrounds';
 import Reservation from './components/ReservationForm.js';
+import ConfirmReservation from './components/ConfirmReservation';
+import CamperList from './components/CamperList';
+import CamperProfile from './components/CamperProfile';
+import ConfirmDelete from './components/ConfirmDelete';
+import Error from './components/Error';
+import ReservationForm from './components/ReservationForm';
+import ReservationsList from './components/ReservationsList.js';
+
 
 function App() {
 
@@ -62,6 +70,22 @@ function App() {
               <Home /> : <Campgrounds credentials={credentials}/>}
           </Route>
 
+          <Route path="/camper-profile">
+            <CamperProfile />
+          </Route>
+
+          <Route path="/campers">
+            <CamperList />
+          </Route>
+
+          <Route path="/reservations-list">
+            <ReservationsList />
+          </Route>
+
+          <Route path="/reservation-form">
+            <ReservationForm />
+          </Route>
+
           <Route path="/reservation">
             {/* Campgrounds page with required credentials */}
             {credentials && credentials?
@@ -70,6 +94,18 @@ function App() {
             {credentials ?
               (credentials.role === 'ADMIN' ? <Home /> : <Reservation />)
               : <Home />}
+          </Route>
+
+          <Route path="confirm-delete">
+            <ConfirmDelete />
+          </Route>
+
+          <Route path="confirm-reservation">
+            <ConfirmReservation />
+          </Route>
+
+          <Route path="/error">
+            <Error />
           </Route>
 
           <Route path="/" exact>

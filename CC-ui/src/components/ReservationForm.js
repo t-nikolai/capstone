@@ -15,7 +15,9 @@ const emptyReservation = {
 
 function Reservation() {
 
-    const [reservation, setReservation] = useState(emptyReservation);       // empty reservation?
+    const[error, setError] = useState();
+
+    const [reservation, setReservation] = useState(emptyReservation);
     const { reservationId } = useParams();
     const history = useHistory();
 
@@ -45,6 +47,14 @@ function Reservation() {
     const onSubmit = evt => {
         evt.preventDefault();
         save(reservation)
+            .then(reservation => {
+                console.log("reservation save was successful!");
+                console.log(reservation);
+                history.push("/confirm-reservation");
+            })
+
+
+
             .then( () => history.push("/")) // push to confirmation page instead of home page?
             .catch( (err) => history.push("/error", err.toString() ));
     };
