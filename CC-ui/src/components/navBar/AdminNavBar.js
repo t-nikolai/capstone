@@ -4,10 +4,11 @@ import UserContext from "../UserContext";
 
 function AdminNavBar(logout) {
 
-    const [canidate, setCanidiate] = useState({
-        username : "",
-        password : ""
-    });
+    // const [canidate, setCanidiate] = useState({
+    //     username : "",
+    //     password : ""
+    // });
+    const [credentials, setCredentials] = useState();
     
     const auth = useContext(UserContext);
   
@@ -31,8 +32,6 @@ function AdminNavBar(logout) {
                 <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
                     <div className="text-sm lg:flex-grow visibility:hidden lg:visable">
                         <Link to='/' className="block mt-4 lg:inline-block lg:mt-0 text-green-300 hover:text-white mr-4 "> home </Link>
-                        <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 text-green-300 hover:text-white mr-4 "> review locations </a>
-                        <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 text-green-300 hover:text-white mr-4 "> review reservations </a>
                         <Link to='/reservations-list' className="block mt-4 lg:inline-block lg:mt-0 text-green-300 hover:text-white mr-4 "> view all reservations </Link>
                         <Link to='/campers' className="block mt-4 lg:inline-block lg:mt-0 text-green-300 hover:text-white mr-4 "> view all campers </Link>
                     </div>
@@ -41,10 +40,10 @@ function AdminNavBar(logout) {
                     </div>
                 </div>
             </nav>
-
+            
             <div className="flex items-center flex-wrap text-green-100 bg-green-700 p-1">
-                <img className="fill-current mr-2 w-8 h-8 p-1" src="images/adminLoginIcon.png" alt="aLoginO=Icon" />
-                <span className="font-semibold text-xl tracking-tight">{auth.credentials.username}</span>
+                <Link to='/camper-profile'><img className="fill-current mr-2 w-8 h-8 p-1" src="images/adminLoginIcon.png" alt="aLoginO=Icon" /></Link>
+                <Link to='/camper-profile' className="font-semibold text-xl tracking-tight">{auth.credentials.username}</Link>
             </div>
         </div>
     );

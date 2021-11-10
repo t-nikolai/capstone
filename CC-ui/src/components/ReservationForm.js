@@ -2,26 +2,30 @@ import './Home';
 import { useState, useEffect, useContext } from 'react';
 import { BrowserRouter as Router, Switch, useHistory, Link, useParams } from 'react-router-dom';
 import { save, findById } from '../api/reservationsApi';
+import { findById as findByCamperId } from '../api/camperApi';
+import { findById as findByCampsiteId } from '../api/campsiteApi';
 import UserContext from './UserContext';
 import MakeCalender from './testingComponents/CalenderTestingComponent';
 
 const emptyReservation = {
     startDate: "",
     endDate: "",
-    campsiteId: 0,
-    camperId: 0,
+    campsite: 0,
+    camper: 0,
     total: 0.00
 };
 
 function Reservation() {
 
+    const user = useContext(UserContext);
+
     const [error, setError] = useState();
 
     const [reservation, setReservation] = useState(emptyReservation);
-    const { reservationId } = useParams();
+    const [camper, setCamper] = useState();
+    const [campsite, setCampsite] = useState();
+    const { reservationId, campsiteId } = useParams();
     const history = useHistory();
-
-    const user = useContext(UserContext);
 
     useEffect(() => {
         if (reservationId) {
@@ -29,6 +33,12 @@ function Reservation() {
                 .then(reservation => setReservation(reservation))
                 .catch((err) => history.push("/error", err.toString()));
         }
+        findByCamperId(user.credentials.camperId) 
+            .then(camper => setCamper(camper))
+            .catch((err) => history.push("/error", err.toString()));
+        findByCampsiteId(campsiteId)
+            .then(campsite => setCampsite(campsite))
+            .catch((err) => history.push("/error", err.toString()));
     }, [reservationId, history]);
 
     const onChange = evt => {
@@ -46,17 +56,23 @@ function Reservation() {
 
     const onSubmit = evt => {
         evt.preventDefault();
-        save(reservation)
-            .then(reservation => {
-                console.log("reservation save was successful!");
-                console.log(reservation);
-                history.push("/confirm-reservation");
-            })
+        
+        if (camper && campsite) {
+            reservation.camper = camper;
+            reservation.campsite = campsite;
 
-
-
-            .then(() => history.push("/")) // push to confirmation page instead of home page?
-            .catch((err) => history.push("/error", err.toString()));
+            console.log(reservation);
+            save(reservation)
+                .then(reservation => {
+                    console.log("reservation save was successful!");
+                    console.log(reservation);
+                    history.push("/confirm-reservation");
+                })
+                .catch((err) => {
+                    console.log("reservations save was unsuccessful");
+                    history.push("/error", err.toString())
+                });
+        }
     };
 
     return <div>
@@ -74,14 +90,14 @@ function Reservation() {
                             Start date
                         </label>
                         <input type="date" name="startDate" className="mb-5 p-3 w-80 focus:border-green-700 rounded border-2 outline-none mr-4" autocomplete="off" required
-                            value={emptyReservation.startDate} onChange={onChange} />
+                            value={reservation.startDate} onChange={onChange} />
                     </div>
                     <div>
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="endDate">
-                            Start date
+                            End date
                         </label>
                         <input type="date" name="endDate" className="mb-5 p-3 w-80 focus:border-green-700 rounded border-2 outline-none" autocomplete="off" required
-                            value={emptyReservation.endDate} onChange={onChange} />
+                            value={reservation.endDate} onChange={onChange} />
                     </div>
                 </div>
                 <div>

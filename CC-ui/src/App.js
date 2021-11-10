@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { BrowserRouter as Router, Switch, useHistory, Link } from 'react-router-dom';
-import UserContext from './components/UserContext.js';
+import UserContext from './components/UserContext';
 import { Redirect, Route } from 'react-router';
 
 //components
@@ -19,6 +19,7 @@ import ConfirmDelete from './components/ConfirmDelete';
 import Error from './components/Error';
 import ReservationForm from './components/ReservationForm';
 import ReservationsList from './components/ReservationsList.js';
+import CamperView from './components/CamperView';
 
 
 function App() {
@@ -36,9 +37,11 @@ function App() {
   const login = (creds) => {
     console.log("logged in", creds);
     setCredentials({
+      camperId: creds.camperId,
       username: creds.username,
       role: creds.role
     });
+    console.log(credentials);
   }
 
   const auth = {
@@ -72,6 +75,10 @@ function App() {
             <CamperProfile />
           </Route>
 
+          <Route path="/camper-view">
+            <CamperView />
+          </Route>
+
           <Route path="/campers">
             {/* Campers list needs admin credential check (should only appear for admin logins) */}
             {credentials ?
@@ -88,14 +95,14 @@ function App() {
             <ReservationForm />
           </Route>
 
-          <Route path="/reservation">
+          <Route path="/reservation">   {/*---------------------include campsite id in url (similar to field agents edit/delete fxns----------------------*/}
             {/* Campgrounds page with required credentials */}
             {credentials && credentials?
               (credentials.role === 'ADMIN' ? <AdminNavBar /> : <UserNavBar />)
               : <BasicNavBar />}
             {credentials ?
               (credentials.role === 'ADMIN' ? <Home /> : <Reservation />)
-              : <Home />}
+              : <Signup />}
           </Route>
 
           <Route path="confirm-delete">

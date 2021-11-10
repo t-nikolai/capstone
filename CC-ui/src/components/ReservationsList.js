@@ -1,7 +1,7 @@
 import { useHistory } from "react-router";
 import { useContext, useState, useEffect } from 'react';
 import UserContext from './UserContext';
-import { findAll } from "../api/camperApi";
+import { findAll } from "../api/reservationsApi";
 import Reservation from './Reservation';
 
 

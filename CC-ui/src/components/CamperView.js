@@ -1,24 +1,31 @@
-import { useState, useContext, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import Camper from "./CamperProfile";
+import { useState, useEffect, useContext } from "react";
+import { useHistory } from "react-router";
 import User from "./UserContext";
-import Signup from "./Signup";
 import { findById } from "../api/camperApi";
 
-function Camper({ camper }) {
+function CamperView(){
+    
+    const [camper, setCamper] = useState();
+    const history = useHistory();
 
-    // const [campers, setCampers] = useState([]);
-    // const history = useHistory();
+    const user = useContext(User);
 
-    // const user = useContext(User);
-
-    // useEffect(() => {
-    //     findById(user.credentials.camperId)
-    //         .then(c => setCredentials(c))
-    //         .catch((err) => history.push("/error", err.toString()));
-    // }, [user.credentials.camperId, history]);
+    useEffect(() => {
+        console.log("--------show user-----------");
+        console.log(user);
+        findById(user.camperId)
+            .then(camper => setCamper(camper))
+            .catch((err) => history.push("/error", err.toString()));
+        console.log("-----------show camper------------");
+        console.log(camper);
+    }, history);
 
     return (
-        <div className="bg-white block py-10">
+        <div>
+            {/* {campers.map(c => <Camper camper={c} key={c.camperId} />)} */}
+
+            <div className="bg-white block py-10">
             <div className="max-w-2xl mx-auto">
 
                 <div className="w-full">
@@ -49,7 +56,9 @@ function Camper({ camper }) {
                 </div>
             </div>
         </div>
+
+        </div>
     );
 }
 
-export default Camper;
+export default CamperView;

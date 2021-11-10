@@ -125,6 +125,11 @@ values ("Afton A-1",1),
     ("LHRP 12",3),
     ("LHRP 13",3),
     ("LHRP 14",3);
+
+insert into reservation(start_date, end_date, total, site_id, camper_id)
+	values
+    ("2021-01-01", "2021-01-02", 11.00, 1, 1),
+    ("2022-02-02", "2022-02-03", 20.00, 2, 2);
     
 use camping_community;
-select * from camper;
+select * from reservation;

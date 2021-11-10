@@ -6,13 +6,13 @@ function Reservation({ reservation }) {
 
     const user = useContext(UserContext);
 
-    return <div id="outerDiv" class="w-full md:w-64 justify-center items-center bg-white shadow-lg rounded-lg flex flex-col">
-        <div id="innerDiv" class="w-full p-4 justify-start flex flex-col">
+    return <div id="outerDiv" class="w-full md:w-64 justify-center items-center bg-white shadow-lg rounded-lg flex flex-col my-4">
+        <div id="innerDiv" class="w-full p-4 justify-start flex flex-col my-2">
             <h4 class="border-b-2 text-3xl" id="cardHeaderResId">Reservation Id: {reservation.reservationId} </h4>
             <p class="my-4" id="startDate">Start Date: {reservation.startDate}</p>
             <p class="my-4" id="endDate">End Date: {reservation.endDate}</p>
             <p class="my-4" id="total">Total: ${reservation.total}</p>
-            <p class="my-4" id="campsite">Campsite Id: {reservation.siteId} *insert current site name*</p>
+            <p class="my-4" id="campsite">Campsite Id: *insert current site name*</p>
             <p class="my-4" id="campground">Campground: *insert current campground*</p>
             {/* or make these buttons below links to the delete/edit pages with the current id's? & also add roles here for button availability */}
             {(user.role === "USER" || user.role === "ADMIN") &&

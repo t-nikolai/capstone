@@ -1,43 +1,129 @@
-// //import React, { useState } from "react";
-// import React, { useRef, useEffect } from 'react';
+//import React, { useState } from "react";
+import React, { useRef, useEffect } from 'react';
 // import ReactMapboxFactory from 'react-mapbox-gl/lib/map';
-// import { Marker } from 'react-mapbox-gl';
-// import mapboxgl from 'mapbox-gl';
+// import { Marker } from 'react-map-gl';
+import mapboxgl from 'mapbox-gl';
 
-// // temp address
-// // look here for proper formatting... 'https://docs.mapbox.com/help/troubleshooting/address-geocoding-format-guide/'
-// mapboxgl.accessToken = 'pk.eyJ1IjoiY2MtdGVzdGVyIiwiYSI6ImNrdnI0emNycDJydHUyd3Fndnd4NjJ6eTEifQ.KDlyZRLITFmkrgIqDdzqwQ';
+// temp address
+// look here for proper formatting... 'https://docs.mapbox.com/help/troubleshooting/address-geocoding-format-guide/'
+mapboxgl.accessToken = 'pk.eyJ1IjoiY2MtdGVzdGVyIiwiYSI6ImNrdnI0emNycDJydHUyd3Fndnd4NjJ6eTEifQ.KDlyZRLITFmkrgIqDdzqwQ';
 
-// function Map() {
+function Map() {
 
-//     const mapContainerRef = useRef(null);
+  const mapContainerRef = useRef(null);
 
-//   // initialize map when component mounts
-//   useEffect(() => {
-//     const map = new mapboxgl.Map({
-//       container: mapContainerRef.current,
-//       // See style options here: https://docs.mapbox.com/api/maps/#styles
-//       style: 'mapbox://styles/mapbox/streets-v11',
-//       center: [45, -90],
-//       zoom: 12.5,
-//     });
+  // initialize map when component mounts
+  useEffect(() => {
+    const map = new mapboxgl.Map({
+      container: mapContainerRef.current,
+      // See style options here: https://docs.mapbox.com/api/maps/#styles
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [-93, 44.8],
+      zoom: 9.5
+    });
 
-//     // add navigation control (the +/- zoom buttons)
-//     map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
 
-//     mapboxgl.Marker(<div className="marker" />).setLngLat({
-//       longitude: 90,
-//       latitude: 90
-//     }).addTo(map); 
+    // add navigation control (the +/- zoom buttons)
+    map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
 
-//     // clean up on unmount
-//     return () => map.remove();
-//   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    mapboxgl.accessToken = 'pk.eyJ1IjoiY2MtdGVzdGVyIiwiYSI6ImNrdnF5dmZjYmV4b2IycXE2aTIyNnBwc3AifQ.woCJ5YPsuTMZpiOciM54qw';
 
-//   return <div className="map-container m-10 " ref={mapContainerRef} >
-    
-//     </div>;
+    map.on('load', () => {
+      // Add an image to use as a custom marker
+      map.loadImage(
+        // 'green_pin.png',
+        'https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png',
+        (error, image) => {
+          if (error) throw error;
+          map.addImage('custom-marker', image);
+          // Add a GeoJSON source with 2 points
+          map.addSource('points', {
+            'type': 'geojson',
+            'data': {
+              'type': 'FeatureCollection',
+              'features': [
+                {
+                  // (1) Afton Campgrounds
+                  'type': 'Feature',
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [
+                      -92.790990, 44.848400
+                    ]
+                  },
+                  'properties': {
+                    'title': 'Afton Campgrounds',
+                    'description': '1'
+                  }
+                },
+                {
+                  // (2) Town and Contry Campgroud
+                  'type': 'Feature',
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [
+                      -93.389520, 44.774860
+                    ]
+                  },
+                  'properties': {
+                    'title': 'Town and Country Campgroud',
+                    'description': '2'
+                  }
+                },
+                {
+                  // (3) Lebabon Hills Regional Park Campground
+                  'type': 'Feature',
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [
+                      -93.1865763, 44.7744335
+                    ]
+                  },
+                  'properties': {
+                    'title': 'Lebanon Hills Regional Park Campground',
+                    'description': '3'
+                  }
+                }
+              ]
+            }
+          });
 
-// }
+          // Add a symbol layer
+          map.addLayer({
+            'id': 'points',
+            'type': 'symbol',
+            'source': 'points',
+            'layout': {
+              'icon-image': 'custom-marker',
+              // get the title name from the source's "title" property
+              'text-field': ['get', 'title'],
+              'text-font': [
+                'Open Sans Semibold',
+                'Arial Unicode MS Bold'
+              ],
+              'text-offset': [0, 1.25],
+              'text-anchor': 'top'
+            }
+          });
+        }
+      );
+    });
 
-// export default Map;
+    // When a click event occurs on a feature in the places layer, get campground id, find all campsites in campground then list to side and change title?
+    map.on('click', 'places', (e) => {
+      const campgroundId = e.features[0].properties.description;
+      //pass through to campgrounds component so that 
+
+      mapboxgl.Popup()
+        .addTo(map);
+    });
+
+    // clean up on unmount
+    return () => map.remove();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  return <div className="map-container m-10 " ref={mapContainerRef} ></div>;
+
+}
+
+export default Map;

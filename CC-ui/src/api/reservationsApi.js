@@ -31,6 +31,7 @@ export async function findById(reservationId){
 }
 
 export async function add(reservation){
+    console.log('reservations add fxn called!');
     const init = {
         method: "POST",
         headers: {
@@ -49,6 +50,7 @@ export async function add(reservation){
 }
 
 export async function update(reservation){
+    console.log('reservations update fxn called!');
     const init = {
         method: "PUT",
         headers: {
@@ -67,6 +69,7 @@ export async function update(reservation){
 }
 
 export async function save(reservation) {
+    console.log("reservations save fxn called!");
     if(reservation.reservationId > 0) {
         await update(reservation);
     } else {

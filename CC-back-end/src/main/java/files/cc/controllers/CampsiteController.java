@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = {"http://localhost:3000"})
@@ -28,5 +29,14 @@ public class CampsiteController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(campsite);
+    }
+
+    @GetMapping("/find-by-campground/{campgroundId}")
+    public ResponseEntity<List<Campsite>> findByCampgroundId(@PathVariable int campgroundId){
+        List<Campsite> campsites = findAll().stream().filter(i -> i.getCampgroundId() == campgroundId).collect(Collectors.toList());
+        if (campsites == null || campsites.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok(campsites);
     }
 }
