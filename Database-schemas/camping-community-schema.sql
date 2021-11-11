@@ -10,7 +10,7 @@ create table campground (
     address varchar(50) not null,
     city varchar(50) not null,
     state varchar(2) not null,
-    zip int(5) not null,
+    zip varchar(5) not null,
     --
     phone varchar(20) not null,
     email varchar(50) not null,

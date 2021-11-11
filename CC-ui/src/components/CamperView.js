@@ -6,18 +6,15 @@ import { findById } from "../api/camperApi";
 
 function CamperView(){
     
-    const [camper, setCamper] = useState();
+    const [camper, setCamper] = useState([]);
     const history = useHistory();
 
     const user = useContext(User);
 
-    console.log(camper);
-    console.log(user.camperId);
-
     useEffect(() => {
         console.log("--------show user-----------");
-        console.log(user);
-        findById(user.camperId)
+        console.log(user.credentials.camperId);
+        findById(user.credentials.camperId)
             .then(camper => setCamper(camper))
             .catch((err) => history.push("/error", err.toString()));
         console.log("-----------show camper------------");
