@@ -6,21 +6,27 @@ function Reservation({ reservation }) {
 
     const user = useContext(UserContext);
 
-    return <div id="outerDiv" class="w-full md:w-64 justify-center items-center bg-white shadow-lg rounded-lg flex flex-col my-4">
-        <div id="innerDiv" class="w-full p-4 justify-start flex flex-col my-2">
-            <h4 class="border-b-2 text-3xl" id="cardHeaderResId">Reservation Id: {reservation.reservationId} </h4>
-            <p class="my-4" id="startDate">Start Date: {reservation.startDate}</p>
-            <p class="my-4" id="endDate">End Date: {reservation.endDate}</p>
-            <p class="my-4" id="total">Total: ${reservation.total}</p>
-            <p class="my-4" id="campsite">Campsite Id: *insert current site name*</p>
-            <p class="my-4" id="campground">Campground: *insert current campground*</p>
-            {/* or make these buttons below links to the delete/edit pages with the current id's? & also add roles here for button availability */}
-            {(user.role === "USER" || user.role === "ADMIN") &&
-            <button value="button" class="my-4 px-4 py-2 text-white hover:bg-blue-700 bg-blue-500" id="updateButton" onClick="?">Update</button>}
-            {(user.role === "ADMIN") &&
-            <button value="button" class="my-4 px-4 py-2 text-white hover:bg-blue-700 bg-blue-500" id="deleteButton" onClick="?">Delete</button>}
+    return (<div className="max-w-sm bg-white px-6 pt-6 pb-2 rounded-xl shadow-xlg transform hover:scale-105 transition duration-500">
+            <h3 className="mb-3 text-xl font-bold text-green-600">ReservationId: {reservation.reservationId}</h3>
+            <div className="relative">
+                <img className="w-full rounded-xl" src="https://thumbs.dreamstime.com/b/camping-cute-bear-trailer-tree-cartoon-isolated-icon-design-camping-cute-bear-trailer-tree-cartoon-isolated-icon-design-vector-177530630.jpg" alt="Colors" />
+                <p className="absolute top-0 bg-green-200 text-gray-800 font-semibold py-1 px-3 rounded-br-lg rounded-tl-lg">CampgroundId, CampsiteId</p>
+            </div>
+            <div className="my-4">
+                <div className="flex space-x-1 items-center">
+                    <p className="text-xl">{reservation.startDate} - {reservation.endDate}</p>
+                </div>
+                <div className="flex space-x-1 items-center">
+                    <p className="text-lg">${reservation.total}</p>
+                </div>
+                {/* or make these buttons below links to the delete/edit pages with the current id's? & also add roles here for button availability */}
+                {(user.role === "USER" || user.role === "ADMIN") &&
+                    <button value="button" className="mt-4 text-xl w-auto text-white bg-green-600 py-1.5 px-2 rounded-xl shadow-lg" id="updateButton" onClick="?">Update</button>}
+                {(user.role === "ADMIN") &&
+                    <button value="button" className="mt-4 text-xl w-auto text-white bg-green-600 py-1.5 px-2 rounded-xl shadow-lg" id="deleteButton" onClick="?">Delete</button>}
+            </div>
         </div>
-</div>
+    );
 }
-
+    
 export default Reservation;
