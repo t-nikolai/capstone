@@ -41,7 +41,7 @@ function App() {
       username: creds.username,
       role: creds.role
     });
-    console.log(credentials);
+    console.log(creds);
   }
 
   const auth = {

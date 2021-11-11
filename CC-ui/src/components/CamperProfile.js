@@ -9,7 +9,7 @@ function Camper({ camper }) {
     // const [campers, setCampers] = useState([]);
     // const history = useHistory();
 
-    // const user = useContext(User);
+    const user = useContext(User);
 
     // useEffect(() => {
     //     findById(user.credentials.camperId)

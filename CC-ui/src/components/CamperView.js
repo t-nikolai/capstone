@@ -11,6 +11,9 @@ function CamperView(){
 
     const user = useContext(User);
 
+    console.log(camper);
+    console.log(user.camperId);
+
     useEffect(() => {
         console.log("--------show user-----------");
         console.log(user);
