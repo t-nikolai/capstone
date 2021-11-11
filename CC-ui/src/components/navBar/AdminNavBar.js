@@ -42,8 +42,8 @@ function AdminNavBar(logout) {
             </nav>
             
             <div className="flex items-center flex-wrap text-green-100 bg-green-700 p-1">
-                <Link to='/camper-profile'><img className="fill-current mr-2 w-8 h-8 p-1" src="images/adminLoginIcon.png" alt="aLoginO=Icon" /></Link>
-                <Link to='/camper-profile' className="font-semibold text-xl tracking-tight">{auth.credentials.username}</Link>
+                <Link to='/camper-view'><img className="fill-current mr-2 w-8 h-8 p-1" src="images/adminLoginIcon.png" alt="aLoginO=Icon" /></Link>
+                <Link to='/camper-view' className="font-semibold text-xl tracking-tight">{auth.credentials.username}</Link>
             </div>
         </div>
     );

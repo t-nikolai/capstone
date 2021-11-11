@@ -1,21 +1,10 @@
 import { useState, useContext, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import User from "./UserContext";
-import Signup from "./Signup";
-import { findById } from "../api/camperApi";
 
 function Camper({ camper }) {
 
-    // const [campers, setCampers] = useState([]);
-    // const history = useHistory();
-
     const user = useContext(User);
-
-    // useEffect(() => {
-    //     findById(user.credentials.camperId)
-    //         .then(c => setCredentials(c))
-    //         .catch((err) => history.push("/error", err.toString()));
-    // }, [user.credentials.camperId, history]);
 
     return (
         <div className="bg-white block py-10">

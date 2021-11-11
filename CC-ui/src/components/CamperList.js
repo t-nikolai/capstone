@@ -1,4 +1,5 @@
 import Camper from "./CamperProfile";
+//import CamperView from './CamperView';
 import { useState, useEffect } from 'react';
 import { useHistory } from "react-router";
 import { UserContext } from './UserContext';
@@ -18,7 +19,7 @@ function CamperList() {
     }, [history]);
 
     return (
-        <div>
+        <div className="grid-cols-2">
             {campers.map(c => <Camper camper={c} key={c.camperId} />)}
         </div>
     );

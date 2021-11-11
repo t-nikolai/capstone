@@ -71,11 +71,14 @@ function App() {
               <Home /> : <Campgrounds credentials={credentials}/>}
           </Route>
 
-          <Route path="/camper-profile">
+          {/* <Route path="/camper-profile">
             <CamperProfile />
-          </Route>
+          </Route> */}
 
           <Route path="/camper-view">
+            {credentials ?
+              (credentials.role === 'ADMIN' ? <AdminNavBar /> : <UserNavBar />)
+              : <BasicNavBar />}
             <CamperView />
           </Route>
 
