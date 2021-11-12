@@ -20,6 +20,7 @@ import Error from './components/Error';
 import ReservationForm from './components/ReservationForm';
 import ReservationsList from './components/ReservationsList.js';
 import CamperView from './components/CamperView';
+import CamperUpdate from './components/CamperUpdate';
 
 
 function App() {
@@ -98,7 +99,11 @@ function App() {
             <ReservationForm />
           </Route>
 
-          <Route path="/reservation">   {/*---------------------include campsite id in url (similar to field agents edit/delete fxns----------------------*/}
+          <Route path="/camper-update">
+            <CamperUpdate />
+          </Route>
+
+          <Route path="/reservation/:campsiteId">
             {/* Campgrounds page with required credentials */}
             {credentials && credentials?
               (credentials.role === 'ADMIN' ? <AdminNavBar /> : <UserNavBar />)
@@ -108,12 +113,16 @@ function App() {
               : <Signup />}
           </Route>
 
-          <Route path="confirm-delete">
+          <Route path="/confirm-delete">
             <ConfirmDelete />
           </Route>
 
-          <Route path="confirm-reservation">
+          <Route path="/confirm-reservation">
             <ConfirmReservation />
+          </Route>
+
+          <Route path="/delete/:camperId">
+            <ConfirmDelete />
           </Route>
 
           <Route path="/error">

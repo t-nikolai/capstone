@@ -1,5 +1,4 @@
-//import React, { useState } from "react";
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 // import ReactMapboxFactory from 'react-mapbox-gl/lib/map';
 // import { Marker } from 'react-map-gl';
 import mapboxgl from 'mapbox-gl';
@@ -8,7 +7,7 @@ import mapboxgl from 'mapbox-gl';
 // look here for proper formatting... 'https://docs.mapbox.com/help/troubleshooting/address-geocoding-format-guide/'
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2MtdGVzdGVyIiwiYSI6ImNrdnI0emNycDJydHUyd3Fndnd4NjJ6eTEifQ.KDlyZRLITFmkrgIqDdzqwQ';
 
-function Map() {
+function Map({ sendCampgroundId }) {
 
   const mapContainerRef = useRef(null);
 
@@ -53,7 +52,7 @@ function Map() {
                   },
                   'properties': {
                     'title': 'Afton Campgrounds',
-                    'description': '1'
+                    'description': 1
                   }
                 },
                 {
@@ -67,7 +66,7 @@ function Map() {
                   },
                   'properties': {
                     'title': 'Town and Country Campgroud',
-                    'description': '2'
+                    'description': 2
                   }
                 },
                 {
@@ -81,7 +80,7 @@ function Map() {
                   },
                   'properties': {
                     'title': 'Lebanon Hills Regional Park Campground',
-                    'description': '3'
+                    'description': 3
                   }
                 }
               ]
@@ -91,6 +90,7 @@ function Map() {
           // Add a symbol layer
           map.addLayer({
             'id': 'points',
+            'interactive': true,
             'type': 'symbol',
             'source': 'points',
             'layout': {
@@ -110,12 +110,11 @@ function Map() {
     });
 
     // When a click event occurs on a feature in the places layer, get campground id, find all campsites in campground then list to side and change title?
-    map.on('click', 'places', (e) => {
+    map.on('click', 'points', (e) => {
       const campgroundId = e.features[0].properties.description;
       //pass through to campgrounds component so that 
-
-      mapboxgl.Popup()
-        .addTo(map);
+      console.log("Mapping's campgroundId: " + campgroundId);
+      sendCampgroundId(campgroundId);
     });
 
     // clean up on unmount
@@ -123,7 +122,6 @@ function Map() {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return <div className="map-container m-10 " ref={mapContainerRef} ></div>;
-
 }
 
 export default Map;
