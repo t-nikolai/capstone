@@ -46,7 +46,7 @@ function CamperView(){
                         <strong>Name:</strong> {" " + camper.firstName + " " + camper.lastName}</div>
                     <div className="my-3 bg-green-100 h-8 w-auto text-xl mx-5 "> {/* row: address info */}
                         <strong>Address:</strong> {" " + camper.address + " " + camper.city +
-                            "\n" + camper.state + " " + camper.address}</div>
+                            "\n" + camper.state + " " + camper.zip}</div>
                     <div className="my-3 bg-green-100 h-8 w-auto text-xl mx-5 "> {/* row: email info */}
                         <strong>Email:</strong> {" " + camper.email}</div>
                     <div className="my-3 bg-green-100 h-8 w-auto text-xl mx-5 "> {/* row: phone info */}
