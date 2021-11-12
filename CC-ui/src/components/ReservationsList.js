@@ -20,7 +20,7 @@ function ReservationsLists() {
     }, [history]);
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-green-900 to-green-100 flex justify-center items-center py-20"> {/* add user permissions & styling in here if necessary (row/column adjusting for cards on different screen sizes */}
+        <div className="min-h-screen bg-gradient-to-t from-green-900 to-green-100 flex justify-center items-center py-20"> {/* add user permissions & styling in here if necessary (row/column adjusting for cards on different screen sizes */}
             {reservations.map(reservation => <Reservation key={reservation.reservationId} reservation={reservation}></Reservation>)}
             {/* maybe add in alternative text if you're not logged in - like "can only view reservations if you're logged in" or something */}
         </div>

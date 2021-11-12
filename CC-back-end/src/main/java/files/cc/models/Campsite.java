@@ -6,7 +6,6 @@ public class Campsite {
 
     private int siteId;
     private String name;
-    //private Campground campground;
     private int campgroundId;
 
     public Campsite() {}

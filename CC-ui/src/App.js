@@ -92,6 +92,9 @@ function App() {
           </Route>
 
           <Route path="/reservations-list">
+          {credentials && credentials?
+              (credentials.role === 'ADMIN' ? <AdminNavBar /> : <UserNavBar />)
+              : <BasicNavBar />}
             <ReservationsList />
           </Route>
 
@@ -111,10 +114,6 @@ function App() {
             {credentials ?
               (credentials.role === 'ADMIN' ? <Home /> : <Reservation />)
               : <Signup />}
-          </Route>
-
-          <Route path="/confirm-delete">
-            <ConfirmDelete />
           </Route>
 
           <Route path="/confirm-reservation">

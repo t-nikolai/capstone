@@ -1,7 +1,5 @@
 package files.cc.domain;
 
-import files.cc.data.CamperRepository;
-import files.cc.data.CampsiteRepository;
 import files.cc.data.ReservationRepository;
 import files.cc.models.Camper;
 import files.cc.models.Campsite;
@@ -115,7 +113,7 @@ class ReservationServiceTest {
         Campsite campsite = makeCampsite();
         campsite.setSiteId(3);
         reservation = makeReservation();
-        reservation.setSite(campsite);
+        reservation.setCampsite(campsite);
         reservation.setStartDate(LocalDate.of(2023, 3, 2));
         reservation.setEndDate(LocalDate.of(2023, 3, 5));
 
@@ -126,7 +124,7 @@ class ReservationServiceTest {
     @Test
     void shouldNotAddBcObjectsNull(){
         Reservation reservation = makeReservation();
-        reservation.setSite(null);
+        reservation.setCampsite(null);
         reservation.setCamper(null);
 
         Result<Reservation> result = service.add(reservation);
@@ -185,7 +183,7 @@ class ReservationServiceTest {
         campsite.setSiteId(3);
         reservation = makeReservation();
         reservation.setReservationId(3);
-        reservation.setSite(campsite);
+        reservation.setCampsite(campsite);
         reservation.setStartDate(LocalDate.of(2023, 3, 2));
         reservation.setEndDate(LocalDate.of(2023, 3, 5));
 
@@ -197,7 +195,7 @@ class ReservationServiceTest {
     void shouldNotUpdateBcObjectsNull(){
         Reservation reservation = makeReservation();
         reservation.setReservationId(3);
-        reservation.setSite(null);
+        reservation.setCampsite(null);
         reservation.setCamper(null);
 
         Result<Reservation> result = service.update(reservation);

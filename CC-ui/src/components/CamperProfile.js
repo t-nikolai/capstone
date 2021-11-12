@@ -33,7 +33,7 @@ function Camper({ camper }) {
                     <div className="my-3 bg-green-100 h-8 w-auto text-xl mx-5 "> {/* row: phone info */}
                         <strong>Phone:</strong> {" " + camper.phone}</div>
                     <div className="float-right"> {/* button here will allow user to update their profile (figure out how later) */}
-                    <button type="button" className="inline-block text-md px-6 py-3 leading-none border rounded text-black bg-gray-400 hover:border-transparent hover:bg-green-600 mt-4 mr-5 lg:mt-0" >Update</button>
+                    <Link to={`/delete/${camper.camperId}`} type="button" className="inline-block text-md px-6 py-3 leading-none border rounded text-black bg-gray-400 hover:border-transparent hover:bg-red-600 mt-4 mr-5 lg:mt-0" >Delete</Link>                    
                     </div>
                 </div>
             </div>

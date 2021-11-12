@@ -17,7 +17,7 @@ function CamperView(){
         console.log(user.credentials.camperId);
         findById(user.credentials.camperId)
             .then(camper => setCamper(camper))
-            .catch((err) => history.push("/error", err.toString()));
+            .catch(console.error);
         console.log("-----------show camper------------");
         console.log(camper);
     }, history);

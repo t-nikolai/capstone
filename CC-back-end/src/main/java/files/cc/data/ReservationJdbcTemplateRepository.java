@@ -48,12 +48,12 @@ public class ReservationJdbcTemplateRepository implements ReservationRepository 
 
     @Override
     public List<Reservation> findByCampsiteId(int siteId){
-        return findAll().stream().filter(i -> i.getSite().getSiteId() == siteId).collect(Collectors.toList());
+        return findAll().stream().filter(i -> i.getCampsite().getSiteId() == siteId).collect(Collectors.toList());
     }
 
     @Override
     public List<Reservation> findByCampgroundId(int campgroundId){
-        return findAll().stream().filter(i -> i.getSite().getCampgroundId() == campgroundId).collect(Collectors.toList());
+        return findAll().stream().filter(i -> i.getCampsite().getCampgroundId() == campgroundId).collect(Collectors.toList());
     }
 
     @Override
@@ -66,7 +66,7 @@ public class ReservationJdbcTemplateRepository implements ReservationRepository 
             ps.setDate(1, Date.valueOf(reservation.getStartDate()));
             ps.setDate(2, Date.valueOf(reservation.getEndDate()));
             ps.setDouble(3, reservation.getTotal().doubleValue());
-            ps.setInt(4, reservation.getSite().getSiteId());
+            ps.setInt(4, reservation.getCampsite().getSiteId());
             ps.setInt(5, reservation.getCamper().getCamperId());
             return ps;
         }, keyHolder);
@@ -92,7 +92,7 @@ public class ReservationJdbcTemplateRepository implements ReservationRepository 
                 reservation.getStartDate(),
                 reservation.getEndDate(),
                 reservation.getTotal().doubleValue(),
-                reservation.getSite().getSiteId(),
+                reservation.getCampsite().getSiteId(),
                 reservation.getCamper().getCamperId(),
                 reservation.getReservationId()) > 0;
     }

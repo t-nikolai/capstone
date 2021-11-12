@@ -1,6 +1,5 @@
 package files.cc.data.mappers;
 
-import files.cc.models.Campsite;
 import files.cc.models.Reservation;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -19,7 +18,7 @@ public class ReservationMapper implements RowMapper<Reservation> {
         reservation.setTotal(BigDecimal.valueOf(resultSet.getDouble("total")));
 
         CampsiteMapper campsiteMapper = new CampsiteMapper();
-        reservation.setSite(campsiteMapper.mapRow(resultSet, i));
+        reservation.setCampsite(campsiteMapper.mapRow(resultSet, i));
 
         CamperMapper camperMapper = new CamperMapper();
         reservation.setCamper(camperMapper.mapRow(resultSet, i));

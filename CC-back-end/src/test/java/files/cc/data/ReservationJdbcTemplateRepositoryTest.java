@@ -71,7 +71,7 @@ class ReservationJdbcTemplateRepositoryTest {
 
         assertNull(repository.findById(5));
 
-        reservation.setSite(cs1);
+        reservation.setCampsite(cs1);
         reservation.setCamper(cr1);
         reservation.setStartDate(LocalDate.of(2022,01,01));
         reservation.setEndDate(LocalDate.of(2022,02,01));
@@ -95,7 +95,7 @@ class ReservationJdbcTemplateRepositoryTest {
         Camper cr1 = camperRepository.findById(2);
         reservation.setTotal(new BigDecimal(10));
 
-        reservation.setSite(cs1);
+        reservation.setCampsite(cs1);
         reservation.setCamper(cr1);
         reservation.setStartDate(LocalDate.of(2022,01,01));
         reservation.setEndDate(LocalDate.of(2022,02,01));

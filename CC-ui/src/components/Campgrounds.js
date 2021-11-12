@@ -12,8 +12,6 @@ function Campgrounds(credentials) {
     const [campsites, setCampsites] = useState([]);
     const history = useHistory();
 
-    // write fxn that uses campgroundId to return campsites - how to we get campgroundId from Map?
-
     const sendCampgroundId = (campgroundId) => {
         console.log("Campgrounds campgroundId: " + campgroundId);
         findByCampgroundId(campgroundId)
@@ -30,7 +28,7 @@ function Campgrounds(credentials) {
                 </div>
             </div>
             <div className="col-span-2 bg-gradient-to-r from-yelow-900 to-white">
-            <h2 className="text-center text-3xl"> Name of campground will appear here when clicked </h2>
+            <h2 className="text-center text-5xl mt-5 pt-2"> Minneapolis/St. Paul Campgrounds </h2>
                 <Map className="mapboxgl-canvas-container" sendCampgroundId={sendCampgroundId} />
             </div>
         </div>

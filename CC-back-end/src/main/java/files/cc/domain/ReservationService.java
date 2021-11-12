@@ -50,7 +50,7 @@ public class ReservationService {
             return result;
         }
 
-        if (reservation.getSite() == null){
+        if (reservation.getCampsite() == null){
             result.addMessage("Reservation must have an associated campsite", ResultType.INVALID);
             return result;
         }
@@ -85,7 +85,7 @@ public class ReservationService {
             return result;
         }
 
-        if (reservation.getSite() == null){
+        if (reservation.getCampsite() == null){
             result.addMessage("Reservation must have an associated campsite", ResultType.INVALID);
             return result;
         }
@@ -144,7 +144,7 @@ public class ReservationService {
             return result;
         }
 
-        for (Reservation r : repository.findByCampsiteId(reservation.getSite().getSiteId())){
+        for (Reservation r : repository.findByCampsiteId(reservation.getCampsite().getSiteId())){
             if (!(reservation.getReservationId() == r.getReservationId())){        // making sure system doesn't compare updated dates with the one it's going to replace
                 if (!(reservation.getEndDate().compareTo(r.getStartDate()) <= 0 || reservation.getStartDate().compareTo(r.getEndDate()) >= 0)){
                     result.addMessage("Requested reservation dates overlap with an existing reservation for this location. Reservation denied.", ResultType.INVALID);
@@ -165,8 +165,8 @@ public class ReservationService {
         // calculate total $ needed for stay at host's location for the given dates
         BigDecimal total = new BigDecimal("0.00");
         // get weekend and standard rates
-        BigDecimal weekendRate = campgroundRepository.findById(reservation.getSite().getCampgroundId()).getWeekendRate();
-        BigDecimal standardRate = campgroundRepository.findById(reservation.getSite().getCampgroundId()).getStandardRate();
+        BigDecimal weekendRate = campgroundRepository.findById(reservation.getCampsite().getCampgroundId()).getWeekendRate();
+        BigDecimal standardRate = campgroundRepository.findById(reservation.getCampsite().getCampgroundId()).getStandardRate();
 
         LocalDate current = reservation.getStartDate().plusDays(1); // exclusive start date
 

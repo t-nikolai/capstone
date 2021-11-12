@@ -39,20 +39,16 @@ function Signup() {
         const clone = { ...camper };
         clone[evt.target.name] = evt.target.value;
         setCamper(clone);
-        console.log(camper);
     }
 
     const onSubmit = evt => {
         evt.preventDefault();
         save(camper)
             .then(camper => {
-                console.log("save was successful");
-                console.log(camper);
                 history.push("/");
             })
             .catch((err) => {
-                setError(err);
-                console.log("save was not successful");
+                setError("duplicate username, or invalid phone/zip");
             });
     };
 
@@ -143,23 +139,22 @@ function Signup() {
                     <input type="text" name="phone" className="mb-5 p-3 w-80 focus:border-green-700 rounded border-2 outline-none" autocomplete="off" placeholder="(xxx)xxx-xxxx" required
                         value={camper.phone} onChange={onChange} />
                 </div>
-                
+
+                {error && <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4" role="alert">
+                    <p class="font-bold">Error</p>
+                    <p>invalid credentials</p>
+                    <p>{error}</p>
+                </div>}
+
                 <div>
                     <button className="bg-green-600 hover:bg-green-900 text-white font-bold p-2 rounded w-30 mr-3" id="login" type="submit"><span>Sign up</span></button>
                     <Link to="/" className="bg-gray-600 hover:bg-gray-900 text-white font-bold p-2 rounded w-30" id="login" type="button"><span>Cancel</span></Link>
                 </div>
 
-                {error && <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4" role="alert">
-                    <p class="font-bold">Error</p>
-                    <p>An error has occurred: </p>
-                    <p>{error}</p>
-                </div>}
-
             </form>
             <img className="fixed object-cover w-full h-full y-0 x-0" src="https://coresites-cdn-adm.imgix.net/mpora_new/wp-content/uploads/2017/01/Cycle-Touring-Essentials-Touring-Bike-at-Camp.jpg?fit=crop"></img>
         </div>
     </div>
-    //</form>
-}
+    }
 
 export default Signup;
